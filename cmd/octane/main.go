@@ -15,6 +15,7 @@ import (
 var flagList = flag.Bool("list", false, "List MIDI devices")
 var flagIn = flag.String("in", "", "Select comma-separated MIDI IN devices by name. Example: \"Arturia KeyStep 32,SQ-1 SEQ IN\"")
 var flagOut = flag.String("out", "", "Select comma-separated MIDI OUT devices by name. Example: \"Arturia KeyStep 32,SQ-1 MIDI OUT\"")
+var flagTransposeNote = flag.Int("transposeNote", 0, "Note offset. Example: -48")
 var flagHelp = flag.Bool("help", false, "Show usage information")
 var flagVersion = flag.Bool("version", false, "Show version information")
 
@@ -152,7 +153,7 @@ func main() {
 	}
 
 	for _, midiIn := range midiInsFiltered {
-		go octane.RegisterHooks(midiIn)
+		go octane.Stream(midiIn, midiOutsFiltered, *flagTransposeNote)
 	}
 
 	for {
