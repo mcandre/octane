@@ -2,7 +2,6 @@ package octane
 
 import (
 	"gitlab.com/gomidi/midi/mid"
-	"gitlab.com/gomidi/rtmididrv/imported/rtmidi"
 
 	"fmt"
 	"os"
@@ -10,9 +9,6 @@ import (
 
 // Version is semver.
 const Version = "0.0.1"
-
-// NOPCallback does nothing.
-func NOPCallback(_ rtmidi.MIDIIn, _ []byte, _ float64) {}
 
 // RegisterTranspose configures MIDI hooks for streaming,
 // with optional note transposition.
