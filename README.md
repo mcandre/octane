@@ -1,6 +1,6 @@
 # octane: MIDI adder
 
-[Hello, Operator?](hello-operator.mp3)
+[Hello, Operator?](https://raw.githubusercontent.com/mcandre/octane/master/hello-operator.mp3)
 
 # EXAMPLE
 
