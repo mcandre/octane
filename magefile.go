@@ -3,10 +3,13 @@
 package main
 
 import (
+	"fmt"
 	"os"
+	"path"
 
 	"github.com/magefile/mage/mg"
 	"github.com/mcandre/mage-extras"
+	"github.com/mcandre/octane"
 )
 
 // artifactsPath describes where artifacts are produced.
@@ -43,6 +46,29 @@ func Lint() error {
 	mg.Deps(Nakedret)
 	return nil
 }
+
+// portBasename labels the artifact basename.
+var portBasename = fmt.Sprintf("octane-%s", octane.Version)
+
+// repoNamespace identifies the Go namespace for this project.
+var repoNamespace = "github.com/mcandre/octane"
+
+// Xgo cross-compiles (c)Go binaries with additional targets enabled.
+func Xgo() error {
+	artifactsPathDist := path.Join(artifactsPath, portBasename)
+
+	return mageextras.Xgo(
+		artifactsPathDist,
+		"-image",
+		"mcandre/octane-builder",
+		"-targets",
+		"darwin/amd64,linux/amd64,windows/amd64",
+		"github.com/mcandre/octane/cmd/octane",
+	)
+}
+
+// Port builds and compresses artifacts.
+func Port() error { mg.Deps(Xgo); return mageextras.Archive(portBasename, artifactsPath) }
 
 // Install builds and installs Go applications.
 func Install() error { return mageextras.Install() }
