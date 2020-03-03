@@ -3,12 +3,10 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/magefile/mage/mg"
 	"github.com/mcandre/mage-extras"
-	"github.com/mcandre/octane"
 )
 
 // artifactsPath describes where artifacts are produced.
