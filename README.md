@@ -41,6 +41,10 @@ See `octane -help` for more options.
 
 https://godoc.org/github.com/mcandre/octane
 
+# LICENSE
+
+FreeBSD
+
 # RUNTIME REQUIREMENTS
 
 (None)
