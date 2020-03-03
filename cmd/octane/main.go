@@ -54,7 +54,7 @@ func main() {
 	}
 
 	if *flagList {
-		if (len(midiIns) == 0) {
+		if len(midiIns) == 0 {
 			fmt.Println("No MIDI IN devices.")
 		} else {
 			fmt.Printf("MIDI IN devices:\n\n")
@@ -66,7 +66,7 @@ func main() {
 			fmt.Println()
 		}
 
-		if (len(midiOuts) == 0) {
+		if len(midiOuts) == 0 {
 			fmt.Println("No MIDI OUT devices.")
 		} else {
 			fmt.Printf("MIDI OUT devices:\n\n")

@@ -3,6 +3,9 @@ package octane
 import (
 	"gitlab.com/gomidi/midi/mid"
 	"gitlab.com/gomidi/rtmididrv/imported/rtmidi"
+
+	"fmt"
+	"os"
 )
 
 // Version is semver.
@@ -19,13 +22,19 @@ func RegisterTranspose(reader *mid.Reader, midiOut mid.Out, offset int) {
 	reader.Msg.Channel.NoteOn = func(_ *mid.Position, channel uint8, key uint8, velocity uint8) {
 		keyTransposed := uint8(int(key) + offset)
 		writer.SetChannel(channel)
-		writer.NoteOn(keyTransposed, velocity)
+
+		if err := writer.NoteOn(keyTransposed, velocity); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
 	}
 
 	reader.Msg.Channel.NoteOff = func(_ *mid.Position, channel uint8, key uint8, velocity uint8) {
 		keyTransposed := uint8(int(key) + offset)
 		writer.SetChannel(channel)
-		writer.NoteOffVelocity(keyTransposed, velocity)
+
+		if err := writer.NoteOffVelocity(keyTransposed, velocity); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
 	}
 }
 
@@ -38,5 +47,9 @@ func Stream(midiIn mid.In, midiOuts []mid.Out, offset int) {
 		RegisterTranspose(reader, midiOut, offset)
 	}
 
-	go mid.ConnectIn(midiIn, reader)
+	go func() {
+		if err := mid.ConnectIn(midiIn, reader); err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
+	}()
 }
