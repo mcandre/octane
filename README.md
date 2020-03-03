@@ -56,3 +56,7 @@ See [DEVELOPMENT.md](DEVELOPMENT.md).
 # LICENSE
 
 FreeBSD
+
+# CREDITS
+
+* [gomidi](https://gitlab.com/gomidi)
