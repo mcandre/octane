@@ -35,6 +35,8 @@ See `octane -help` for more options.
 # TIPS
 
 * Polling may complete faster when MIDI software such as Arturia Analog Lab is running. Though be careful about such software interfering with your jam sessions.
+* Any USB MIDI adapter hubs may obfuscate or alter device names.
+* MIDI device names may differ between operating systems.
 * In a pinch, many MIDI devices can serve as adapters to reach further MIDI devices, using "thru" options.
 
 # DOWNLOAD

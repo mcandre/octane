@@ -3,6 +3,12 @@
 * [Go](https://golang.org/) 1.12+
 * a [C++](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers) compiler
 
+## Linux
+
+Linux build environments have additional requirements.
+
+* [ALSA](https://alsa-project.org/wiki/Main_Page) development headers (Debian: `libasound2-dev`, RHEL: `alsa-lib-devel`)
+
 ## Recommended
 
 * [Docker](https://www.docker.com/)

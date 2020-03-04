@@ -83,7 +83,7 @@ func main() {
 
 	var midiInWhitelist []string
 
-	if flagIn != nil {
+	if *flagIn != "" {
 		midiInWhitelist = strings.Split(*flagIn, ",")
 	}
 
@@ -92,21 +92,27 @@ func main() {
 	if len(midiInWhitelist) == 0 {
 		midiInsFiltered = midiIns
 	} else {
-		for _, midiIn := range midiIns {
-			midiInName := midiIn.String()
+		for _, name := range midiInWhitelist {
+			var foundMIDI bool
 
-			for _, name := range midiInWhitelist {
-				if midiInName == name {
+			for _, midiIn := range midiIns {
+				if midiIn.String() == name {
 					midiInsFiltered = append(midiInsFiltered, midiIn)
+					foundMIDI = true
 					break
 				}
+			}
+
+			if !foundMIDI {
+				fmt.Fprintf(os.Stderr, "Unable to find MIDI IN named: %v\n", name)
+				os.Exit(1)
 			}
 		}
 	}
 
 	var midiOutWhitelist []string
 
-	if flagOut != nil {
+	if *flagOut != "" {
 		midiOutWhitelist = strings.Split(*flagOut, ",")
 	}
 
@@ -115,21 +121,22 @@ func main() {
 	if len(midiOutWhitelist) == 0 {
 		midiOutsFiltered = midiOuts
 	} else {
-		for _, midiOut := range midiOuts {
-			midiOutName := midiOut.String()
+		for _, name := range midiOutWhitelist {
+			var foundMIDI bool
 
-			for _, name := range midiOutWhitelist {
-				if midiOutName == name {
+			for _, midiOut := range midiOuts {
+				if midiOut.String() == name {
 					midiOutsFiltered = append(midiOutsFiltered, midiOut)
+					foundMIDI = true
 					break
 				}
 			}
-		}
-	}
 
-	if len(midiIns) == 0 {
-		fmt.Fprintln(os.Stderr, "No MIDI IN devices found")
-		os.Exit(1)
+			if !foundMIDI {
+				fmt.Fprintf(os.Stderr, "Unable to find MIDI OUT named: %v\n", name)
+				os.Exit(1)
+			}
+		}
 	}
 
 	for _, midiIn := range midiInsFiltered {
