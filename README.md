@@ -32,6 +32,14 @@ Connected to MIDI OUT device: Arturia KeyStep 32
 
 See `octane -help` for more options.
 
+# ABOUT
+
+Octane streams ferries signals between MIDI devices, with optional transformations on the data. For example, the incoming pitch from one device can be shifted up or down before it arrives at another device. This is particularly useful when some devices have large gaps in note compatibility, or use certain pitches to indicate CC-like signals.
+
+By default, octane copies data from all available IN devices to all available OUT devices. Optional `-in`, `-out` flags can narrow the mapping.
+
+Octane is free and open source: fork it to introduce your own creative MIDI tweaks!
+
 # TIPS
 
 * Polling may complete faster when MIDI software such as Arturia Analog Lab is running. Though be careful about such software interfering with your jam sessions.
