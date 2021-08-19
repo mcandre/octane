@@ -22,22 +22,10 @@ Linux build environments have additional requirements.
 * [zipc](https://github.com/mcandre/zipc) (e.g. `go get github.com/mcandre/zipc/...`)
 * [karp](https://github.com/mcandre/karp) (e.g., `go get github.com/mcandre/karp/...`)
 
-# INSTALL FROM REMOTE GIT REPOSITORY
-
-```console
-$ go get github.com/mcandre/octane/...
-```
-
-(Yes, include the ellipsis as well, it's the magic Go syntax for downloading, building, and installing all components of a package, including any libraries and command line tools.)
-
-# INSTALL FROM LOCAL GIT REPOSITORY
+# INSTALL FROM SOURCE
 
 ```
-$ mkdir -p $GOPATH/src/github.com/mcandre
-$ git clone https://github.com/mcandre/octane.git $GOPATH/src/github.com/mcandre/octane
-$ cd $GOPATH/src/github.com/mcandre/octane
-$ git submodule update --init --recursive
-$ go install ./...
+$ GO111MODULE=off go install ./...
 ```
 
 # LINT
