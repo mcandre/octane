@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/mcandre/octane"
-	"gitlab.com/gomidi/midi/mid"
+	"gitlab.com/gomidi/midi"
 	"gitlab.com/gomidi/rtmididrv"
 
 	"flag"
@@ -87,7 +87,7 @@ func main() {
 		midiInWhitelist = strings.Split(*flagIn, ",")
 	}
 
-	var midiInsFiltered []mid.In
+	var midiInsFiltered []midi.In
 
 	if len(midiInWhitelist) == 0 {
 		midiInsFiltered = midiIns
@@ -116,7 +116,7 @@ func main() {
 		midiOutWhitelist = strings.Split(*flagOut, ",")
 	}
 
-	var midiOutsFiltered []mid.Out
+	var midiOutsFiltered []midi.Out
 
 	if len(midiOutWhitelist) == 0 {
 		midiOutsFiltered = midiOuts
@@ -160,7 +160,7 @@ func main() {
 	}
 
 	for _, midiIn := range midiInsFiltered {
-		go octane.Stream(midiIn, midiOutsFiltered, *flagTransposeNote)
+		octane.Stream(midiIn, midiOutsFiltered, *flagTransposeNote)
 	}
 
 	for {
