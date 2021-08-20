@@ -2,6 +2,10 @@
 
 Hello, Operator? [🎵 MP3](https://raw.githubusercontent.com/mcandre/octane/master/hello-operator.mp3)
 
+# TECH TALK SLIDES
+
+[MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
+
 # ABOUT
 
 Octane ferries signals between MIDI devices, with optional transformations on the data. For example, the incoming pitch from one device can be shifted up or down before it arrives at another device. This is particularly useful when some devices have large gaps in note compatibility, or use extreme pitches to indicate CC-like signals.
