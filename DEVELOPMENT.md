@@ -1,6 +1,6 @@
 # BUILDTIME REQUIREMENTS
 
-* [Go](https://golang.org/) 1.12+
+* [Go](https://golang.org/) 1.17+
 * a [C++](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers) compiler
 
 ## Linux
@@ -22,7 +22,7 @@ Linux build environments have additional requirements.
 * [zipc](https://github.com/mcandre/zipc) (e.g. `go get github.com/mcandre/zipc/...`)
 * [karp](https://github.com/mcandre/karp) (e.g., `go get github.com/mcandre/karp/...`)
 
-# INSTALL FROM SOURCE
+# INSTALL
 
 ```
 $ GO111MODULE=off go install ./...

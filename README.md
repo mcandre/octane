@@ -60,6 +60,12 @@ https://godoc.org/github.com/mcandre/octane
 
 (None)
 
+# INSTALL FROM SOURCE
+
+```console
+$ GO111MODULE=off go install ./...
+```
+
 # CONTRIBUTING
 
 See [DEVELOPMENT.md](DEVELOPMENT.md).
