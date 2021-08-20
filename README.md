@@ -63,7 +63,7 @@ https://godoc.org/github.com/mcandre/octane
 # INSTALL FROM SOURCE
 
 ```console
-$ GO111MODULE=off go install ./...
+$ go install github.com/mcandre/octane/cmd/octane@latest
 ```
 
 # CONTRIBUTING

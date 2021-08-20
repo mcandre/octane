@@ -1,0 +1,29 @@
+# github.com/magefile/mage v1.11.0
+github.com/magefile/mage/mg
+# github.com/mcandre/mage-extras v0.0.2-0.20200303190821-17a59b2fc3e2
+github.com/mcandre/mage-extras
+# gitlab.com/gomidi/midi v1.14.1
+gitlab.com/gomidi/midi
+gitlab.com/gomidi/midi/cc
+gitlab.com/gomidi/midi/internal/midilib
+gitlab.com/gomidi/midi/internal/runningstatus
+gitlab.com/gomidi/midi/internal/vlq
+gitlab.com/gomidi/midi/mid
+gitlab.com/gomidi/midi/midimessage/channel
+gitlab.com/gomidi/midi/midimessage/meta
+gitlab.com/gomidi/midi/midimessage/meta/meter
+gitlab.com/gomidi/midi/midimessage/realtime
+gitlab.com/gomidi/midi/midimessage/syscommon
+gitlab.com/gomidi/midi/midimessage/sysex
+gitlab.com/gomidi/midi/midireader
+gitlab.com/gomidi/midi/midiwriter
+gitlab.com/gomidi/midi/nrpn
+gitlab.com/gomidi/midi/rpn
+gitlab.com/gomidi/midi/smf
+gitlab.com/gomidi/midi/smf/smfreader
+gitlab.com/gomidi/midi/smf/smftimeline
+gitlab.com/gomidi/midi/smf/smfwriter
+# gitlab.com/gomidi/rtmididrv v0.4.2
+gitlab.com/gomidi/rtmididrv
+# gitlab.com/gomidi/rtmididrv/imported/rtmidi v0.0.0-20191025100939-514fe0ed97a6
+gitlab.com/gomidi/rtmididrv/imported/rtmidi
