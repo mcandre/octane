@@ -20,7 +20,7 @@ https://godoc.org/github.com/mcandre/octane
 
 # RUNTIME REQUIREMENTS
 
-* macOS or Linux
+* macOS or Linux (no Windows or WSL support at this time)
 
 # INSTALL FROM SOURCE
 
