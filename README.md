@@ -35,15 +35,16 @@ Hardware Configuration:
 4. Connect MIDI controller to sampler with a DIN cable.
 5. Connect MIDI controller to PC with a USB cable.
 6. Ensure MIDI controller is powered on.
-7. Enable Hold function on MIDI controller, if you have one.
-8. Connect sequencer MIDI _OUT_ port to DIN adapter.
-9. Connect sequencer DIN adapter to MIDI _IN_ port of USB adapter.
-10. Connect MIDI USB adapter to PC.
-11. Ensure sequencer is powered on.
-12. Set sequencer pattern to linear, left to right through 8 + 8 = 16 rows.
-13. Randomize sequencer pitch knobs.
-14. Set sequencer mode to Step Jump if you have one.
-15. Ensure PC is powered on.
+7. Set the MIDI controller clock to internal.
+8. Enable Hold function on MIDI controller, if you have one.
+9. Connect sequencer MIDI _OUT_ port to DIN adapter.
+10. Connect sequencer DIN adapter to MIDI _IN_ port of USB adapter.
+11. Connect MIDI USB adapter to PC.
+12. Ensure sequencer is powered on.
+13. Set sequencer pattern to linear, left to right through 8 + 8 = 16 rows.
+14. Randomize sequencer pitch knobs.
+15. Set sequencer mode to Step Jump if you have one.
+16. Ensure PC is powered on.
 
 Software configuration:
 
