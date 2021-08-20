@@ -10,7 +10,41 @@ By default, octane copies data from all available IN devices to all available OU
 
 Octane is free and open source: fork it to introduce your own creative MIDI tweaks!
 
-## We Jammin
+# DOWNLOAD
+
+https://github.com/mcandre/octane/releases
+
+# DOCUMENTATION
+
+https://godoc.org/github.com/mcandre/octane
+
+# RUNTIME REQUIREMENTS
+
+* macOS or Linux
+
+# INSTALL FROM SOURCE
+
+```console
+$ go install github.com/mcandre/octane/cmd/octane@latest
+```
+
+# CONTRIBUTING
+
+See [DEVELOPMENT.md](DEVELOPMENT.md).
+
+# LICENSE
+
+FreeBSD
+
+# TIPS
+
+* Polling may complete faster when MIDI software such as Arturia Analog Lab is running. Though be careful about such software interfering with your jam sessions.
+* Polling may complete faster on Linux.
+* Any USB MIDI adapter hubs may obfuscate or alter device names.
+* MIDI device names may differ between operating systems.
+* In a pinch, many MIDI devices can serve as adapters to reach further MIDI devices, using "thru" options.
+
+# WE JAMMIN'
 
 A quick hardware example triggers funky beats.
 
@@ -91,40 +125,6 @@ Connected to MIDI OUT device: Arturia KeyStep 32
 3. Set a sample going with the MIDI controller piano keys.
 4. Start the sequencer playing.
 5. Jam.
-
-# TIPS
-
-* Polling may complete faster when MIDI software such as Arturia Analog Lab is running. Though be careful about such software interfering with your jam sessions.
-* Polling may complete faster on Linux.
-* Any USB MIDI adapter hubs may obfuscate or alter device names.
-* MIDI device names may differ between operating systems.
-* In a pinch, many MIDI devices can serve as adapters to reach further MIDI devices, using "thru" options.
-
-# DOWNLOAD
-
-https://github.com/mcandre/octane/releases
-
-# DOCUMENTATION
-
-https://godoc.org/github.com/mcandre/octane
-
-# RUNTIME REQUIREMENTS
-
-(None)
-
-# INSTALL FROM SOURCE
-
-```console
-$ go install github.com/mcandre/octane/cmd/octane@latest
-```
-
-# CONTRIBUTING
-
-See [DEVELOPMENT.md](DEVELOPMENT.md).
-
-# LICENSE
-
-FreeBSD
 
 # CREDITS
 
