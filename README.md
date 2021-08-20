@@ -18,7 +18,11 @@ MIDI OUT devices:
 * SQ-1 MIDI OUT
 * SQ-1 CTRL
 
-$ octane -transposeNote -48
+$ octane \
+    -transposeNote -48 \
+    -in "SQ-1 SEQ IN" \
+    -out "Arturia KeyStep 32"
+
 Polling for MIDI devices...
 Connected to MIDI IN device: SQ-1 SEQ IN
 Connected to MIDI OUT device: Arturia KeyStep 32
