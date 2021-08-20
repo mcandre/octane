@@ -1,0 +1,10 @@
+package: github.com/mcandre/octane
+import:
+- package: github.com/mcandre/mage-extras
+  version: "17a59b2fc3e277b3f42855d62349163daca8038c"
+- package: gitlab.com/gomidi/midi
+  version: "ff4adc6744b404d5c8a11a322459ae39c25ed412"
+  subpackages:
+  - mid
+- package: gitlab.com/gomidi/rtmididrv
+  version: "1dd005ef57aa0eceb5fd4e268b29a50083b2caf5"
