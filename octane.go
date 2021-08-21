@@ -10,7 +10,7 @@ import (
 )
 
 // Version is semver.
-const Version = "0.0.3"
+const Version = "0.0.4"
 
 // TransposeKey applies a MIDI offset to a key.
 func TransposeKey(key uint8, offset int) uint8 {
