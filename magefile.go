@@ -1,3 +1,4 @@
+//go:build mage
 // +build mage
 
 package main
@@ -62,7 +63,7 @@ func Xgo() error {
 		"-image",
 		"mcandre/octane-builder",
 		"-targets",
-		"darwin/amd64,linux/amd64,windows/amd64",
+		"darwin/amd64,linux/amd64",
 		"github.com/mcandre/octane/cmd/octane",
 	)
 }
