@@ -13,8 +13,14 @@ Linux build environments have additional requirements.
 
 # INSTALL
 
+```console
+$ mage install
 ```
-$ go install ./...
+
+# UNINSTALL
+
+```console
+$ mage uninstall
 ```
 
 # LINT
