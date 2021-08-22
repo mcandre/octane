@@ -1,14 +1,17 @@
 # github.com/jhoonb/archivex v0.0.0-20201016144719-6a343cdae81d
 github.com/jhoonb/archivex
 # github.com/magefile/mage v1.11.0
+## explicit
 github.com/magefile/mage/mg
 # github.com/mcandre/factorio v0.0.1
 github.com/mcandre/factorio
 # github.com/mcandre/mage-extras v0.0.6
+## explicit
 github.com/mcandre/mage-extras
 # github.com/mcandre/zipc v0.0.4
 github.com/mcandre/zipc
 # gitlab.com/gomidi/midi v1.21.0
+## explicit
 gitlab.com/gomidi/midi
 gitlab.com/gomidi/midi/cc
 gitlab.com/gomidi/midi/internal/midilib
@@ -31,5 +34,6 @@ gitlab.com/gomidi/midi/smf/smftimeline
 gitlab.com/gomidi/midi/smf/smfwriter
 gitlab.com/gomidi/midi/writer
 # gitlab.com/gomidi/rtmididrv v0.14.0
+## explicit
 gitlab.com/gomidi/rtmididrv
 gitlab.com/gomidi/rtmididrv/imported/rtmidi
