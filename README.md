@@ -8,7 +8,7 @@ octane intercepts and transforms MIDI signals. This is convenient to solve commu
 
 For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer may both _technically_ speak MIDI. Unfortunately, sampler's CC control signal range is too low for the sequencer to trigger.
 
-That's where octane steps in. octane can shift notes up or down into a custom range. Now the sequencer is able to trigger the sampler, via octane.
+That's where octane steps in. octane can shift notes up or down into a custom range. Now the sequencer is able to trigger the sampler, via octane. Make sweet, sweet beats with octane.
 
 # DOWNLOAD
 
