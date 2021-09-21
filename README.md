@@ -1,10 +1,8 @@
 # octane: MIDI adder
 
-Hello, Operator? [🎵 MP3](https://raw.githubusercontent.com/mcandre/octane/master/hello-operator.mp3)
+![jam session](demo.gif)
 
 # TECH TALK SLIDES
-
-[MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
 
 # ABOUT
 
@@ -17,6 +15,8 @@ Octane is free and open source: fork it to introduce your own creative MIDI twea
 # DOWNLOAD
 
 https://github.com/mcandre/octane/releases
+
+[MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
 
 # DOCUMENTATION
 
@@ -124,6 +124,15 @@ Connected to MIDI OUT device: Arturia KeyStep 32
 #0 [4 d:4] channel.NoteOn channel 0 key 48 velocity 64
 #0 [1187 d:1187] channel.NoteOff channel 0 key 48
 ...
+```
+
+Depending on the host, your MIDI devices may enumerate differently. For example, Linux typically may provide fewer. more generic MIDI instruments.
+
+```console
+$ octane \
+    -transposeNote -48 \
+    -in "mio:mio MIDI 1 24:0" \
+    -out "mio:mio MIDI 1 24:0"
 ```
 
 3. Set a sample going with the MIDI controller piano keys.
