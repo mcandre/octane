@@ -4,11 +4,15 @@
 
 # ABOUT
 
-Octane ferries signals between MIDI devices, with optional transformations on the data. For example, the incoming pitch from one device can be shifted up or down before it arrives at another device. This is particularly useful when some devices have large gaps in note compatibility, or use extreme pitches to indicate CC-like signals.
+octane intercepts and transforms MIDI signals. This is convenient to solve communication gaps between devices.
+
+For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer both speak MIDI, but there is no overlap for the too-low pitch range for microGranny control signals and too-high SQ-1 note signals.
+
+That's where octane steps in. octane can shift the output from one set of devices up or down, into a more comfortable range to be processed by other devices.
 
 By default, octane copies data from all available IN devices to all available OUT devices. Optional `-in`, `-out` flags can narrow the mapping.
 
-Octane is free and open source: fork it to introduce your own creative MIDI tweaks!
+octane is free and open source: fork it to introduce your own creative MIDI tweaks!
 
 # DOWNLOAD
 
