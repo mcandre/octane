@@ -2,8 +2,6 @@
 
 ![jam session](demo.gif)
 
-# TECH TALK SLIDES
-
 # ABOUT
 
 Octane ferries signals between MIDI devices, with optional transformations on the data. For example, the incoming pitch from one device can be shifted up or down before it arrives at another device. This is particularly useful when some devices have large gaps in note compatibility, or use extreme pitches to indicate CC-like signals.
@@ -15,6 +13,8 @@ Octane is free and open source: fork it to introduce your own creative MIDI twea
 # DOWNLOAD
 
 https://github.com/mcandre/octane/releases
+
+# TECH TALK SLIDES
 
 [MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
 
