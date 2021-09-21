@@ -6,13 +6,9 @@
 
 octane intercepts and transforms MIDI signals. This is convenient to solve communication gaps between devices.
 
-For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer both speak MIDI, but there is no overlap for the too-low pitch range for microGranny control signals and too-high SQ-1 note signals.
+For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer may both _technically_ speak MIDI. Unfortunately, sampler's CC control signal range is too low for the sequencer to trigger.
 
-That's where octane steps in. octane can shift the output from one set of devices up or down, into a more comfortable range to be processed by other devices.
-
-By default, octane copies data from all available IN devices to all available OUT devices. Optional `-in`, `-out` flags can narrow the mapping.
-
-octane is free and open source: fork it to introduce your own creative MIDI tweaks!
+That's where octane steps in. octane can shift notes up or down into a custom range. Now the sequencer is able to trigger the sampler, via octane.
 
 # DOWNLOAD
 
@@ -51,6 +47,7 @@ FreeBSD
 * Any USB MIDI adapter hubs may obfuscate or alter device names.
 * MIDI device names may differ between operating systems.
 * In a pinch, many MIDI devices can serve as adapters to reach further MIDI devices, using "thru" options.
+* By default, octane copies data from all available IN devices to all available OUT devices. Optional `-in`, `-out` flags can narrow the mapping.
 
 # WE JAMMIN'
 
