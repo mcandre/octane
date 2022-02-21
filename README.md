@@ -4,11 +4,9 @@
 
 # ABOUT
 
-octane intercepts and transforms MIDI signals. This is convenient to solve communication gaps between devices.
+octane harmonizes MIDI devices. Primarily by extending pitch range!
 
-For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer may both _technically_ speak MIDI. Unfortunately, sampler's CC control signal range is too low for the sequencer to trigger.
-
-That's where octane steps in. octane can shift notes up or down into a custom range. Now the sequencer is able to trigger the sampler, via octane. Make sweet, sweet beats with octane.
+For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with mutually exclusive CC signals. That's where octane comes in! octane offers a simple pitch offset parameter. Suddenly we unlock more interesting interactions for your synths. Make sweet, sweet beats with octane.
 
 # DOWNLOAD
 
