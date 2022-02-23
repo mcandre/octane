@@ -28,7 +28,7 @@ func main() {
 		os.Exit(0)
 	case *flagHelp:
 		flag.PrintDefaults()
-		os.Exit(1)
+		os.Exit(0)
 	}
 
 	driver, err := rtmididrv.New()
