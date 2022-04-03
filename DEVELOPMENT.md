@@ -5,11 +5,21 @@
 * [Docker](https://www.docker.com/) 19+
 * a [C++](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers) compiler
 
+## Recommended
+
+* [snyk](https://www.npmjs.com/package/snyk) 1.893.0 (`npm install -g snyk@1.893.0`)
+
 ## Linux
 
 Linux build environments have additional requirements.
 
 * [ALSA](https://alsa-project.org/wiki/Main_Page) development headers (Debian: `libasound2-dev`, RHEL: `alsa-lib-devel`, Alpine: `alsa-lib-dev`, etc.)
+
+# SECURITY AUDIT
+
+```console
+$ mage audit
+```
 
 # INSTALL
 

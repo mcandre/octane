@@ -19,6 +19,9 @@ var artifactsPath = "bin"
 // Default references the default build task.
 var Default = Install
 
+// Audit runs a security audit.
+func Audit() error { return mageextras.SnykTest() }
+
 // GoVet runs go vet with shadow checks enabled.
 func GoVet() error { return mageextras.GoVetShadow() }
 
