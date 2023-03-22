@@ -1,6 +1,6 @@
 # BUILDTIME REQUIREMENTS
 
-* [Go](https://golang.org/) 1.17+ with `go install github.com/mcandre/accio/cmd/accio@v0.0.3`, `accio -install`, and `modvendor -copy='**/*.h **/*.c **/*.hpp **/*.cpp'` re-run after every `go mod vendor` execution
+* [Go](https://golang.org/) 1.19+ with `go install github.com/mcandre/accio/cmd/accio@v0.0.3`, `accio -install`, and `modvendor -copy='**/*.h **/*.c **/*.hpp **/*.cpp'` re-run after every `go mod vendor` execution
 * [Docker](https://www.docker.com/) 19+
 * a [C++](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers) compiler
 * [Node.js](https://nodejs.org/en) 16.14.2+ with `npm install -g snyk@1.996.0`
