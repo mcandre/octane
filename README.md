@@ -26,7 +26,7 @@ When consuming octane as a library in a downstream library or application, the d
 
 # RUNTIME REQUIREMENTS
 
-* macOS or Linux (no Windows or WSL support at this time)
+* macOS, Linux, or Windows (experimental)
 
 # INSTALL FROM SOURCE
 
