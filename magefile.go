@@ -99,10 +99,10 @@ func Xgo() error {
 
 	return mageextras.Xgo(
 		artifactsPathDist,
-		"-image",
+		"-docker-image",
 		image,
 		"-targets",
-		"darwin/amd64,linux/amd64",
+		"darwin/amd64,darwin/arm64,linux/amd64,windows/amd64",
 		"github.com/mcandre/octane/cmd/octane",
 	)
 }
