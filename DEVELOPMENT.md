@@ -51,6 +51,13 @@ Keep the code tidy:
 $ mage lint
 ```
 
+# BUILD + PUSH DOCKER IMAGE
+
+```console
+$ mage dockerBuild
+$ mage dockerPush
+```
+
 # PORT
 
 ```console

@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path"
 
 	"github.com/magefile/mage/mg"
@@ -61,6 +62,37 @@ var portBasename = fmt.Sprintf("octane-%s", octane.Version)
 // repoNamespace identifies the Go namespace for this project.
 var repoNamespace = "github.com/mcandre/octane"
 
+// image denotes a Docker image for building this project.
+var image = "mcandre/octane-builder"
+
+// DockerBuild generates a Docker image.
+func DockerBuild() error {
+	cmd := exec.Command("docker")
+	cmd.Args = []string{
+		"docker",
+		"build",
+		"-t",
+		image,
+		".",
+	}
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
+// DockerPush registers a Docker image.
+func DockerPush() error {
+	cmd := exec.Command("docker")
+	cmd.Args = []string{
+		"docker",
+		"push",
+		image,
+	}
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
 	artifactsPathDist := path.Join(artifactsPath, portBasename)
@@ -68,7 +100,7 @@ func Xgo() error {
 	return mageextras.Xgo(
 		artifactsPathDist,
 		"-image",
-		"mcandre/octane-builder",
+		image,
 		"-targets",
 		"darwin/amd64,linux/amd64",
 		"github.com/mcandre/octane/cmd/octane",
