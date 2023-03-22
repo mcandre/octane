@@ -2,8 +2,9 @@ package main
 
 import (
 	"github.com/mcandre/octane"
-	"gitlab.com/gomidi/midi"
-	"gitlab.com/gomidi/rtmididrv"
+	"gitlab.com/gomidi/midi/v2"
+	"gitlab.com/gomidi/midi/v2/drivers"
+	_ "gitlab.com/gomidi/midi/v2/drivers/rtmididrv"
 
 	"flag"
 	"fmt"
@@ -31,27 +32,12 @@ func main() {
 		os.Exit(0)
 	}
 
-	driver, err := rtmididrv.New()
-
-	if err != nil {
-		panic(err)
-	}
-
-	defer driver.Close()
+	defer midi.CloseDriver()
 
 	fmt.Println("Polling for MIDI devices...")
 
-	midiIns, err := driver.Ins()
-
-	if err != nil {
-		panic(err)
-	}
-
-	midiOuts, err := driver.Outs()
-
-	if err != nil {
-		panic(err)
-	}
+	midiIns := midi.GetInPorts()
+	midiOuts := midi.GetOutPorts()
 
 	if *flagList {
 		if len(midiIns) == 0 {
@@ -87,7 +73,7 @@ func main() {
 		midiInWhitelist = strings.Split(*flagIn, ",")
 	}
 
-	var midiInsFiltered []midi.In
+	var midiInsFiltered []drivers.In
 
 	if len(midiInWhitelist) == 0 {
 		midiInsFiltered = midiIns
@@ -116,7 +102,7 @@ func main() {
 		midiOutWhitelist = strings.Split(*flagOut, ",")
 	}
 
-	var midiOutsFiltered []midi.Out
+	var midiOutsFiltered []drivers.Out
 
 	if len(midiOutWhitelist) == 0 {
 		midiOutsFiltered = midiOuts

@@ -1,9 +1,8 @@
 package octane
 
 import (
-	"gitlab.com/gomidi/midi"
-	"gitlab.com/gomidi/midi/reader"
-	"gitlab.com/gomidi/midi/writer"
+	"gitlab.com/gomidi/midi/v2"
+	"gitlab.com/gomidi/midi/v2/drivers"
 
 	"fmt"
 	"os"
@@ -17,44 +16,44 @@ func TransposeKey(key uint8, offset int) uint8 {
 	return uint8((int(key) + offset) % 128)
 }
 
-// Transpose configures MIDI hooks for streaming,
-// with optional note transposition.
-func Transpose(midiIn midi.In, _ midi.Out, offset int) {
-
-}
-
 // Stream begins copying data between MIDI IN devices,
 // with an optional note transposition.
-func Stream(midiIn midi.In, midiOuts []midi.Out, offset int) {
-	var writers []*writer.Writer
+func Stream(midiIn drivers.In, midiOuts []drivers.Out, offset int) {
+	var senders []func(msg midi.Message) error
 
 	for _, midiOut := range midiOuts {
-		wr := writer.New(midiOut)
-		writers = append(writers, wr)
+		sender, err := midi.SendTo(midiOut)
+
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			break
+		}
+
+		senders = append(senders, sender)
 	}
 
-	rd := reader.New(
-		reader.NoteOn(func(_ *reader.Position, channel, key, velocity uint8) {
-			for _, wr := range writers {
-				wr.SetChannel(channel)
+	var channel uint8
+	var key uint8
+	var velocity uint8
 
-				if err := writer.NoteOn(wr, TransposeKey(key, offset), velocity); err != nil {
+	react := func(msg midi.Message, timestampms int32) {
+		switch {
+		case msg.GetNoteStart(&channel, &key, &velocity):
+			for _, sender := range senders {
+				if err := sender(midi.NoteOn(channel, TransposeKey(key, offset), velocity)); err != nil {
 					fmt.Fprintln(os.Stderr, err)
 				}
 			}
-		}),
-		reader.NoteOff(func(_ *reader.Position, channel, key, velocity uint8) {
-			for _, wr := range writers {
-				wr.SetChannel(channel)
-
-				if err := writer.NoteOffVelocity(wr, TransposeKey(key, offset), velocity); err != nil {
+		case msg.GetNoteEnd(&channel, &key):
+			for _, sender := range senders {
+				if err := sender(midi.NoteOff(channel, TransposeKey(key, offset))); err != nil {
 					fmt.Fprintln(os.Stderr, err)
 				}
 			}
-		}),
-	)
+		}
+	}
 
-	if err := rd.ListenTo(midiIn); err != nil {
+	if _, err := midi.ListenTo(midiIn, react); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
 }

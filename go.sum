@@ -5,11 +5,9 @@ github.com/magefile/mage v1.11.0/go.mod h1:z5UZb/iS3GoOSn0JgWuiw7dxlurVYTu+/jHXq
 github.com/mcandre/factorio v0.0.1 h1:0xEb9Gn/HEqloxv40DUOLylF21bvKVOcUUxm4IqKHug=
 github.com/mcandre/factorio v0.0.1/go.mod h1:xFjFNLPNyr1G7Escf8JE1gDMi/4+8JlLQ7m4uxuRE2o=
 github.com/mcandre/mage-extras v0.0.2/go.mod h1:LaUjUgmPBAl+58zVzGk5YhTTxhqGEFDAI5Oit56bPYs=
-github.com/mcandre/mage-extras v0.0.7 h1:pvrh6wOalAZfpuo7BMcSayKHYastceZCSBRXd99MSUo=
-github.com/mcandre/mage-extras v0.0.7/go.mod h1:Yy0JKv3zwFc4wx6CNSY+yJMV2q5BZu86KbN/J5bYEhk=
+github.com/mcandre/mage-extras v0.0.8 h1:0U8JJGL7dNphK5hj8pwmMei9sDfLkh/8P6c/c12YPWk=
+github.com/mcandre/mage-extras v0.0.8/go.mod h1:jMgYLPYXa0ggTlKNltm0566mgF2hsw0yOBmI6YCaheA=
 github.com/mcandre/zipc v0.0.4 h1:+C/lXJVySnwfnAdRv5wvphrpX8JYmvpIQ1y6onazCkQ=
 github.com/mcandre/zipc v0.0.4/go.mod h1:iJR+24JbL8Juffs+bbLWs/IL3n/6sNSLEz81+h0EtJc=
-gitlab.com/gomidi/midi v1.21.0 h1:eyoUlx7/PTRUcmWWWD3OKxUYuRWbcDa2rCvRYY7Y4yc=
-gitlab.com/gomidi/midi v1.21.0/go.mod h1:3ohtNOhqoSakkuLG/Li1OI6I3J1c2LErnJF5o/VBq1c=
-gitlab.com/gomidi/rtmididrv v0.14.0 h1:IBkDsqXs1RuFoRWgQbyYEpwe0hoXZ17FLTZaJuyXWx0=
-gitlab.com/gomidi/rtmididrv v0.14.0/go.mod h1:p/6IL1LGgj7utcv3wXudsDWiD9spgAdn0O8LDsGIPG0=
+gitlab.com/gomidi/midi/v2 v2.0.25 h1:dkzVBqbaFHjyWwP71MrQNX7IeRUIDonddmHbPpO/Ucg=
+gitlab.com/gomidi/midi/v2 v2.0.25/go.mod h1:quTyMKSQ4Klevxu6gY4gy2USbeZra0fV5SalndmPfsY=
