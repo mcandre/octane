@@ -1,0 +1,22 @@
+# github.com/jhoonb/archivex v0.0.0-20201016144719-6a343cdae81d
+## explicit
+github.com/jhoonb/archivex
+# github.com/magefile/mage v1.11.0
+## explicit; go 1.12
+github.com/magefile/mage/mg
+# github.com/mcandre/factorio v0.0.1
+## explicit; go 1.17
+github.com/mcandre/factorio
+# github.com/mcandre/mage-extras v0.0.8
+## explicit; go 1.19
+github.com/mcandre/mage-extras
+# github.com/mcandre/zipc v0.0.4
+## explicit; go 1.13
+github.com/mcandre/zipc
+# gitlab.com/gomidi/midi/v2 v2.0.25
+## explicit; go 1.16
+gitlab.com/gomidi/midi/v2
+gitlab.com/gomidi/midi/v2/drivers
+gitlab.com/gomidi/midi/v2/drivers/rtmididrv
+gitlab.com/gomidi/midi/v2/drivers/rtmididrv/imported/rtmidi
+gitlab.com/gomidi/midi/v2/internal/utils
