@@ -1,6 +1,6 @@
 module github.com/mcandre/octane
 
-go 1.19
+go 1.20
 
 require (
 	github.com/magefile/mage v1.11.0
