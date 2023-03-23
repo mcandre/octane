@@ -1,14 +1,15 @@
 # BUILDTIME REQUIREMENTS
 
 * [Go](https://golang.org/) 1.20.2+ with `go install github.com/mcandre/accio/cmd/accio@v0.0.4`, `accio -install`, and `modvendor -copy='**/*.h **/*.c **/*.hpp **/*.cpp'` re-run after every `go mod vendor` execution
-* [Node.js](https://nodejs.org/en) 16.14.2+ with `npm install -g snyk@1.996.0`
 * a [C++](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers) compiler
+* [Node.js](https://nodejs.org/en) 16.14.2+ with `npm install -g snyk@1.996.0`
+* [Python](https://www.python.org/) 3.11.2+ with `pip[3] install --upgrade pip setuptools` and `pip[3] install -r requirements-dev.txt`
+* [Docker](https://www.docker.com/) 19+
 
 ## Recommended
 
 * [ASDF](https://asdf-vm.com/) 0.10
 * [direnv](https://direnv.net/) 2
-* [Docker](https://www.docker.com/) 19+
 
 ## Linux
 
