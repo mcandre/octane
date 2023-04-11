@@ -1,4 +1,4 @@
-# octane: MIDI adder
+# octane: a MIDI connector
 
 ![jam session](demo.gif)
 
