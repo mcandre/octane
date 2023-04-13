@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/magefile/mage v1.14.0
 	github.com/mcandre/mage-extras v0.0.11
-	gitlab.com/gomidi/midi/v2 v2.0.25
+	gitlab.com/gomidi/midi/v2 v2.0.28
 )
 
 require (

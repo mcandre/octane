@@ -20,10 +20,6 @@ https://github.com/mcandre/octane/releases
 
 https://godoc.org/github.com/mcandre/octane
 
-## Warning for go mod vendor
-
-When consuming octane as a library in a downstream library or application, the developer must re-run `modvendor -copy='**/*.h **/*.c **/*.hpp **/*.cpp'` after every `go mod vendor` execution.
-
 # RUNTIME REQUIREMENTS
 
 * macOS, Linux, or Windows (experimental)

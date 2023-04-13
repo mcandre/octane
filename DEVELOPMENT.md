@@ -7,7 +7,6 @@
 * [Docker](https://www.docker.com/) 19+
 * a POSIX compliant [make](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html) implementation (e.g. GNU make, BSD make, etc.)
 * Provision additional dev tools with `make`
-* Re-run `modvendor -copy='**/*.h **/*.c **/*.hpp **/*.cpp'` after `go mod`... commands, to work around a quirk in how the upstream gomidi Cgo project is structured.
 
 ## Recommended
 
@@ -19,15 +18,6 @@
 Linux build environments have additional requirements.
 
 * [ALSA](https://alsa-project.org/wiki/Main_Page) development headers (Debian: `libasound2-dev`, RHEL: `alsa-lib-devel`, Alpine: `alsa-lib-dev`, etc.)
-
-# CGO BUILD ERRORS
-
-```console
-$ go install ./...
-file not found
-```
-
-You forgot to run the `modvendor -copy='**/*.h **/*.c **/*.hpp **/*.cpp'` after a `go mod vendor` run. This is an artifact of a messed up CGO project upstream.
 
 # AUDIT
 

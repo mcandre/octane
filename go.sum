@@ -8,5 +8,5 @@ github.com/mcandre/mage-extras v0.0.11 h1:vJq8diLnAXy7j3+aUzBPVI/bzHoFe+Y9qUJhZ4
 github.com/mcandre/mage-extras v0.0.11/go.mod h1:Q2tXIHq3wfVxrpucaR4mnXSXrAEpprzZwGR/WejfrJA=
 github.com/mcandre/zipc v0.0.7 h1:P5f4pB80jG0UFnn/C5Ex3gG2eilDAXtzgPmPXd+oUE8=
 github.com/mcandre/zipc v0.0.7/go.mod h1:oSG7tdqkZKlcTwzTmE5QXXM8TBkO2xwVzsOabVJ00KU=
-gitlab.com/gomidi/midi/v2 v2.0.25 h1:dkzVBqbaFHjyWwP71MrQNX7IeRUIDonddmHbPpO/Ucg=
-gitlab.com/gomidi/midi/v2 v2.0.25/go.mod h1:quTyMKSQ4Klevxu6gY4gy2USbeZra0fV5SalndmPfsY=
+gitlab.com/gomidi/midi/v2 v2.0.28 h1:kxwA4ZXXm6lVxzzKQkFnKrgjNEjkPLAS6eCJgAk1gmY=
+gitlab.com/gomidi/midi/v2 v2.0.28/go.mod h1:quTyMKSQ4Klevxu6gY4gy2USbeZra0fV5SalndmPfsY=
