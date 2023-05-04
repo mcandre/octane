@@ -3,7 +3,7 @@
 .PHONY: all
 
 all:
-	cargo install --force unmake@0.0.10
+	cargo install --force unmake@0.0.11
 
 	go install github.com/alexkohler/nakedret@v1.0.1
 	go install github.com/crazy-max/xgo@v0.26.0
