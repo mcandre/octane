@@ -65,28 +65,46 @@ var repoNamespace = "github.com/mcandre/octane"
 // image denotes a Docker image for building this project.
 var image = "mcandre/octane-builder"
 
-// DockerBuild generates a Docker image.
+// DockerBuild generates Docker images.
 func DockerBuild() error {
-	cmd := exec.Command("docker")
+	cmd := exec.Command("tug")
 	cmd.Args = []string{
-		"docker",
-		"build",
+		"tug",
 		"-t",
 		image,
-		".",
+		"-exclude-arch",
+		"386,arm/v6,arm/v7,mips64le,ppc64le,riscv64,s390x",
 	}
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
 }
 
-// DockerPush registers a Docker image.
+// DockerPush registers Docker images.
 func DockerPush() error {
-	cmd := exec.Command("docker")
+	cmd := exec.Command("tug")
 	cmd.Args = []string{
-		"docker",
-		"push",
+		"tug",
+		"-t",
 		image,
+		"-exclude-arch",
+		"386,arm/v6,arm/v7,mips64le,ppc64le,riscv64,s390x",
+		"-push",
+	}
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd.Run()
+}
+
+// DockerLoad loads Docker images of a given platform.
+func DockerLoad(platform string) error {
+	cmd := exec.Command("tug")
+	cmd.Args = []string{
+		"tug",
+		"-t",
+		image,
+		"-load",
+		platform,
 	}
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -95,14 +113,39 @@ func DockerPush() error {
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
+	err := DockerLoad("linux/amd64")
+
+	if err != nil {
+		return err
+	}
+
 	artifactsPathDist := path.Join(artifactsPath, portBasename)
+
+	err = mageextras.Xgo(
+		artifactsPathDist,
+		"-docker-image",
+		image,
+		"-targets",
+		"darwin/amd64,darwin/arm64,linux/amd64,windows/amd64",
+		"github.com/mcandre/octane/cmd/octane",
+	)
+
+	if err != nil {
+		return err
+	}
+
+	err = DockerLoad("linux/arm64")
+
+	if err != nil {
+		return err
+	}
 
 	return mageextras.Xgo(
 		artifactsPathDist,
 		"-docker-image",
 		image,
 		"-targets",
-		"darwin/amd64,darwin/arm64,linux/amd64,windows/amd64",
+		"linux/arm64",
 		"github.com/mcandre/octane/cmd/octane",
 	)
 }
