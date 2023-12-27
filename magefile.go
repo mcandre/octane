@@ -20,42 +20,6 @@ var artifactsPath = "bin"
 // Default references the default build task.
 var Default = Install
 
-// Audit runs a security audit.
-func Audit() error { return mageextras.SnykTest() }
-
-// GoVet runs go vet with shadow checks enabled.
-func GoVet() error { return mageextras.GoVetShadow() }
-
-// Gofmt runs gofmt.
-func GoFmt() error { return mageextras.GoFmt("-s", "-w") }
-
-// GoImports runs goimports.
-func GoImports() error { return mageextras.GoImports("-w") }
-
-// Errcheck runs errcheck.
-func Errcheck() error { return mageextras.Errcheck("-blank") }
-
-// Nakedret runs nakedret.
-func Nakedret() error { return mageextras.Nakedret("-l", "0") }
-
-// Staticcheck runs staticcheck.
-func Staticcheck() error { return mageextras.Staticcheck() }
-
-// Unmake runs unmake.
-func Unmake() error { return mageextras.Unmake(".") }
-
-// Lint runs the lint suite.
-func Lint() error {
-	mg.Deps(GoVet)
-	mg.Deps(GoFmt)
-	mg.Deps(GoImports)
-	mg.Deps(Errcheck)
-	mg.Deps(Nakedret)
-	mg.Deps(Staticcheck)
-	mg.Deps(Unmake)
-	return nil
-}
-
 // portBasename labels the artifact basename.
 var portBasename = fmt.Sprintf("octane-%s", octane.Version)
 
@@ -109,6 +73,57 @@ func DockerLoad(platform string) error {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()
+}
+
+// Snyk runs a snyk security audit.
+func Snyk() error { return mageextras.SnykTest() }
+
+// DockerScout runs a Docker security audit.
+func DockerScout() error {
+	if err := DockerLoad("linux/amd64"); err != nil {
+		return err
+	}
+
+	return mageextras.DockerScout("mcandre/octane-builder")
+}
+
+// Audit runs security audits.
+func Audit() error {
+	mg.Deps(mageextras.SnykTest)
+	return DockerScout()
+}
+
+// GoVet runs go vet with shadow checks enabled.
+func GoVet() error { return mageextras.GoVetShadow() }
+
+// Gofmt runs gofmt.
+func GoFmt() error { return mageextras.GoFmt("-s", "-w") }
+
+// GoImports runs goimports.
+func GoImports() error { return mageextras.GoImports("-w") }
+
+// Errcheck runs errcheck.
+func Errcheck() error { return mageextras.Errcheck("-blank") }
+
+// Nakedret runs nakedret.
+func Nakedret() error { return mageextras.Nakedret("-l", "0") }
+
+// Staticcheck runs staticcheck.
+func Staticcheck() error { return mageextras.Staticcheck() }
+
+// Unmake runs unmake.
+func Unmake() error { return mageextras.Unmake(".") }
+
+// Lint runs the lint suite.
+func Lint() error {
+	mg.Deps(GoVet)
+	mg.Deps(GoFmt)
+	mg.Deps(GoImports)
+	mg.Deps(Errcheck)
+	mg.Deps(Nakedret)
+	mg.Deps(Staticcheck)
+	mg.Deps(Unmake)
+	return nil
 }
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
