@@ -84,7 +84,7 @@ func DockerScout() error {
 		return err
 	}
 
-	return mageextras.DockerScout("mcandre/octane-builder")
+	return mageextras.DockerScout("-e", "mcandre/octane-builder")
 }
 
 // Audit runs security audits.
