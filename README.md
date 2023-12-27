@@ -20,6 +20,10 @@ https://github.com/mcandre/octane/releases
 
 https://godoc.org/github.com/mcandre/octane
 
+# LICENSE
+
+BSD-2-Clause
+
 # RUNTIME REQUIREMENTS
 
 * macOS, Linux, or Windows (experimental)
@@ -33,10 +37,6 @@ $ go install github.com/mcandre/octane/cmd/octane@latest
 # CONTRIBUTING
 
 See [DEVELOPMENT.md](DEVELOPMENT.md).
-
-# LICENSE
-
-FreeBSD
 
 # TIPS
 
