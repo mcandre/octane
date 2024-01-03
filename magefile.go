@@ -89,7 +89,7 @@ func DockerScout() error {
 
 // Audit runs security audits.
 func Audit() error {
-	mg.Deps(mageextras.SnykTest)
+	mg.Deps(Snyk)
 	return DockerScout()
 }
 
