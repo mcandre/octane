@@ -26,6 +26,6 @@ jobs:
     # Care when merging pull requests.
     # In any case, all CI/CD jobs can be peformed locally.
     #
-    - run: "mage snyk"
+    - run: "mage govulncheck snyk"
       env:
         SNYK_TOKEN: "${{ secrets.SNYK_TOKEN }}"
