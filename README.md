@@ -18,7 +18,7 @@ https://github.com/mcandre/octane/releases
 
 # DOCUMENTATION
 
-https://godoc.org/github.com/mcandre/octane
+https://pkg.go.dev/github.com/mcandre/octane?utm_source=godoc
 
 # LICENSE
 
