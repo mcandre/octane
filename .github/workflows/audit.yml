@@ -15,16 +15,19 @@ jobs:
     - run: "echo \"${GOPATH}/bin\" >> $GITHUB_PATH"
     - uses: "actions/checkout@v4"
     - run: "sudo apt-get update"
-    - run: "sudo apt-get install -y libasound2-dev cargo make npm wget"
-    - run: "wget https://go.dev/dl/go1.23.0.linux-amd64.tar.gz"
-    - run: "sudo tar -C /usr/local -xzf go1.23.0.linux-amd64.tar.gz"
+    - run: "sudo apt-get install -y libasound2-dev cargo curl make"
+    - run: "curl -LO https://go.dev/dl/go1.23.2.linux-amd64.tar.gz"
+    - run: "sudo tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz"
+    - run: "curl -LO https://downloads.snyk.io/cli/stable/snyk-linux"
+    - run: "sudo cp snyk-linux /bin/snyk"
+    - run: "sudo chmod a+x /bin/snyk"
     - run: "make"
     #
     # Docker-in-Docker GitHub Actions setup required for docker scout SAC.
     #
     # Disabling (GitHub Actions Hosted) Docker Scout runner step for now.
     # Care when merging pull requests.
-    # In any case, all CI/CD jobs can be peformed locally.
+    # In any case, all CI/CD jobs can be performed locally.
     #
     - run: "mage govulncheck snyk"
       env:
