@@ -1,3 +1,4 @@
+// Package octane provides primitives for manipulating MIDI signals.
 package octane
 
 import (
@@ -33,7 +34,7 @@ func Stream(midiIn drivers.In, midiOuts []drivers.Out, offset int) {
 	var key uint8
 	var velocity uint8
 
-	react := func(msg midi.Message, timestampms int32) {
+	react := func(msg midi.Message, _ int32) {
 		switch {
 		case msg.GetNoteStart(&channel, &key, &velocity):
 			for _, sender := range senders {

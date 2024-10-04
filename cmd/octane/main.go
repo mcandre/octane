@@ -1,3 +1,4 @@
+// Package main implements a CLI MIDI shifter application.
 package main
 
 import (
