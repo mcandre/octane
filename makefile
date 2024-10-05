@@ -6,7 +6,7 @@ all:
 	cargo install --force unmake@0.0.17
 
 	go install github.com/alexkohler/nakedret@v1.0.1
-	go install github.com/crazy-max/xgo@v0.26.0
+	go install src.techknowlogick.com/xgo@v1.7.0+1.19.5
 	go install github.com/kisielk/errcheck@v1.7.0
 	go install github.com/magefile/mage@v1.14.0
 	go install github.com/mcandre/factorio/cmd/factorio@v0.0.8

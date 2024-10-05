@@ -158,32 +158,13 @@ func Xgo() error {
 
 	artifactsPathDist := path.Join(artifactsPath, portBasename)
 
-	err = mageextras.Xgo(
+	return mageextras.Xgo(
 		artifactsPathDist,
-		"-docker-image",
+		"-image",
 		image,
 		"-targets",
 		"darwin/amd64,darwin/arm64,linux/amd64,windows/amd64",
-		"github.com/mcandre/octane/cmd/octane",
-	)
-
-	if err != nil {
-		return err
-	}
-
-	err = DockerLoad("linux/arm64")
-
-	if err != nil {
-		return err
-	}
-
-	return mageextras.Xgo(
-		artifactsPathDist,
-		"-docker-image",
-		image,
-		"-targets",
-		"linux/arm64",
-		"github.com/mcandre/octane/cmd/octane",
+		".",
 	)
 }
 
