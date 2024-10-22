@@ -52,6 +52,12 @@ Keep the code tidy:
 $ mage lint
 ```
 
+# TEST
+
+```console
+$ mage [test]
+```
+
 # BUILD + PUSH DOCKER IMAGE
 
 ```console

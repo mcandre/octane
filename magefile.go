@@ -16,7 +16,7 @@ import (
 var artifactsPath = "bin"
 
 // Default references the default build task.
-var Default = Install
+var Default = Test
 
 // portBasename labels the artifact basename.
 var portBasename = fmt.Sprintf("octane-%s", octane.Version)
@@ -170,6 +170,9 @@ func Xgo() error {
 
 // Port builds and compresses artifacts.
 func Port() error { mg.Deps(Xgo); return mageextras.Archive(portBasename, artifactsPath) }
+
+// Test runs a test suite.
+func Test() error { return mageextras.UnitTest() }
 
 // Install builds and installs Go applications.
 func Install() error { return mageextras.Install() }
