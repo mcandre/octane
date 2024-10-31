@@ -18,7 +18,7 @@ go:
 	go install golang.org/x/tools/cmd/goimports@latest
 	go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
 	go install golang.org/x/vuln/cmd/govulncheck@latest
-	go install honnef.co/go/tools/cmd/staticcheck@2024.1
+	go install honnef.co/go/tools/cmd/staticcheck@2024.1.1
 	go install src.techknowlogick.com/xgo@v1.7.0+1.19.5
 	go mod tidy
 
