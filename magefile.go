@@ -35,7 +35,7 @@ func DockerBuild() error {
 		"-t",
 		image,
 		"-exclude-arch",
-		"386,arm/v6,arm/v7,arm64,mips64le,ppc64le,riscv64,s390x",
+		"386,arm/v6,arm/v7,mips64le,ppc64le,riscv64,s390x",
 	}
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -50,7 +50,7 @@ func DockerPush() error {
 		"-t",
 		image,
 		"-exclude-arch",
-		"386,arm/v6,arm/v7,arm64,mips64le,ppc64le,riscv64,s390x",
+		"386,arm/v6,arm/v7,mips64le,ppc64le,riscv64,s390x",
 		"-push",
 	}
 	cmd.Stdout = os.Stdout
