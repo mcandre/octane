@@ -12,6 +12,8 @@ jobs:
     env:
       SNYK_TOKEN: "${{ secrets.SNYK_TOKEN }}"
     steps:
+    - name: "mitigate gh actions low disk capacity"
+      run: "rm -rf /opt/hostedtoolcache"
     - uses: "actions/checkout@v4"
     - uses: "actions/setup-go@v5"
       with:
