@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"time"
 )
 
 var flagList = flag.Bool("list", false, "List MIDI devices")
@@ -150,7 +149,5 @@ func main() {
 		octane.Stream(midiIn, midiOutsFiltered, *flagTransposeNote)
 	}
 
-	for {
-		time.Sleep(10)
-	}
+	select {}
 }
