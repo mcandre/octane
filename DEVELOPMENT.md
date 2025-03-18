@@ -2,7 +2,7 @@
 
 * a [C++](https://en.wikipedia.org/wiki/List_of_compilers#C++_compilers) compiler
 * [Docker](https://www.docker.com/) 27+
-* [Go](https://go.dev/) 1.24.0+
+* [Go](https://go.dev/) 1.24.1+
 * POSIX compatible [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [Rust](https://www.rust-lang.org/) 1.75.0+
 * [Snyk](https://snyk.io/)
