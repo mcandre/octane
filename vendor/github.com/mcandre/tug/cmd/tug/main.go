@@ -1,3 +1,4 @@
+// Package main implements a CLI application to automate common docker buildx workflows.
 package main
 
 import (

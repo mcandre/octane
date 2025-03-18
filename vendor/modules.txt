@@ -18,8 +18,8 @@ github.com/fatih/structtag
 # github.com/hashicorp/go-version v1.7.0
 ## explicit
 github.com/hashicorp/go-version
-# github.com/kisielk/errcheck v1.8.0
-## explicit; go 1.18
+# github.com/kisielk/errcheck v1.9.0
+## explicit; go 1.22.0
 github.com/kisielk/errcheck
 github.com/kisielk/errcheck/errcheck
 # github.com/magefile/mage v1.15.0
@@ -46,14 +46,14 @@ github.com/mcandre/factorio/cmd/factorio
 # github.com/mcandre/mage-extras v0.0.21
 ## explicit; go 1.23
 github.com/mcandre/mage-extras
-# github.com/mcandre/tug v0.0.10
-## explicit; go 1.23
+# github.com/mcandre/tug v0.0.12
+## explicit; go 1.24
 github.com/mcandre/tug
 github.com/mcandre/tug/cmd/tug
 # github.com/mgechev/dots v0.0.0-20210922191527-e955255bf517
 ## explicit
 github.com/mgechev/dots
-# github.com/mgechev/revive v1.6.0
+# github.com/mgechev/revive v1.7.0
 ## explicit; go 1.22.1
 github.com/mgechev/revive
 github.com/mgechev/revive/cli

@@ -124,4 +124,4 @@ Running tug itself within a Docker context, such as for CI/CD, would naturally r
 * [snek](https://github.com/mcandre/snek) ports native C/C++ applications
 * [tonixxx](https://github.com/mcandre/tonixxx) ports applications of any programming language
 * [WASM](https://webassembly.org/) provides a portable interface for C/C++ code
-* [xgo](https://github.com/crazy-max/xgo) supports Go projects with native cgo dependencies
+* [xgo](https://github.com/techknowlogick/xgo) supports Go projects with native cgo dependencies
