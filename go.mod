@@ -1,6 +1,6 @@
 module github.com/mcandre/octane
 
-go 1.24
+go 1.24.2
 
 require (
 	github.com/magefile/mage v1.15.0
@@ -46,6 +46,3 @@ tool (
 	honnef.co/go/tools/cmd/staticcheck
 	src.techknowlogick.com/xgo
 )
-
-// Pending https://github.com/alexkohler/nakedret/issues/38
-replace github.com/alexkohler/nakedret/v2 v2.0.5 => github.com/aep-sunlife/nakedret/v2 v2.0.0-20250227175454-3fb3a0f5caba
