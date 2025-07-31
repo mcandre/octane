@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 
 	"github.com/magefile/mage/mg"
 	mageextras "github.com/mcandre/mage-extras"
@@ -21,6 +22,20 @@ func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./
 
 // Snyk runs Snyk SCA.
 func Snyk() error { return mageextras.SnykTest() }
+
+// DockerPublish publishes demo images.
+func DockerPublish() error {
+	cmd := exec.Command(
+		"tug",
+		"-t",
+		"mcandre/tug-demo",
+		"-exclude-arch",
+		"386,arm/v6,arm/v7,ppc64le,riscv64,s390x",
+	)
+	cmd.Env = os.Environ()
+	cmd.Dir = "example"
+	return cmd.Run()
+}
 
 // DockerScout runs a Docker security audit.
 func DockerScout() error { return mageextras.DockerScout("-e", "mcandre/tug-demo") }
