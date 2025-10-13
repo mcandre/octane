@@ -1,7 +1,7 @@
 # BUILDTIME REQUIREMENTS
 
 * [Docker](https://www.docker.com/) 20.10.12+
-* [Go](https://go.dev/) 1.24.5+
+* [Go](https://go.dev/) 1.24.6+
 * [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/) compatible [make](https://en.wikipedia.org/wiki/Make_(software))
 * [Rust](https://www.rust-lang.org/) 1.87.0+
 * [Snyk](https://snyk.io/)
