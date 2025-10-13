@@ -3,7 +3,7 @@
 * a UNIX-like environment (e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/))
 * a [C++](https://isocpp.org/) compiler
 * [Docker](https://www.docker.com/) 27+
-* [Go](https://go.dev/) 1.25.2+
+* [Go](https://go.dev/) 1.25.3+
 * [Snyk](https://snyk.io/)
 * [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/) compatible [tar](https://en.wikipedia.org/wiki/Tar_(computing))
 * Provision additional dev tools with `./install`
