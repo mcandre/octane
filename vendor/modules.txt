@@ -18,20 +18,19 @@ github.com/magefile/mage/mage
 github.com/magefile/mage/mg
 github.com/magefile/mage/parse
 github.com/magefile/mage/sh
-# github.com/mcandre/mage-extras v0.0.26
-## explicit; go 1.24.5
+# github.com/mcandre/mage-extras v0.0.27
+## explicit; go 1.24.6
 github.com/mcandre/mage-extras
 # github.com/mcandre/tug v0.0.15
 ## explicit; go 1.24.5
 github.com/mcandre/tug
 github.com/mcandre/tug/cmd/tug
-# gitlab.com/gomidi/midi/v2 v2.0.28
-## explicit; go 1.16
+# gitlab.com/gomidi/midi/v2 v2.3.16
+## explicit; go 1.24.2
 gitlab.com/gomidi/midi/v2
 gitlab.com/gomidi/midi/v2/drivers
 gitlab.com/gomidi/midi/v2/drivers/rtmididrv
 gitlab.com/gomidi/midi/v2/drivers/rtmididrv/imported/rtmidi
-gitlab.com/gomidi/midi/v2/drivers/rtmididrv/imported/rtmidi/cpp
 gitlab.com/gomidi/midi/v2/internal/utils
 # golang.org/x/exp/typeparams v0.0.0-20250408133849-7e4ce0ab07d0
 ## explicit; go 1.23.0

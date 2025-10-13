@@ -1,3 +1,6 @@
+//go:build !js
+// +build !js
+
 package rtmidi
 
 /*
@@ -13,7 +16,7 @@ package rtmidi
 
 #include <stdlib.h>
 #include <stdint.h>
-#include "rtmidi_stub.h"
+#include "rtmidi_c.h"
 
 extern void goMIDIInCallback(double ts, unsigned char *msg, size_t msgsz, void *arg);
 
@@ -209,7 +212,7 @@ func NewMIDIInDefault() (MIDIIn, error) {
 }
 
 // Open a single MIDIIn port using the given API. One can provide a
-// custom port name and a desired queue size for the incomming MIDI messages.
+// custom port name and a desired queue size for the incoming MIDI messages.
 func NewMIDIIn(api API, name string, queueSize int) (MIDIIn, error) {
 	p := C.CString(name)
 	defer C.free(unsafe.Pointer(p))
