@@ -78,7 +78,7 @@ func DockerLoad(platform string) error {
 func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./...") }
 
 // Snyk runs Snyk SCA.
-func Snyk() error { return mageextras.SnykTest() }
+func Snyk() error { return mageextras.SnykTest("--dev") }
 
 // DockerScout runs a Docker security audit.
 func DockerScout() error {
