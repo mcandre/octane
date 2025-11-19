@@ -1,21 +1,19 @@
 # BUILDTIME REQUIREMENTS
 
 * [Docker](https://www.docker.com/) 20.10.12+
-* [Go](https://go.dev/) 1.24.6+
-* [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/) compatible [make](https://en.wikipedia.org/wiki/Make_(software))
-* [Rust](https://www.rust-lang.org/) 1.87.0+
+* [Go](https://go.dev/)
+* POSIX compliant [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [Snyk](https://snyk.io/)
-* [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/) compatible [tar](https://en.wikipedia.org/wiki/Tar_(computing))
-* Provision additional dev tools with `make [-j 4]`
+* [GNU](https://www.gnu.org/software/tar/)/[BSD](https://man.freebsd.org/cgi/man.cgi?tar(1))/[Windows](https://ss64.com/nt/tar.html) tar with gzip support
+* Provision additional dev tools with `make`
 
 ## Recommended
 
-* [ASDF](https://asdf-vm.com/) 0.10 (run `asdf reshim` after provisioning)
+* a host capable of running musl/Linux containers (e.g. a GNU/Linux, musl/Linux, macOS, or Windows host)
+* a UNIX-like environment (e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/))
+* [ASDF](https://asdf-vm.com/) 0.18 (run `asdf reshim` after provisioning)
 * [direnv](https://direnv.net/) 2
-* [GNU](https://www.gnu.org/)/[BSD](https://en.wikipedia.org/wiki/Berkeley_Software_Distribution) [make](https://en.wikipedia.org/wiki/Make_(software))
-* [GNU](https://www.gnu.org/)/[BSD](https://en.wikipedia.org/wiki/Berkeley_Software_Distribution) [tar](https://en.wikipedia.org/wiki/Tar_(computing))
 * [webm](https://www.webmproject.org/) supports audio in animation loops
-* a [UNIX](https://en.wikipedia.org/wiki/Unix)-like environment
 
 ## Windows
 
