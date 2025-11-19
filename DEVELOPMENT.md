@@ -1,18 +1,19 @@
 # BUILDTIME REQUIREMENTS
 
-* a UNIX-like environment (e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/))
 * a [C++](https://isocpp.org/) compiler
 * [Docker](https://www.docker.com/) 27+
+* POSIX compliant [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [Go](https://go.dev/)
 * [Snyk](https://snyk.io/)
-* [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/) compatible [tar](https://en.wikipedia.org/wiki/Tar_(computing))
-* Provision additional dev tools with `./install`
+* [GNU](https://www.gnu.org/software/tar/)/[BSD](https://man.freebsd.org/cgi/man.cgi?tar(1))/[Windows](https://ss64.com/nt/tar.html) tar with gzip support
+* Provision additional dev tools with `make`
 
 ## Recommended
 
+* a host capable of running musl/Linux containers (e.g. a GNU/Linux, musl/Linux, macOS, or Windows host)
+* a UNIX-like environment (e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/))
 * [ASDF](https://asdf-vm.com/) 0.18 (run `asdf reshim` after provisioning)
 * [direnv](https://direnv.net/) 2
-* [GNU](https://www.gnu.org/)/[BSD](https://en.wikipedia.org/wiki/Berkeley_Software_Distribution) [tar](https://en.wikipedia.org/wiki/Tar_(computing))
 
 ## Linux
 
