@@ -95,9 +95,6 @@ func Audit() error {
 // Deadcode runs deadcode.
 func Deadcode() error { return mageextras.Deadcode("./...") }
 
-// Gofmt runs gofmt.
-func GoFmt() error { return mageextras.GoFmt("-s", "-w") }
-
 // GoImports runs goimports.
 func GoImports() error { return mageextras.GoImports("-w") }
 
@@ -119,7 +116,6 @@ func Staticcheck() error { return mageextras.Staticcheck("./...") }
 // Lint runs the lint suite.
 func Lint() error {
 	mg.Deps(Deadcode)
-	mg.Deps(GoFmt)
 	mg.Deps(GoImports)
 	mg.Deps(GoVet)
 	mg.Deps(Errcheck)
