@@ -21,6 +21,9 @@ var Default = Test
 // portBasename labels the artifact basename.
 var portBasename = fmt.Sprintf("octane-%s", octane.Version)
 
+// artifactsPathDist places xgo artifacts.
+var artifactsPathDist = path.Join(artifactsPath, portBasename)
+
 // repoNamespace identifies the Go namespace for this project.
 var repoNamespace = "github.com/mcandre/octane"
 
@@ -106,8 +109,6 @@ func Lint() error {
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
 	mg.Deps(DockerBuild)
-
-	artifactsPathDist := path.Join(artifactsPath, portBasename)
 
 	return mageextras.Xgo(
 		artifactsPathDist,

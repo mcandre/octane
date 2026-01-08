@@ -1,0 +1,31 @@
+# verbose = true
+
+# header.type = "UStar"
+
+# cwd = "..."
+
+# skip_paths = [
+#     ".DS_Store",
+#     "Thumbs.db",
+# ]
+
+[[rules]]
+permissions = 0o755
+
+[[rules]]
+when.mode.type = "File"
+when.paths = "(?i)^aliases|(ba|(m)?k|z)shrc|(bsd|gnu)?makefile|changelog|exports|fstab|license|readme|group|hosts|issue|mime|modules|profile|protocols|resolv|services|t(e)?mp|zshenv|((.*/)?etc/.+)$"
+permissions = 0o644
+
+[[rules]]
+when.mode.type = "File"
+when.paths = "^(.*/)*[^/]*\\.[^/]*$"
+permissions = 0o644
+
+[[rules]]
+when.paths = "^(.*/)?etc/init\\.d(/.*)?$"
+permissions = 0o755
+
+[[rules]]
+when.paths = "-darwin-"
+permissions = 0o755
