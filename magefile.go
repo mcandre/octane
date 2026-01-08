@@ -114,7 +114,7 @@ func Xgo() error {
 		"-image",
 		image,
 		"-targets",
-		"darwin/amd64,darwin/arm64,linux/amd64,windows/amd64",
+		"darwin/amd64,darwin/arm64,linux/amd64,linux/arm64,windows/amd64",
 		".",
 	)
 }
