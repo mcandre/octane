@@ -21,72 +21,72 @@ type in struct {
 }
 
 // IsOpen returns wether the MIDI in port is open
-func (i *in) IsOpen() (open bool) {
+func (me *in) IsOpen() (open bool) {
 	//	i.RLock()
-	open = i.midiIn != nil
+	open = me.midiIn != nil
 	//i.RUnlock()
 	return
 }
 
 // String returns the name of the MIDI in port.
-func (i *in) String() string {
-	return i.name
+func (me *in) String() string {
+	return me.name
 }
 
 // Underlying returns the underlying rtmidi.MIDIIn. Use it with type casting:
 //
 //	rtIn := i.Underlying().(rtmidi.MIDIIn)
-func (i *in) Underlying() interface{} {
-	return i.midiIn
+func (me *in) Underlying() interface{} {
+	return me.midiIn
 }
 
 // Number returns the number of the MIDI in port.
 // Note that with rtmidi, out and in ports are counted separately.
 // That means there might exists out ports and an in ports that share the same number.
-func (i *in) Number() int {
-	return i.number
+func (me *in) Number() int {
+	return me.number
 }
 
 // Close closes the MIDI in port, after it has stopped listening.
-func (i *in) Close() (err error) {
-	if !i.IsOpen() {
+func (me *in) Close() (err error) {
+	if !me.IsOpen() {
 		return nil
 	}
 
 	//	i.StopListening()
 	//	i.Lock()
-	err = i.midiIn.Close()
-	i.midiIn = nil
+	err = me.midiIn.Close()
+	me.midiIn = nil
 	//	i.Unlock()
 	return
 }
 
 // Open opens the MIDI in port
-func (i *in) Open() (err error) {
-	if i.IsOpen() {
+func (me *in) Open() (err error) {
+	if me.IsOpen() {
 		return nil
 	}
 
 	//i.Lock()
 
-	i.midiIn, err = rtmidi.NewMIDIInDefault()
+	me.midiIn, err = rtmidi.NewMIDIInDefault()
 	if err != nil {
-		i.midiIn = nil
+		me.midiIn = nil
 		//i.Unlock()
 		return fmt.Errorf("can't open default MIDI in: %v", err)
 	}
 
-	err = i.midiIn.OpenPort(i.number, "")
+	err = me.midiIn.OpenPort(me.number, "")
 	//i.Unlock()
 
 	if err != nil {
-		i.Close()
-		return fmt.Errorf("can't open MIDI in port %v (%s): %v", i.number, i, err)
+		me.Close()
+		return fmt.Errorf("can't open MIDI in port %v (%s): %v", me.number, me, err)
 	}
 
 	//i.driver.Lock()
 	//i.midiIn.IgnoreTypes(i.driver.ignoreSysex, i.driver.ignoreTimeCode, i.driver.ignoreActiveSense)
-	i.driver.opened = append(i.driver.opened, i)
+	me.driver.opened = append(me.driver.opened, me)
 	//i.driver.Unlock()
 
 	return nil
@@ -125,13 +125,13 @@ func newIn(driver *Driver, number int, name string) drivers.In {
 	return &in{driver: driver, number: number, name: name}
 }
 
-func (i *in) Listen(onMsg func(msg []byte, milliseconds int32), config drivers.ListenConfig) (stopFn func(), err error) {
+func (me *in) Listen(onMsg func(msg []byte, milliseconds int32), config drivers.ListenConfig) (stopFn func(), err error) {
 
 	if onMsg == nil {
 		return nil, fmt.Errorf("onMsg callback must not be nil")
 	}
 
-	i.midiIn.IgnoreTypes(!config.SysEx, !config.TimeCode, !config.ActiveSense)
+	me.midiIn.IgnoreTypes(!config.SysEx, !config.TimeCode, !config.ActiveSense)
 
 	//var inSysEx bool
 	if config.SysExBufferSize == 0 {
@@ -167,7 +167,7 @@ func (i *in) Listen(onMsg func(msg []byte, milliseconds int32), config drivers.L
 		// lockless sync
 		//	atomic.StoreInt32(&stop, 1)
 		//	fmt.Println("stopping")
-		i.midiIn.CancelCallback()
+		me.midiIn.CancelCallback()
 		//time.Sleep(stopWait)
 	}
 
@@ -304,7 +304,7 @@ func (i *in) Listen(onMsg func(msg []byte, milliseconds int32), config drivers.L
 		}
 	*/
 
-	go i.midiIn.SetCallback(func(in rtmidi.MIDIIn, bt []byte, deltaSeconds float64) {
+	go me.midiIn.SetCallback(func(in rtmidi.MIDIIn, bt []byte, deltaSeconds float64) {
 		/*
 			var stopped int32
 

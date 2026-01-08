@@ -5,7 +5,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path"
 
 	"github.com/magefile/mage/mg"
@@ -26,52 +25,34 @@ var portBasename = fmt.Sprintf("octane-%s", octane.Version)
 var repoNamespace = "github.com/mcandre/octane"
 
 // image denotes a Docker image for building this project.
-var image = "mcandre/octane-builder"
+var image = "n4jm4/octane-builder"
 
-// DockerBuild generates Docker images.
+// DockerBuild creates local Docker buildx images.
 func DockerBuild() error {
-	cmd := exec.Command("tug")
-	cmd.Args = []string{
-		"tug",
-		"-t",
-		image,
-		"-exclude-arch",
-		"386,arm/v6,arm/v7,mips64le,ppc64le,riscv64,s390x",
-	}
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	return mageextras.Tuggy(
+		"-t", image,
+		"--load",
+	)
 }
 
-// DockerPush registers Docker images.
+// DockerPush creates and tag aliases remote Docker buildx images.
 func DockerPush() error {
-	cmd := exec.Command("tug")
-	cmd.Args = []string{
-		"tug",
-		"-t",
-		image,
-		"-exclude-arch",
-		"386,arm/v6,arm/v7,mips64le,ppc64le,riscv64,s390x",
-		"-push",
-	}
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+	return mageextras.Tuggy(
+		"-t", image,
+		"--push",
+	)
 }
 
-// DockerLoad loads Docker images of a given platform.
-func DockerLoad(platform string) error {
-	cmd := exec.Command("tug")
-	cmd.Args = []string{
-		"tug",
-		"-t",
-		image,
-		"-load",
-		platform,
+// DockerTest creates and tag aliases remote test Docker buildx images.
+func DockerTest() error {
+	if err := mageextras.Tuggy("-t", fmt.Sprintf("%s:test", image), "--load"); err != nil {
+		return err
 	}
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	return cmd.Run()
+
+	return mageextras.Tuggy(
+		"-t", fmt.Sprintf("%s:test", image),
+		"--push",
+	)
 }
 
 // Govulncheck runs govulncheck.
@@ -79,11 +60,8 @@ func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./
 
 // DockerScout runs a Docker security audit.
 func DockerScout() error {
-	if err := DockerLoad("linux/amd64"); err != nil {
-		return err
-	}
-
-	return mageextras.DockerScout("-e", "mcandre/octane-builder")
+	mg.Deps(DockerBuild)
+	return mageextras.DockerScout("-e", image)
 }
 
 // Audit runs security audits.
@@ -127,11 +105,7 @@ func Lint() error {
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
-	err := DockerLoad("linux/amd64")
-
-	if err != nil {
-		return err
-	}
+	mg.Deps(DockerBuild)
 
 	artifactsPathDist := path.Join(artifactsPath, portBasename)
 
@@ -146,7 +120,17 @@ func Xgo() error {
 }
 
 // Port builds and compresses artifacts.
-func Port() error { mg.Deps(Xgo); return mageextras.Archive(portBasename, artifactsPath) }
+func Port() error {
+	mg.Deps(Xgo)
+
+	return mageextras.Chandler(
+		"-C",
+		artifactsPath,
+		"-czf",
+		fmt.Sprintf("%s.tgz", portBasename),
+		portBasename,
+	)
+}
 
 // Test runs a test suite.
 func Test() error { return mageextras.UnitTest() }

@@ -24,18 +24,18 @@ type out struct {
 }
 
 // IsOpen returns wether the port is open
-func (o *out) IsOpen() (open bool) {
+func (me *out) IsOpen() (open bool) {
 	//	o.RLock()
-	open = o.midiOut != nil
+	open = me.midiOut != nil
 	//	o.RUnlock()
 	return
 }
 
 // Send writes a MIDI sysex message to the outut port
-func (o *out) SendSysEx(data []byte) error {
+func (me *out) SendSysEx(data []byte) error {
 	//fmt.Printf("try to send sysex\n")
 
-	if o.midiOut == nil {
+	if me.midiOut == nil {
 		//o.RUnlock()
 		return drivers.ErrPortClosed
 	}
@@ -49,15 +49,15 @@ func (o *out) SendSysEx(data []byte) error {
 	//	defer o.mx.Unlock()
 	//fmt.Printf("sending sysex % X\n", data)
 	//err := o.stream.WriteSysExBytes(ts, data)
-	err := o.midiOut.SendMessage(data)
+	err := me.midiOut.SendMessage(data)
 	if err != nil {
-		return fmt.Errorf("could not send sysex message to MIDI out %v (%s): %v", o.Number(), o, err)
+		return fmt.Errorf("could not send sysex message to MIDI out %v (%s): %v", me.Number(), me, err)
 	}
 	return nil
 }
 
-func (o *out) Send(b []byte) error {
-	if o.midiOut == nil {
+func (me *out) Send(b []byte) error {
+	if me.midiOut == nil {
 		//o.RUnlock()
 		return drivers.ErrPortClosed
 	}
@@ -79,9 +79,9 @@ func (o *out) Send(b []byte) error {
 		//bt := []byte{b[0], b[1], b[2]}
 		err := o.midiOut.SendMessage(bt)
 	*/
-	err := o.midiOut.SendMessage(b)
+	err := me.midiOut.SendMessage(b)
 	if err != nil {
-		return fmt.Errorf("could not send message to MIDI out %v (%s): %v", o.number, o, err)
+		return fmt.Errorf("could not send message to MIDI out %v (%s): %v", me.number, me, err)
 	}
 	return nil
 }
@@ -111,61 +111,61 @@ func (o *out) send(bt []byte) error {
 // Underlying returns the underlying rtmidi.MIDIOut. Use it with type casting:
 //
 //	rtOut := o.Underlying().(rtmidi.MIDIOut)
-func (o *out) Underlying() interface{} {
-	return o.midiOut
+func (me *out) Underlying() interface{} {
+	return me.midiOut
 }
 
 // Number returns the number of the MIDI out port.
 // Note that with rtmidi, out and in ports are counted separately.
 // That means there might exists out ports and an in ports that share the same number
-func (o *out) Number() int {
-	return o.number
+func (me *out) Number() int {
+	return me.number
 }
 
 // String returns the name of the MIDI out port.
-func (o *out) String() string {
-	return o.name
+func (me *out) String() string {
+	return me.name
 }
 
 // Close closes the MIDI out port
-func (o *out) Close() (err error) {
-	if !o.IsOpen() {
+func (me *out) Close() (err error) {
+	if !me.IsOpen() {
 		return nil
 	}
 	//o.Lock()
 	//defer o.Unlock()
 
-	err = o.midiOut.Close()
-	o.midiOut = nil
+	err = me.midiOut.Close()
+	me.midiOut = nil
 
 	if err != nil {
-		err = fmt.Errorf("can't close MIDI out %v (%s): %v", o.number, o, err)
+		err = fmt.Errorf("can't close MIDI out %v (%s): %v", me.number, me, err)
 	}
 
 	return
 }
 
 // Open opens the MIDI out port
-func (o *out) Open() (err error) {
-	if o.IsOpen() {
+func (me *out) Open() (err error) {
+	if me.IsOpen() {
 		return nil
 	}
 	//	o.Lock()
 	//defer o.Unlock()
-	o.midiOut, err = rtmidi.NewMIDIOutDefault()
+	me.midiOut, err = rtmidi.NewMIDIOutDefault()
 	if err != nil {
-		o.midiOut = nil
+		me.midiOut = nil
 		return fmt.Errorf("can't open default MIDI out: %v", err)
 	}
 
-	err = o.midiOut.OpenPort(o.number, "")
+	err = me.midiOut.OpenPort(me.number, "")
 	if err != nil {
-		o.midiOut = nil
-		return fmt.Errorf("can't open MIDI out port %v (%s): %v", o.number, o, err)
+		me.midiOut = nil
+		return fmt.Errorf("can't open MIDI out port %v (%s): %v", me.number, me, err)
 	}
 
 	//	o.driver.Lock()
-	o.driver.opened = append(o.driver.opened, o)
+	me.driver.opened = append(me.driver.opened, me)
 	//	o.driver.Unlock()
 
 	return nil

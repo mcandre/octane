@@ -10,8 +10,8 @@ import (
 type Messages []Message
 
 // Bytes returns all bytes of all the messages
-func (m Messages) Bytes() (all []byte) {
-	for _, msg := range m {
+func (me Messages) Bytes() (all []byte) {
+	for _, msg := range me {
 		all = append(all, msg.Bytes()...)
 	}
 	return
@@ -21,23 +21,23 @@ func (m Messages) Bytes() (all []byte) {
 type Message []byte
 
 // Bytes returns the underlying bytes of the message.
-func (m Message) Bytes() []byte {
-	return []byte(m)
+func (me Message) Bytes() []byte {
+	return []byte(me)
 }
 
 // IsPlayable returns, if the message can be send to an instrument.
-func (m Message) IsPlayable() bool {
-	if m.Type() <= UnknownMsg {
+func (me Message) IsPlayable() bool {
+	if me.Type() <= UnknownMsg {
 		return false
 	}
 
-	return m.Type() < firstMetaMsg
+	return me.Type() < firstMetaMsg
 }
 
 // IsOneOf returns true, if the message has one of the given types.
-func (m Message) IsOneOf(checkers ...Type) bool {
+func (me Message) IsOneOf(checkers ...Type) bool {
 	for _, checker := range checkers {
-		if m.Is(checker) {
+		if me.Is(checker) {
 			return true
 		}
 	}
@@ -45,33 +45,33 @@ func (m Message) IsOneOf(checkers ...Type) bool {
 }
 
 // Type returns the type of the message.
-func (m Message) Type() Type {
-	return getType(m)
+func (me Message) Type() Type {
+	return getType(me)
 }
 
 // Is returns true, if the message is of the given type.
-func (m Message) Is(t Type) bool {
-	return m.Type().Is(t)
+func (me Message) Is(t Type) bool {
+	return me.Type().Is(t)
 }
 
 // GetNoteOn returns true if (and only if) the message is a NoteOnMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetNoteOn(channel, key, velocity *uint8) (is bool) {
-	if !m.Is(NoteOnMsg) {
+func (me Message) GetNoteOn(channel, key, velocity *uint8) (is bool) {
+	if !me.Is(NoteOnMsg) {
 		return false
 	}
 
-	if len(m) != 3 {
+	if len(me) != 3 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
 	if key != nil || velocity != nil {
-		_key, _velocity := utils.ParseTwoUint7(m[1], m[2])
+		_key, _velocity := utils.ParseTwoUint7(me[1], me[2])
 
 		if key != nil {
 			*key = _key
@@ -88,10 +88,10 @@ func (m Message) GetNoteOn(channel, key, velocity *uint8) (is bool) {
 // GetNoteStart returns true if (and only if) the message is a NoteOnMsg with a velocity > 0.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetNoteStart(channel, key, velocity *uint8) (is bool) {
+func (me Message) GetNoteStart(channel, key, velocity *uint8) (is bool) {
 	var vel uint8
 
-	if !m.GetNoteOn(channel, key, &vel) || vel == 0 {
+	if !me.GetNoteOn(channel, key, &vel) || vel == 0 {
 		return false
 	}
 
@@ -104,21 +104,21 @@ func (m Message) GetNoteStart(channel, key, velocity *uint8) (is bool) {
 // GetNoteOff returns true if (and only if) the message is a NoteOffMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetNoteOff(channel, key, velocity *uint8) (is bool) {
-	if !m.Is(NoteOffMsg) {
+func (me Message) GetNoteOff(channel, key, velocity *uint8) (is bool) {
+	if !me.Is(NoteOffMsg) {
 		return false
 	}
 
-	if len(m) != 3 {
+	if len(me) != 3 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
 	if key != nil || velocity != nil {
-		_key, _velocity := utils.ParseTwoUint7(m[1], m[2])
+		_key, _velocity := utils.ParseTwoUint7(me[1], me[2])
 
 		if key != nil {
 			*key = _key
@@ -135,17 +135,17 @@ func (m Message) GetNoteOff(channel, key, velocity *uint8) (is bool) {
 // GetChannel returns true if (and only if) the message is a ChannelMsg.
 // Then it also extracts the channel to the given argument.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetChannel(channel *uint8) (is bool) {
-	if !m.Is(ChannelMsg) {
+func (me Message) GetChannel(channel *uint8) (is bool) {
+	if !me.Is(ChannelMsg) {
 		return false
 	}
 
-	if len(m) < 1 {
+	if len(me) < 1 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 	return true
 }
@@ -153,8 +153,8 @@ func (m Message) GetChannel(channel *uint8) (is bool) {
 // GetNoteEnd returns true if (and only if) the message is a NoteOnMsg with a velocity == 0 or a NoteOffMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetNoteEnd(channel, key *uint8) (is bool) {
-	if !m.Is(NoteOnMsg) && !m.Is(NoteOffMsg) {
+func (me Message) GetNoteEnd(channel, key *uint8) (is bool) {
+	if !me.Is(NoteOnMsg) && !me.Is(NoteOffMsg) {
 		return false
 	}
 
@@ -165,9 +165,9 @@ func (m Message) GetNoteEnd(channel, key *uint8) (is bool) {
 	is = false
 
 	switch {
-	case m.GetNoteOn(&ch, &k, &vel):
+	case me.GetNoteOn(&ch, &k, &vel):
 		is = vel == 0
-	case m.GetNoteOff(&ch, &k, &vel):
+	case me.GetNoteOff(&ch, &k, &vel):
 		is = true
 	}
 
@@ -189,21 +189,21 @@ func (m Message) GetNoteEnd(channel, key *uint8) (is bool) {
 // GetPolyAfterTouch returns true if (and only if) the message is a PolyAfterTouchMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetPolyAfterTouch(channel, key, pressure *uint8) (is bool) {
-	if !m.Is(PolyAfterTouchMsg) {
+func (me Message) GetPolyAfterTouch(channel, key, pressure *uint8) (is bool) {
+	if !me.Is(PolyAfterTouchMsg) {
 		return false
 	}
 
-	if len(m) != 3 {
+	if len(me) != 3 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
 	if key != nil || pressure != nil {
-		var _key, _pressure = utils.ParseTwoUint7(m[1], m[2])
+		var _key, _pressure = utils.ParseTwoUint7(me[1], me[2])
 
 		if key != nil {
 			*key = _key
@@ -219,21 +219,21 @@ func (m Message) GetPolyAfterTouch(channel, key, pressure *uint8) (is bool) {
 // GetAfterTouch returns true if (and only if) the message is a AfterTouchMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetAfterTouch(channel, pressure *uint8) (is bool) {
-	if !m.Is(AfterTouchMsg) {
+func (me Message) GetAfterTouch(channel, pressure *uint8) (is bool) {
+	if !me.Is(AfterTouchMsg) {
 		return false
 	}
 
-	if len(m) != 2 {
+	if len(me) != 2 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
 	if pressure != nil {
-		*pressure = utils.ParseUint7(m[1])
+		*pressure = utils.ParseUint7(me[1])
 	}
 	return true
 }
@@ -241,21 +241,21 @@ func (m Message) GetAfterTouch(channel, pressure *uint8) (is bool) {
 // GetProgramChange returns true if (and only if) the message is a ProgramChangeMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetProgramChange(channel, program *uint8) (is bool) {
-	if !m.Is(ProgramChangeMsg) {
+func (me Message) GetProgramChange(channel, program *uint8) (is bool) {
+	if !me.Is(ProgramChangeMsg) {
 		return false
 	}
 
-	if len(m) != 2 {
+	if len(me) != 2 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
 	if program != nil {
-		*program = utils.ParseUint7(m[1])
+		*program = utils.ParseUint7(me[1])
 	}
 	return true
 }
@@ -264,20 +264,20 @@ func (m Message) GetProgramChange(channel, program *uint8) (is bool) {
 // Then it also extracts the data to the given arguments.
 // Either relative or absolute may be nil, if not needed.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetPitchBend(channel *uint8, relative *int16, absolute *uint16) (is bool) {
-	if !m.Is(PitchBendMsg) {
+func (me Message) GetPitchBend(channel *uint8, relative *int16, absolute *uint16) (is bool) {
+	if !me.Is(PitchBendMsg) {
 		return false
 	}
 
-	if len(m) != 3 {
+	if len(me) != 3 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
-	rel, abs := utils.ParsePitchWheelVals(m[1], m[2])
+	rel, abs := utils.ParsePitchWheelVals(me[1], me[2])
 	if relative != nil {
 		*relative = rel
 	}
@@ -290,23 +290,23 @@ func (m Message) GetPitchBend(channel *uint8, relative *int16, absolute *uint16)
 // GetControlChange returns true if (and only if) the message is a ControlChangeMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetControlChange(channel, controller, value *uint8) (is bool) {
-	if !m.Is(ControlChangeMsg) {
+func (me Message) GetControlChange(channel, controller, value *uint8) (is bool) {
+	if !me.Is(ControlChangeMsg) {
 		return false
 	}
 
-	if len(m) != 3 {
+	if len(me) != 3 {
 		return false
 	}
 
 	if channel != nil {
-		_, *channel = utils.ParseStatus(m[0])
+		_, *channel = utils.ParseStatus(me[0])
 	}
 
 	if controller != nil || value != nil {
 		var _controller, _value uint8
 
-		_controller, _value = utils.ParseTwoUint7(m[1], m[2])
+		_controller, _value = utils.ParseTwoUint7(me[1], me[2])
 
 		if controller != nil {
 			*controller = _controller
@@ -346,17 +346,17 @@ cdefg = Hours (0-23)
 // GetMTC returns true if (and only if) the message is a MTCMsg.
 // Then it also extracts the data to the given arguments.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetMTC(quarterframe *uint8) (is bool) {
-	if !m.Is(MTCMsg) {
+func (me Message) GetMTC(quarterframe *uint8) (is bool) {
+	if !me.Is(MTCMsg) {
 		return false
 	}
 
-	if len(m) != 2 {
+	if len(me) != 2 {
 		return false
 	}
 
 	if quarterframe != nil {
-		*quarterframe = utils.ParseUint7(m[1])
+		*quarterframe = utils.ParseUint7(me[1])
 	}
 
 	return true
@@ -365,17 +365,17 @@ func (m Message) GetMTC(quarterframe *uint8) (is bool) {
 // GetSongSelect returns true if (and only if) the message is a SongSelectMsg.
 // Then it also extracts the song number to the given argument.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetSongSelect(song *uint8) (is bool) {
-	if !m.Is(SongSelectMsg) {
+func (me Message) GetSongSelect(song *uint8) (is bool) {
+	if !me.Is(SongSelectMsg) {
 		return false
 	}
 
-	if len(m) != 2 {
+	if len(me) != 2 {
 		return false
 	}
 
 	if song != nil {
-		*song = utils.ParseUint7(m[1])
+		*song = utils.ParseUint7(me[1])
 	}
 
 	return true
@@ -384,26 +384,26 @@ func (m Message) GetSongSelect(song *uint8) (is bool) {
 // GetSPP returns true if (and only if) the message is a SPPMsg.
 // Then it also extracts the spp to the given argument.
 // Only arguments that are not nil are parsed and filled.
-func (m Message) GetSPP(spp *uint16) (is bool) {
-	if !m.Is(SPPMsg) {
+func (me Message) GetSPP(spp *uint16) (is bool) {
+	if !me.Is(SPPMsg) {
 		return false
 	}
 
-	if len(m) != 3 {
+	if len(me) != 3 {
 		return false
 	}
 
 	if spp != nil {
-		_, *spp = utils.ParsePitchWheelVals(m[2], m[1])
+		_, *spp = utils.ParsePitchWheelVals(me[2], me[1])
 	}
 
 	return true
 }
 
 // String represents the Message as a string that contains the Type and its properties.
-func (m Message) String() string {
+func (me Message) String() string {
 	var bf bytes.Buffer
-	fmt.Fprint(&bf, m.Type().String())
+	fmt.Fprint(&bf, me.Type().String())
 
 	var channel, val1, val2 uint8
 	var pitchabs uint16
@@ -412,31 +412,31 @@ func (m Message) String() string {
 	var sysex []byte
 
 	switch {
-	case m.GetNoteOn(&channel, &val1, &val2):
+	case me.GetNoteOn(&channel, &val1, &val2):
 		fmt.Fprintf(&bf, " channel: %v key: %v velocity: %v", channel, val1, val2)
-	case m.GetNoteOff(&channel, &val1, &val2):
+	case me.GetNoteOff(&channel, &val1, &val2):
 		if val2 > 0 {
 			fmt.Fprintf(&bf, " channel: %v key: %v velocity: %v", channel, val1, val2)
 		} else {
 			fmt.Fprintf(&bf, " channel: %v key: %v", channel, val1)
 		}
-	case m.GetPolyAfterTouch(&channel, &val1, &val2):
+	case me.GetPolyAfterTouch(&channel, &val1, &val2):
 		fmt.Fprintf(&bf, " channel: %v key: %v pressure: %v", channel, val1, val2)
-	case m.GetAfterTouch(&channel, &val1):
+	case me.GetAfterTouch(&channel, &val1):
 		fmt.Fprintf(&bf, " channel: %v pressure: %v", channel, val1)
-	case m.GetControlChange(&channel, &val1, &val2):
+	case me.GetControlChange(&channel, &val1, &val2):
 		fmt.Fprintf(&bf, " channel: %v controller: %v value: %v", channel, val1, val2)
-	case m.GetProgramChange(&channel, &val1):
+	case me.GetProgramChange(&channel, &val1):
 		fmt.Fprintf(&bf, " channel: %v program: %v", channel, val1)
-	case m.GetPitchBend(&channel, &pitchrel, &pitchabs):
+	case me.GetPitchBend(&channel, &pitchrel, &pitchabs):
 		fmt.Fprintf(&bf, " channel: %v pitch: %v (%v)", channel, pitchrel, pitchabs)
-	case m.GetMTC(&val1):
+	case me.GetMTC(&val1):
 		fmt.Fprintf(&bf, " mtc: %v", val1)
-	case m.GetSPP(&spp):
+	case me.GetSPP(&spp):
 		fmt.Fprintf(&bf, " spp: %v", spp)
-	case m.GetSongSelect(&val1):
+	case me.GetSongSelect(&val1):
 		fmt.Fprintf(&bf, " song: %v", val1)
-	case m.GetSysEx(&sysex):
+	case me.GetSysEx(&sysex):
 		fmt.Fprintf(&bf, " data: % X", sysex)
 	default:
 	}
@@ -446,17 +446,17 @@ func (m Message) String() string {
 
 // GetSysEx returns true, if the message is a sysex message.
 // Then it extracts the inner bytes to the given slice.
-func (m Message) GetSysEx(bt *[]byte) bool {
-	if len(m) < 3 {
+func (me Message) GetSysEx(bt *[]byte) bool {
+	if len(me) < 3 {
 		return false
 	}
 
-	if !m.Is(SysExMsg) {
+	if !me.Is(SysExMsg) {
 		return false
 	}
 
-	if m[0] == 0xF0 && m[len(m)-1] == 0xF7 {
-		*bt = m[1 : len(m)-1]
+	if me[0] == 0xF0 && me[len(me)-1] == 0xF7 {
+		*bt = me[1 : len(me)-1]
 		return true
 	}
 

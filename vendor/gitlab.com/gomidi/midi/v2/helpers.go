@@ -29,21 +29,21 @@ type channelMessage struct {
 	data     [2]byte
 }
 
-func (m *channelMessage) getCompleteStatus() uint8 {
-	s := m.status << 4
+func (me *channelMessage) getCompleteStatus() uint8 {
+	s := me.status << 4
 	s = utils.ClearBitU8(s, 0)
 	s = utils.ClearBitU8(s, 1)
 	s = utils.ClearBitU8(s, 2)
 	s = utils.ClearBitU8(s, 3)
-	s = s | m.channel
+	s = s | me.channel
 	return s
 }
 
-func (m *channelMessage) bytes() []byte {
-	if m.twoBytes {
-		return []byte{m.getCompleteStatus(), m.data[0], m.data[1]}
+func (me *channelMessage) bytes() []byte {
+	if me.twoBytes {
+		return []byte{me.getCompleteStatus(), me.data[0], me.data[1]}
 	}
-	return []byte{m.getCompleteStatus(), m.data[0]}
+	return []byte{me.getCompleteStatus(), me.data[0]}
 }
 
 const (

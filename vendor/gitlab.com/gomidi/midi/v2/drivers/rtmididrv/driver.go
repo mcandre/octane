@@ -27,16 +27,16 @@ type Driver struct {
 	//sync.RWMutex
 }
 
-func (d *Driver) String() string {
+func (me *Driver) String() string {
 	return "rtmididrv"
 }
 
 // Close closes all open ports. It must be called at the end of a session.
-func (d *Driver) Close() (err error) {
+func (me *Driver) Close() (err error) {
 	//	d.Lock()
 	var e CloseErrors
 
-	for _, p := range d.opened {
+	for _, p := range me.opened {
 		err = p.Close()
 		if err != nil {
 			e = append(e, err)
@@ -81,7 +81,7 @@ func New() (*Driver, error) {
 }
 
 // OpenVirtualIn opens and returns a virtual MIDI in. We can't get the port number, so set it to -1.
-func (d *Driver) OpenVirtualIn(name string) (drivers.In, error) {
+func (me *Driver) OpenVirtualIn(name string) (drivers.In, error) {
 	_in, err := rtmidi.NewMIDIInDefault()
 	if err != nil {
 		return nil, fmt.Errorf("can't open default MIDI in: %v", err)
@@ -96,13 +96,13 @@ func (d *Driver) OpenVirtualIn(name string) (drivers.In, error) {
 	//	d.Lock()
 	//defer d.Unlock()
 	//_in.IgnoreTypes(d.ignoreSysex, d.ignoreTimeCode, d.ignoreActiveSense)
-	inPort := &in{driver: d, number: -1, name: name, midiIn: _in}
-	d.opened = append(d.opened, inPort)
+	inPort := &in{driver: me, number: -1, name: name, midiIn: _in}
+	me.opened = append(me.opened, inPort)
 	return inPort, nil
 }
 
 // OpenVirtualOut opens and returns a virtual MIDI out. We can't get the port number, so set it to -1.
-func (d *Driver) OpenVirtualOut(name string) (drivers.Out, error) {
+func (me *Driver) OpenVirtualOut(name string) (drivers.Out, error) {
 	_out, err := rtmidi.NewMIDIOutDefault()
 	if err != nil {
 		return nil, fmt.Errorf("can't open default MIDI out: %v", err)
@@ -116,13 +116,13 @@ func (d *Driver) OpenVirtualOut(name string) (drivers.Out, error) {
 
 	//d.Lock()
 	//defer d.Unlock()
-	outPort := &out{driver: d, number: -1, name: name, midiOut: _out}
-	d.opened = append(d.opened, outPort)
+	outPort := &out{driver: me, number: -1, name: name, midiOut: _out}
+	me.opened = append(me.opened, outPort)
 	return outPort, nil
 }
 
 // Ins returns the available MIDI input ports
-func (d *Driver) Ins() (ins []drivers.In, err error) {
+func (me *Driver) Ins() (ins []drivers.In, err error) {
 	var in rtmidi.MIDIIn
 	in, err = rtmidi.NewMIDIInDefault()
 	if err != nil {
@@ -139,7 +139,7 @@ func (d *Driver) Ins() (ins []drivers.In, err error) {
 		if err != nil {
 			name = ""
 		}
-		ins = append(ins, newIn(d, i, name))
+		ins = append(ins, newIn(me, i, name))
 	}
 
 	// don't destroy, destroy just panics
@@ -149,7 +149,7 @@ func (d *Driver) Ins() (ins []drivers.In, err error) {
 }
 
 // Outs returns the available MIDI output ports
-func (d *Driver) Outs() (outs []drivers.Out, err error) {
+func (me *Driver) Outs() (outs []drivers.Out, err error) {
 	var out rtmidi.MIDIOut
 	out, err = rtmidi.NewMIDIOutDefault()
 	if err != nil {
@@ -166,7 +166,7 @@ func (d *Driver) Outs() (outs []drivers.Out, err error) {
 		if err != nil {
 			name = ""
 		}
-		outs = append(outs, newOut(d, i, name))
+		outs = append(outs, newOut(me, i, name))
 	}
 
 	err = out.Close()
@@ -176,8 +176,8 @@ func (d *Driver) Outs() (outs []drivers.Out, err error) {
 // CloseErrors collects error from closing multiple MIDI ports
 type CloseErrors []error
 
-func (c CloseErrors) Error() string {
-	if len(c) == 0 {
+func (me CloseErrors) Error() string {
+	if len(me) == 0 {
 		return "no errors"
 	}
 
@@ -185,7 +185,7 @@ func (c CloseErrors) Error() string {
 
 	bd.WriteString("the following closing errors occured:\n")
 
-	for _, e := range c {
+	for _, e := range me {
 		bd.WriteString(e.Error() + "\n")
 	}
 

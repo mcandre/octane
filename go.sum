@@ -8,12 +8,10 @@ github.com/kisielk/errcheck v1.9.0 h1:9xt1zI9EBfcYBvdU1nVrzMzzUPUtPKs9bVSIM3TAb3
 github.com/kisielk/errcheck v1.9.0/go.mod h1:kQxWMMVZgIkDq7U8xtG/n2juOjbLgZtedi0D+/VL/i8=
 github.com/magefile/mage v1.15.0 h1:BvGheCMAsG3bWUDbZ8AyXXpCNwU9u5CB6sM+HNb9HYg=
 github.com/magefile/mage v1.15.0/go.mod h1:z5UZb/iS3GoOSn0JgWuiw7dxlurVYTu+/jHXqQg881A=
-github.com/mcandre/mage-extras v0.0.30 h1:JxLAHH45fmhRMKSWyaIpGg6yCdGe2Aih0/m7wRG2AsQ=
-github.com/mcandre/mage-extras v0.0.30/go.mod h1:DwsxMvSSKhILM/3XHAK3z5t8m65nNFgleYE6vDH/GM8=
-github.com/mcandre/tug v0.0.18 h1:12XIVwtR3zChv0Iy0HmMRIACL84fey1YfK87zUQn5sc=
-github.com/mcandre/tug v0.0.18/go.mod h1:aCF+q8Hwo1/TTQnfXsvvmByEIcKuuCBpvPiZbB4B0qg=
-gitlab.com/gomidi/midi/v2 v2.3.16 h1:yufWSENyjnJ4LFQa9BerzUm4E4aLfTyzw5nmnCteO0c=
-gitlab.com/gomidi/midi/v2 v2.3.16/go.mod h1:jDpP4O4skYi+7iVwt6Zyp18bd2M4hkjtMuw2cmgKgfw=
+github.com/mcandre/mage-extras v0.0.32 h1:tlKys4fY6SBwlK66Um6h1iKKgaB+qDHROGBI9fikJ0E=
+github.com/mcandre/mage-extras v0.0.32/go.mod h1:DwsxMvSSKhILM/3XHAK3z5t8m65nNFgleYE6vDH/GM8=
+gitlab.com/gomidi/midi/v2 v2.3.18 h1:sj2fOhtvOe+zI8YJe8qTxLw5zv0ntULLUDwcFOaZQbI=
+gitlab.com/gomidi/midi/v2 v2.3.18/go.mod h1:jDpP4O4skYi+7iVwt6Zyp18bd2M4hkjtMuw2cmgKgfw=
 golang.org/x/exp/typeparams v0.0.0-20250408133849-7e4ce0ab07d0 h1:oMe07YcizemJ09rs2kRkFYAp0pt4e1lYLwPWiEGMpXE=
 golang.org/x/exp/typeparams v0.0.0-20250408133849-7e4ce0ab07d0/go.mod h1:LKZHyeOpPuZcMgxeHjJp4p5yvxrCX1xDvH10zYHhjjQ=
 golang.org/x/mod v0.24.0 h1:ZfthKaKaT4NrhGVZHO1/WDTwGES4De8KtWO0SIbNJMU=

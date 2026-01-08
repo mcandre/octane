@@ -2,8 +2,9 @@
 
 * a [C++](https://isocpp.org/) compiler
 * [Docker](https://www.docker.com/) 27+
-* POSIX compliant [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [Go](https://go.dev/)
+* POSIX compliant [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
+* [Rust](https://rust-lang.org/)
 * [GNU](https://www.gnu.org/software/tar/)/[BSD](https://man.freebsd.org/cgi/man.cgi?tar(1))/[Windows](https://ss64.com/nt/tar.html) tar with gzip support
 * Provision additional dev tools with `make`
 
@@ -56,15 +57,20 @@ $ mage lint
 $ mage [test]
 ```
 
-# BUILD + PUSH DOCKER IMAGE
-
-```console
-$ mage dockerBuild
-$ mage dockerPush
-```
-
 # PORT
 
 ```console
 $ mage port
+```
+
+# TEST DOCKER IMAGES
+
+```console
+$ mage dockerTest
+```
+
+# PUSH DOCKER IMAGES
+
+```console
+$ mage dockerPush
 ```

@@ -8,29 +8,29 @@ import (
 type Type int8
 
 // Is returns true, if the type correspond to the given type.
-func (t Type) Is(checker Type) bool {
+func (me Type) Is(checker Type) bool {
 
 	switch {
-	case t == UnknownMsg:
+	case me == UnknownMsg:
 		return checker == UnknownMsg
-	case t == SysExMsg:
+	case me == SysExMsg:
 		return checker == SysExMsg
-	case t < UnknownMsg:
+	case me < UnknownMsg:
 		return false
 	case checker == UnknownMsg:
 		return false
 	case checker > UnknownMsg:
-		return t == checker
+		return me == checker
 	default:
 		switch checker {
 		case RealTimeMsg:
-			return t <= reservedRealTimeMsg14
+			return me <= reservedRealTimeMsg14
 		case SysCommonMsg:
-			return t >= MTCMsg && t <= reservedSysCommonMsg10
+			return me >= MTCMsg && me <= reservedSysCommonMsg10
 		case ChannelMsg:
-			return t >= NoteOnMsg && t <= reservedChannelMsg16
+			return me >= NoteOnMsg && me <= reservedChannelMsg16
 		case metaMsg:
-			return t >= firstMetaMsg
+			return me >= firstMetaMsg
 		default:
 			return false
 		}
@@ -105,12 +105,12 @@ var typeNames = map[Type]string{
 }
 
 // String returns the name of the type.
-func (t Type) String() string {
-	if s, has := typeNames[t]; has {
+func (me Type) String() string {
+	if s, has := typeNames[me]; has {
 		return s
 	}
 
-	if t >= firstMetaMsg {
+	if me >= firstMetaMsg {
 		return typeNames[metaMsg]
 	}
 

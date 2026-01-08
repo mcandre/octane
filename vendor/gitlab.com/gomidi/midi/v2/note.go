@@ -28,13 +28,13 @@ const (
 )
 */
 
-func o(base uint8, oct uint8) uint8 {
+func o(base uint8, oct uint8) Note {
 	if oct > 10 {
 		oct = 10
 	}
 
 	if oct == 0 {
-		return base
+		return Note(base)
 	}
 
 	res := base + uint8(12*oct)
@@ -42,66 +42,66 @@ func o(base uint8, oct uint8) uint8 {
 		res -= 12
 	}
 
-	return res
+	return Note(res)
 }
 
 // C returns the key for the MIDI note C in the given octave
-func C(oct uint8) uint8 {
+func C(oct uint8) Note {
 	return o(0, oct)
 }
 
 // Db returns the key for the MIDI note Db in the given octave
-func Db(oct uint8) uint8 {
+func Db(oct uint8) Note {
 	return o(1, oct)
 }
 
 // D returns the key for the MIDI note D in the given octave
-func D(oct uint8) uint8 {
+func D(oct uint8) Note {
 	return o(2, oct)
 }
 
 // Eb returns the key for the MIDI note Eb in the given octave
-func Eb(oct uint8) uint8 {
+func Eb(oct uint8) Note {
 	return o(3, oct)
 }
 
 // E returns the key for the MIDI note E in the given octave
-func E(oct uint8) uint8 {
+func E(oct uint8) Note {
 	return o(4, oct)
 }
 
 // F returns the key for the MIDI note F in the given octave
-func F(oct uint8) uint8 {
+func F(oct uint8) Note {
 	return o(5, oct)
 }
 
 // Gb returns the key for the MIDI note Gb in the given octave
-func Gb(oct uint8) uint8 {
+func Gb(oct uint8) Note {
 	return o(6, oct)
 }
 
 // G returns the key for the MIDI note G in the given octave
-func G(oct uint8) uint8 {
+func G(oct uint8) Note {
 	return o(7, oct)
 }
 
 // Ab returns the key for the MIDI note Ab in the given octave
-func Ab(oct uint8) uint8 {
+func Ab(oct uint8) Note {
 	return o(8, oct)
 }
 
 // A returns the key for the MIDI note A in the given octave
-func A(oct uint8) uint8 {
+func A(oct uint8) Note {
 	return o(9, oct)
 }
 
 // Bb returns the key for the MIDI note Bb in the given octave
-func Bb(oct uint8) uint8 {
+func Bb(oct uint8) Note {
 	return o(10, oct)
 }
 
 // B returns the key for the MIDI note B in the given octave
-func B(oct uint8) uint8 {
+func B(oct uint8) Note {
 	return o(11, oct)
 }
 
@@ -163,17 +163,17 @@ var intervalNames = map[Interval]string{
 	24: "DoubleOctave",
 }
 
-func (i Interval) String() string {
+func (me Interval) String() string {
 	var down bool
-	if i < 0 {
+	if me < 0 {
 		down = true
-		i = (-1) * i
+		me = (-1) * me
 	}
 
-	i = i % 24
+	me = me % 24
 
 	var bd strings.Builder
-	bd.WriteString(intervalNames[i])
+	bd.WriteString(intervalNames[me])
 
 	if down {
 		bd.WriteString(" down")
@@ -186,28 +186,36 @@ func (i Interval) String() string {
 
 type Note uint8
 
-func (n Note) Interval(o Note) Interval {
-	return Interval(int8(o) - int8(n))
+func (me Note) Interval(o Note) Interval {
+	return Interval(int8(o) - int8(me))
 }
 
-func (n Note) Transpose(i Interval) Note {
-	res := int8(n) + int8(i)
+func (me Note) NoteOn(channel, velocity uint8) Message {
+	return NoteOn(channel, me.Value(), velocity)
+}
+
+func (me Note) NoteOff(channel uint8) Message {
+	return NoteOff(channel, me.Value())
+}
+
+func (me Note) Transpose(i Interval) Note {
+	res := int8(me) + int8(i)
 	if res < 0 {
 		res = 0
 	}
 	return Note(res)
 }
 
-func (n Note) Value() uint8 {
-	return uint8(n)
+func (me Note) Value() uint8 {
+	return uint8(me)
 }
 
-func (n Note) Base() uint8 {
-	return uint8(n) % 12
+func (me Note) Base() uint8 {
+	return uint8(me) % 12
 }
 
-func (n Note) Name() (name string) {
-	switch n % 12 {
+func (me Note) Name() (name string) {
+	switch me % 12 {
 	case 0:
 		name = "C"
 	case 1:
@@ -239,20 +247,20 @@ func (n Note) Name() (name string) {
 	return name
 }
 
-func (n Note) String() string {
-	name := n.Name()
+func (me Note) String() string {
+	name := me.Name()
 	if name != "" {
-		name += fmt.Sprintf("%v", n.Octave())
+		name += fmt.Sprintf("%v", me.Octave())
 	}
 	return name
 }
 
-func (n Note) Octave() uint8 {
-	return uint8(n / 12)
+func (me Note) Octave() uint8 {
+	return uint8(me / 12)
 }
 
 // Equal returns true if noteX is the same as noteY
 // they may be in different octaves.
-func (n Note) Is(o Note) bool {
-	return n%12 == o%12
+func (me Note) Is(o Note) bool {
+	return me%12 == o%12
 }

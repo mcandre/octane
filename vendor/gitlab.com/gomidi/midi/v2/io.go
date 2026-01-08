@@ -28,10 +28,10 @@ func SendTo(outPort drivers.Out) (func(msg Message) error, error) {
 
 type InPorts []drivers.In
 
-func (ip InPorts) String() string {
+func (me InPorts) String() string {
 	var bf strings.Builder
 
-	for i, p := range ip {
+	for i, p := range me {
 		bf.WriteString(fmt.Sprintf("[%v] %s\n", i, p))
 	}
 
@@ -40,10 +40,10 @@ func (ip InPorts) String() string {
 
 type OutPorts []drivers.Out
 
-func (op OutPorts) String() string {
+func (me OutPorts) String() string {
 	var bf strings.Builder
 
-	for i, p := range op {
+	for i, p := range me {
 		bf.WriteString(fmt.Sprintf("[%v] %s\n", i, p))
 	}
 
