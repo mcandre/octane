@@ -26,6 +26,7 @@ permissions = 0o644
 when.paths = "^(.*/)?etc/init\\.d(/.*)?$"
 permissions = 0o755
 
+# Account for xgo binary naming
 [[rules]]
 when.paths = "-darwin-"
 permissions = 0o755
