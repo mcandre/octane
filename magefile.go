@@ -21,7 +21,7 @@ var Default = Test
 // portBasename labels the artifact basename.
 var portBasename = fmt.Sprintf("octane-%s", octane.Version)
 
-// artifactsPathDist places xgo artifacts.
+// artifactsPathDist is the parent directory of xgo artifacts.
 var artifactsPathDist = path.Join(artifactsPath, portBasename)
 
 // repoNamespace identifies the Go namespace for this project.
