@@ -39,7 +39,7 @@ docker pull n4jm4/octane
 ## go mod
 
 ```sh
-go get -tool github.com/mcandre/octane/cmd/octane@v0.0.21
+go get -tool github.com/mcandre/octane/cmd/octane
 go mod tidy
 ```
 
