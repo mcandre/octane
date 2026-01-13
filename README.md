@@ -8,17 +8,54 @@ octane harmonizes MIDI devices. Primarily by extending pitch range!
 
 For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with mutually exclusive CC signals. That's where octane comes in! octane offers a simple pitch offset parameter. Suddenly we unlock more interesting interactions for your synths. Make sweet, sweet beats with octane.
 
-# DOWNLOAD
-
-https://github.com/mcandre/octane/releases
-
 # TECH TALK SLIDES
 
 [MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
 
-# DOCUMENTATION
+# API DOCUMENTATION
 
-https://pkg.go.dev/github.com/mcandre/octane?utm_source=godoc
+https://pkg.go.dev/github.com/mcandre/octane
+
+# INSTALL
+
+We support several installation methods.
+
+## Precompiled Binaries
+
+https://github.com/mcandre/octane/releases
+
+1. Download release archive.
+2. Extract archive.
+3. Select executables for your target platform.
+4. Copy executabless to a convenient location, e.g. `$HOME/bin`.
+5. Ensure location is registered in `$PATH`.
+
+## Docker
+
+```sh
+docker pull n4jm4/octane
+```
+
+## go mod
+
+```sh
+go get -tool github.com/mcandre/octane/cmd/octane@v0.0.21
+go mod tidy
+```
+
+Optional:
+
+```sh
+go mod vendor
+```
+
+## Compile from Source
+
+```sh
+go install ./...
+```
+
+For more information on developing octane itself, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
 # LICENSE
 
@@ -27,16 +64,6 @@ BSD-2-Clause
 # RUNTIME REQUIREMENTS
 
 * macOS, Linux, or Windows (experimental)
-
-# INSTALL FROM SOURCE
-
-```console
-$ go install github.com/mcandre/octane/cmd/octane@latest
-```
-
-# CONTRIBUTING
-
-See [DEVELOPMENT.md](DEVELOPMENT.md).
 
 # TIPS
 
@@ -87,7 +114,7 @@ Software configuration:
 
 1. Enumerate PC MIDI devices:
 
-```
+```console
 $ octane -list
 Polling for MIDI devices...
 MIDI IN devices:
@@ -108,7 +135,7 @@ Normally, the KORG SQ-1 sequencer emits notes too high for Bastl microGranny to 
 
 2. Set `-transposeNote` to subtract 48 from each sequencer note. Test octane with different inputs and outputs for your particular setup.
 
-```
+```console
 $ octane \
     -transposeNote -48 \
     -in "SQ-1 SEQ IN" \
