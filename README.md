@@ -16,54 +16,13 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
 
 https://pkg.go.dev/github.com/mcandre/octane
 
-# INSTALL
+# INSTALLATION
 
-We support several installation methods.
-
-## Precompiled Binaries
-
-https://github.com/mcandre/octane/releases
-
-1. Download release archive.
-2. Extract archive.
-3. Select executables for your target platform.
-4. Copy executabless to a convenient location, e.g. `$HOME/bin`.
-5. Ensure location is registered in `$PATH`.
-
-## Docker
-
-```sh
-docker pull n4jm4/octane
-```
-
-## go mod
-
-```sh
-go get -tool github.com/mcandre/octane/cmd/octane
-go mod tidy
-```
-
-Optional:
-
-```sh
-go mod vendor
-```
-
-## Compile from Source
-
-```sh
-go install ./...
-```
-
-For more information on developing octane itself, see [DEVELOPMENT.md](DEVELOPMENT.md).
+See [INSTALL.md](INSTALL.md).
 
 # LICENSE
 
 BSD-2-Clause
-
-# RUNTIME REQUIREMENTS
-
-* macOS, Linux, or Windows (experimental)
 
 # TIPS
 
