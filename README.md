@@ -2,7 +2,7 @@
 
 ![jam session](demo.gif)
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/n4jm4/octane)](https://hub.docker.com/r/n4jm4/octane)
+[![Docker Pulls](https://img.shields.io/docker/pulls/n4jm4/octane)](https://hub.docker.com/r/n4jm4/octane) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![license](https://img.shields.io/badge/license-BSD-3)](LICENSE.md) [![Donate](https://img.shields.io/badge/GUMROAD-36a9ae?style=flat&logo=gumroad&logoColor=white)](https://mcandre.gumroad.com/)
 
 # ABOUT
 
@@ -14,17 +14,9 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
 
 [MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
 
-# API DOCUMENTATION
-
-https://pkg.go.dev/github.com/mcandre/octane
-
 # INSTALLATION
 
 See [INSTALL.md](INSTALL.md).
-
-# LICENSE
-
-BSD-2-Clause
 
 # TIPS
 
