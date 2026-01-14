@@ -27,35 +27,97 @@ var artifactsPathDist = path.Join(artifactsPath, portBasename)
 // repoNamespace identifies the Go namespace for this project.
 var repoNamespace = "github.com/mcandre/octane"
 
-// image denotes a Docker image for building this project.
-var image = "n4jm4/octane-builder"
+// imageXgo denotes a Docker image for building this project.
+var imageXgo = "n4jm4/octane-builder"
 
-// DockerBuild creates local Docker buildx images.
-func DockerBuild() error {
+// DockerBuildXgo creates local Docker buildx xgo images.
+func DockerBuildXgo() error {
 	return mageextras.Tuggy(
-		"-t", image,
+		"-c", "tuggy.xgo.toml",
+		"-t", imageXgo,
+		"-f", "xgo.Dockerfile",
 		"--load",
 	)
 }
 
-// DockerPush creates and tag aliases remote Docker buildx images.
-func DockerPush() error {
+// DockerPushXgo creates and tag aliases remote Docker buildx xgo images.
+func DockerPushXgo() error {
 	return mageextras.Tuggy(
-		"-t", image,
+		"-c", "tuggy.xgo.toml",
+		"-t", imageXgo,
+		"-f", "xgo.Dockerfile",
 		"--push",
 	)
 }
 
-// DockerTest creates and tag aliases remote test Docker buildx images.
-func DockerTest() error {
-	if err := mageextras.Tuggy("-t", fmt.Sprintf("%s:test", image), "--load"); err != nil {
+// DockerTestXgo creates and tag aliases remote test Docker buildx xgo images.
+func DockerTestXgo() error {
+	if err := mageextras.Tuggy("-c", "tuggy.xgo.toml", "-t", fmt.Sprintf("%s:test", imageXgo), "-f", "xgo.Dockerfile", "--load"); err != nil {
 		return err
 	}
 
 	return mageextras.Tuggy(
-		"-t", fmt.Sprintf("%s:test", image),
+		"-c", "tuggy.xgo.toml",
+		"-t", fmt.Sprintf("%s:test", imageXgo),
+		"-f", "xgo.Dockerfile",
 		"--push",
 	)
+}
+
+// imageApp denotes a Docker image for running this project.
+var imageApp = "n4jm4/octane"
+
+// DockerBuildApp creates Docker buildx images.
+func DockerBuildApp() error {
+	return mageextras.Tuggy(
+		"-c", "tuggy.app.toml",
+		"-t", imageApp,
+		"-f", "app.Dockerfile",
+		"--load",
+	)
+}
+
+// DockerPushApp creates and tag aliases remote Docker buildx app images.
+func DockerPushApp() error {
+	return mageextras.Tuggy(
+		"-c", "tuggy.app.toml",
+		"-t", imageApp,
+		"-f", "app.Dockerfile",
+		"-a", fmt.Sprintf("%s:%s", imageApp, octane.Version),
+		"--push",
+	)
+}
+
+// DockerTestApp creates and tag aliases remote test Docker buildx app images.
+func DockerTestApp() error {
+	if err := mageextras.Tuggy("-c", "tuggy.app.toml", "-t", fmt.Sprintf("%s:test", imageApp), "-f", "app.Dockerfile", "--load"); err != nil {
+		return err
+	}
+
+	return mageextras.Tuggy(
+		"-c", "tuggy.app.toml",
+		"-t", fmt.Sprintf("%s:test", imageApp),
+		"-f", "app.Dockerfile",
+		"--push",
+	)
+}
+
+// DockerBuild creates buildx images.
+func DockerBuild() error {
+	mg.Deps(DockerBuildXgo)
+	return DockerBuildApp()
+}
+
+// DockerPush creates and tags remote Docker buildx images.
+func DockerPush() error {
+	mg.Deps(DockerPushXgo)
+	return DockerPushApp()
+}
+
+// DockerTest creates and tag aliases remote test Docker buildx images.
+func DockerTest() error {
+	mg.Deps(DockerTestXgo)
+	return DockerTestApp()
 }
 
 // Govulncheck runs govulncheck.
@@ -63,8 +125,14 @@ func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./
 
 // DockerScout runs a Docker security audit.
 func DockerScout() error {
-	mg.Deps(DockerBuild)
-	return mageextras.DockerScout("-e", image)
+	mg.Deps(DockerBuildXgo)
+	mg.Deps(DockerBuildApp)
+
+	if err := mageextras.DockerScout("-e", imageXgo); err != nil {
+		return err
+	}
+
+	return mageextras.DockerScout("-e", imageApp)
 }
 
 // Audit runs security audits.
@@ -108,12 +176,12 @@ func Lint() error {
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
-	mg.Deps(DockerBuild)
+	mg.Deps(DockerBuildXgo)
 
 	return mageextras.Xgo(
 		artifactsPathDist,
 		"-image",
-		image,
+		imageXgo,
 		"-targets",
 		"darwin/amd64,darwin/arm64,freebsd/amd64,linux/386,linux/amd64,linux/arm,linux/arm64,linux/mips,linux/mips64,linux/mips64le,linux/mipsle,linux/ppc64le,linux/riscv64,linux/s390x,windows/386,windows/amd64",
 		".",

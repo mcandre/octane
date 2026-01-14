@@ -30,6 +30,8 @@ https://github.com/mcandre/octane/releases
 docker pull n4jm4/octane
 ```
 
+Follow [Docker](https://docs.docker.com/) documentation for wiring up host MIDI/USB devices to containers.
+
 # BUILD FROM SOURCE
 
 ## Requirements

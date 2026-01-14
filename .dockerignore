@@ -1,10 +1,10 @@
 *.gif
 *.md
 *.mp3
+tuggy.*.toml
 .editorconfig
 .rubberstamp
 cover.html
-tuggy.toml
 bin/
 .github/
 .git/
