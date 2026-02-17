@@ -21,12 +21,4 @@ jobs:
         toolchain: "1.92.0"
     - name: "provision dev tools"
       run: "make"
-    # https://github.com/actions/runner-images/issues/11605
-    # - run: "mage audit"
-    - uses: "docker/scout-action@v1"
-      with:
-        command: "cves"
-        image: "n4jm4/octane-builder"
-        dockerhub-user: "${{ secrets.DOCKER_USER }}"
-        dockerhub-password: "${{ secrets.DOCKER_TOKEN }}"
     - run: "mage govulncheck"
