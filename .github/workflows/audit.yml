@@ -30,7 +30,7 @@ jobs:
     - uses: "docker/scout-action@v1"
       with:
         command: "cves"
-        image: "mcandre/octane-builder"
+        image: "n4jm4/octane-builder"
         dockerhub-user: "${{ secrets.DOCKER_USER }}"
         dockerhub-password: "${{ secrets.DOCKER_TOKEN }}"
     - run: "mage govulncheck"
