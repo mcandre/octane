@@ -25,8 +25,6 @@ jobs:
       run: |
         curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
         sh install-scout.sh
-    - name: "provision docker scout"
-      run: "docker login -u \"$DOCKER_USER\" -p \"$DOCKER_TOKEN\""
     # https://github.com/actions/runner-images/issues/11605
     # - run: "mage audit"
     - uses: "docker/scout-action@v1"
