@@ -1,51 +1,38 @@
 # INSTALL
 
-We support several installation methods.
+In addition to OS packages, octane also supports alternative installation methods.
 
-# PRECOMPILED BINARIES
+# INSTALL (GO REMOTE)
 
-https://github.com/mcandre/octane/releases
-
-## Requirements
-
-(None)
-
-## Instructions
-
-1. Download release archive.
-2. Extract archive.
-3. Select executables for your target platform.
-4. Copy executabless to a convenient location, e.g. `$HOME/bin`.
-5. Ensure location is registered in `$PATH`.
-
-# DOCKER
-
-## Requirements
-
-* [Docker](https://www.docker.com/) 28.0.1+
-
-## Instructions
+octane is packaged as a Go module.
 
 ```sh
-docker pull n4jm4/octane
+go install github.com/mcandre/octane/cmd/octane@latest
 ```
 
-Follow [Docker](https://docs.docker.com/) documentation for wiring up host MIDI/USB devices to containers.
+## Prerequisites
 
-# BUILD FROM SOURCE
+* a [C++](https://isocpp.org/) compiler
+* [Go](https://go.dev/)
+* FreeBSD users require enabling the `snd_uaudio` driver
+* Linux distros require an [ALSA](https://www.alsa-project.org/wiki/Main_Page) driver
 
-## Requirements
+# INSTALL (GO LOCAL)
 
-* [Go](https://go.dev/) 1.25.4+
-* Ensure `GOBIN` is registered in `$PATH`. Validate like `go env GOBIN; echo "$PATH"`
-
-## Instructions
+kirill may be compiled from source.
 
 ```sh
-go get -tool github.com/mcandre/octane/src/cmd/octane
-go mod tidy
-go mod vendor
-go install tool
+git clone https://github.com/mcandre/octane.git
+cd octane
+go install ./...
 ```
 
-For more information on developing octane itself, see [DEVELOPMENT.md](DEVELOPMENT.md).
+## Prerequisites
+
+* a [C++](https://isocpp.org/) compiler
+* [git](https://git-scm.com/)
+* [Go](https://go.dev/)
+* FreeBSD users require enabling the `snd_uaudio` driver
+* Linux distros require an [ALSA](https://www.alsa-project.org/wiki/Main_Page) driver
+
+For more details on developing octane, see our [development guide](DEVELOPMENT.md).

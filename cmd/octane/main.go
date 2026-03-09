@@ -25,7 +25,7 @@ func main() {
 
 	switch {
 	case *flagVersion:
-		fmt.Printf("/VVV %v\n", octane.Version)
+		fmt.Printf("%s\n", octane.Version)
 		os.Exit(0)
 	case *flagHelp:
 		flag.PrintDefaults()

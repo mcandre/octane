@@ -1,0 +1,52 @@
+# log_level = "debug"
+log_level = "quiet"
+
+[rocklet]
+name = "octane"
+identifier = "com.github.mcandre.octane"
+rev = "1"
+maintainer = "Andrew Pennebaker <n4jm4@pm.me>"
+manufacturer = "YelloSoft"
+summary = "a MIDI connector"
+description = "octane harmonizes MIDI devices"
+copyright = "Copyright (C) 2020 Andrew Pennebaker"
+license = "0BSD"
+url = "https://github.com/mcandre/octane"
+
+[[pkg]]
+image = "n4jm4/rockhopper:0.0.21-freebsd"
+rocklet.origin = "local/octane"
+rocklet.oci_arch = "linux/amd64"
+rocklet.os_arch = "freebsd:*:amd64"
+dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-freebsd13-amd64"
+
+[[pkg]]
+image = "n4jm4/rockhopper:0.0.21-macos"
+rocklet.oci_arch = "linux/amd64"
+rocklet.os_arch = "x86_64"
+dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-darwin-10.12-amd64"
+
+[[pkg]]
+image = "n4jm4/rockhopper:0.0.21-macos"
+rocklet.oci_arch = "linux/arm64"
+rocklet.os_arch = "arm64"
+dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-darwin-10.12-arm64"
+
+[[pkg]]
+image = "n4jm4/rockhopper:0.0.21-ubuntu-24.04"
+rocklet.oci_arch = "linux/amd64"
+rocklet.dependencies = "libasound2"
+dest."usr/bin/octane" = "bin/octane/github.com/mcandre/octane-linux-amd64"
+
+[[pkg]]
+image = "n4jm4/rockhopper:0.0.21-ubuntu-24.04"
+rocklet.oci_arch = "linux/arm64"
+rocklet.dependencies = "libasound2"
+dest."usr/bin/octane" = "bin/octane/github.com/mcandre/octane-linux-arm64"
+
+[[pkg]]
+image = "n4jm4/rockhopper:0.0.21-windows"
+rocklet.oci_arch = "linux/amd64"
+rocklet.os_arch = "x64"
+rocklet.msi_upgrade_code = "DBDB0062-8263-4532-B9B6-10953A6CE9D6"
+dest."bin/octane.exe" = "bin/octane/github.com/mcandre/octane-windows-4.0-amd64.exe"

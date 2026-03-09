@@ -1,6 +1,6 @@
 # octane: a MIDI connector
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/n4jm4/octane)](https://hub.docker.com/r/n4jm4/octane) [![GitHub Downloads](https://img.shields.io/github/downloads/mcandre/octane/total?logo=github)](https://github.com/mcandre/octane/releases) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![Test](https://github.com/mcandre/octane/actions/workflows/test.yml/badge.svg)](https://github.com/mcandre/octane/actions/workflows/test.yml) [![license](https://img.shields.io/badge/license-BSD-3)](LICENSE.md) [![Donate](https://img.shields.io/badge/-any?logo=gumroad&label=Donate&color=grey)](https://mcandre.gumroad.com/)
+[![CloudFlare R2 install media downloads](https://img.shields.io/badge/Cloudflare-F28220?style=for-the-badge&logo=Cloudflare&logoColor=white&style=flat)](#download) [![GitHub Downloads](https://img.shields.io/github/downloads/mcandre/octane/total?logo=github)](https://github.com/mcandre/octane/releases) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![Test](https://github.com/mcandre/octane/actions/workflows/test.yml/badge.svg)](https://github.com/mcandre/octane/actions/workflows/test.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
 
 ![jam session](demo.gif)
 
@@ -14,9 +14,46 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
 
 [MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
 
-# INSTALLATION
+# DOWNLOAD
 
-See [INSTALL.md](INSTALL.md).
+<table>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th colspan=2>Package</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>FreeBSD 13</td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.22/freebsd-amd64/octane-0.0.22_1.pkg">Intel</a></td>
+    </tr>
+    <tr>
+      <td>macOS 26 Tahoe+</td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.22/macos/octane-x86_64-0.0.22-1.pkg">Intel</a></td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.22/macos/octane-arm64-0.0.22-1.pkg">ARM</a></td>
+    </tr>
+    <tr>
+      <td>Ubuntu 24.04 Noble</td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.22/ubuntu/octane_0.0.22-1_amd64.deb">Intel</a></td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.22/ubuntu/octane_0.0.22-1_arm64.deb">ARM</a></td>
+    </tr>
+    <tr>
+      <td>Windows 11+</td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.22/windows/octane-0.0.22.1-x64.msi">Intel</a></td>
+    </tr>
+  </tbody>
+</table>
+
+# SYSTEM REQUIREMENTS
+
+## Bitness
+
+64
+
+FreeBSD users require enabling the `snd_uaudio` driver.
+
+For more host platforms and installation methods, see our [install guide](INSTALL.md).
 
 # TIPS
 
@@ -118,6 +155,8 @@ $ octane \
 4. Start the sequencer playing.
 5. Jam.
 
+For details on more CLI options, see `octane -help`.
+
 # CREDITS
 
-* [gomidi](https://gitlab.com/gomidi)
+[gomidi](https://gitlab.com/gomidi) - MIDI framework for Go projects

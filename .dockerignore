@@ -1,13 +1,14 @@
 *.gif
 *.md
 *.mp3
-tuggy.*.toml
 .editorconfig
-.rubberstamp
-cover.html
-bin/
-.github/
 .git/
+.github/
+.rockhopper/
+.rubberstamp
+bin/
+cover.html
+docker-bake.hcl
 # Created by https://www.toptal.com/developers/gitignore/api/go
 # Edit at https://www.toptal.com/developers/gitignore?templates=go
 

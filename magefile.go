@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"path"
 
 	"github.com/magefile/mage/mg"
@@ -19,7 +20,7 @@ var artifactsPath = "bin"
 var Default = Test
 
 // portBasename labels the artifact basename.
-var portBasename = fmt.Sprintf("octane-%s", octane.Version)
+var portBasename = "octane"
 
 // artifactsPathDist is the parent directory of xgo artifacts.
 var artifactsPathDist = path.Join(artifactsPath, portBasename)
@@ -28,112 +29,16 @@ var artifactsPathDist = path.Join(artifactsPath, portBasename)
 var repoNamespace = "github.com/mcandre/octane"
 
 // imageXgo denotes a Docker image for building this project.
-var imageXgo = "n4jm4/octane-builder"
+var imageXgo = "n4jm4/octane-xgo"
 
-// DockerBuildXgo creates local Docker buildx xgo images.
-func DockerBuildXgo() error {
-	return mageextras.Tuggy(
-		"-c", "tuggy.xgo.toml",
-		"-t", imageXgo,
-		"-f", "xgo.Dockerfile",
-		"--load",
-	)
-}
+// Clean deletes build artifacts.
+func Clean() error { mg.Deps(CleanBin); return CleanPackages() }
 
-// DockerPushXgo creates and tag aliases remote Docker buildx xgo images.
-func DockerPushXgo() error {
-	return mageextras.Tuggy(
-		"-c", "tuggy.xgo.toml",
-		"-t", imageXgo,
-		"-f", "xgo.Dockerfile",
-		"--push",
-	)
-}
+// CleanBin deletes Go artifacts.
+func CleanBin() error { return os.RemoveAll(artifactsPath) }
 
-// DockerTestXgo creates and tag aliases remote test Docker buildx xgo images.
-func DockerTestXgo() error {
-	if err := mageextras.Tuggy("-c", "tuggy.xgo.toml", "-t", fmt.Sprintf("%s:test", imageXgo), "-f", "xgo.Dockerfile", "--load"); err != nil {
-		return err
-	}
-
-	return mageextras.Tuggy(
-		"-c", "tuggy.xgo.toml",
-		"-t", fmt.Sprintf("%s:test", imageXgo),
-		"-f", "xgo.Dockerfile",
-		"--push",
-	)
-}
-
-// imageApp denotes a Docker image for running this project.
-var imageApp = "n4jm4/octane"
-
-// DockerBuildApp creates Docker buildx images.
-func DockerBuildApp() error {
-	return mageextras.Tuggy(
-		"-c", "tuggy.app.toml",
-		"-t", imageApp,
-		"-f", "app.Dockerfile",
-		"--load",
-	)
-}
-
-// DockerPushApp creates and tag aliases remote Docker buildx app images.
-func DockerPushApp() error {
-	return mageextras.Tuggy(
-		"-c", "tuggy.app.toml",
-		"-t", imageApp,
-		"-f", "app.Dockerfile",
-		"-a", fmt.Sprintf("%s:%s", imageApp, octane.Version),
-		"--push",
-	)
-}
-
-// DockerTestApp creates and tag aliases remote test Docker buildx app images.
-func DockerTestApp() error {
-	if err := mageextras.Tuggy("-c", "tuggy.app.toml", "-t", fmt.Sprintf("%s:test", imageApp), "-f", "app.Dockerfile", "--load"); err != nil {
-		return err
-	}
-
-	return mageextras.Tuggy(
-		"-c", "tuggy.app.toml",
-		"-t", fmt.Sprintf("%s:test", imageApp),
-		"-f", "app.Dockerfile",
-		"--push",
-	)
-}
-
-// DockerBuild creates buildx images.
-func DockerBuild() error {
-	mg.Deps(DockerBuildXgo)
-	return DockerBuildApp()
-}
-
-// DockerPush creates and tags remote Docker buildx images.
-func DockerPush() error {
-	mg.Deps(DockerPushXgo)
-	return DockerPushApp()
-}
-
-// DockerTest creates and tag aliases remote test Docker buildx images.
-func DockerTest() error {
-	mg.Deps(DockerTestXgo)
-	return DockerTestApp()
-}
-
-// Govulncheck runs govulncheck.
-func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./...") }
-
-// DockerScout runs a Docker security audit.
-func DockerScout() error {
-	mg.Deps(DockerBuildXgo)
-	mg.Deps(DockerBuildApp)
-
-	if err := mageextras.DockerScout("-e", imageXgo); err != nil {
-		return err
-	}
-
-	return mageextras.DockerScout("-e", imageApp)
-}
+// CleanPackages deletes OS package artifacts.
+func CleanPackages() error { return os.RemoveAll(".rockhopper") }
 
 // Audit runs security audits.
 func Audit() error {
@@ -144,23 +49,60 @@ func Audit() error {
 // Deadcode runs deadcode.
 func Deadcode() error { return mageextras.Deadcode("./...") }
 
+// DockerBuild generates Docker images.
+func DockerBuild() error {
+	cmd := exec.Command("docker", "buildx", "bake", "all")
+	cmd.Env = os.Environ()
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
+// DockerPush pushes Docker images.
+func DockerPush() error {
+	cmd := exec.Command("docker", "buildx", "bake", "production", "--push")
+	cmd.Env = os.Environ()
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
+// DockerScout runs docker scout scans.
+func DockerScout() error {
+	if err := mageextras.DockerScout("-e", imageXgo); err != nil {
+		return err
+	}
+
+	cmd := exec.Command("docker", "scout", "cves", "-e", "fs://.")
+	cmd.Env = os.Environ()
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
+// DockerTest tests pushing Docker images.
+func DockerTest() error {
+	cmd := exec.Command("docker", "buildx", "bake", "test", "--push")
+	cmd.Env = os.Environ()
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
+// Errcheck runs errcheck.
+func Errcheck() error { return mageextras.Errcheck("-blank") }
+
 // GoImports runs goimports.
 func GoImports() error { return mageextras.GoImports("-w") }
 
 // GoVet runs default go vet analyzers.
 func GoVet() error { return mageextras.GoVet() }
 
-// Errcheck runs errcheck.
-func Errcheck() error { return mageextras.Errcheck("-blank") }
+// Govulncheck runs govulncheck.
+func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./...") }
 
-// Nakedret runs nakedret.
-func Nakedret() error { return mageextras.Nakedret("-l", "0") }
-
-// Shadow runs go vet with shadow checks enabled.
-func Shadow() error { return mageextras.GoVetShadow() }
-
-// Staticcheck runs staticcheck.
-func Staticcheck() error { return mageextras.Staticcheck("./...") }
+// Install builds and installs Go applications.
+func Install() error { return mageextras.Install() }
 
 // Lint runs the lint suite.
 func Lint() error {
@@ -174,41 +116,47 @@ func Lint() error {
 	return nil
 }
 
+// Nakedret runs nakedret.
+func Nakedret() error { return mageextras.Nakedret("-l", "0") }
+
+// Package generates OS packages.
+func Package() error {
+	cmd := exec.Command("rockhopper", "-r", fmt.Sprintf("version=%s", octane.Version))
+	cmd.Env = os.Environ()
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
+// Shadow runs go vet with shadow checks enabled.
+func Shadow() error { return mageextras.GoVetShadow() }
+
+// Staticcheck runs staticcheck.
+func Staticcheck() error { return mageextras.Staticcheck("./...") }
+
+// Test runs a test suite.
+func Test() error { return mageextras.UnitTest() }
+
+// Uninstall deletes installed Go applications.
+func Uninstall() error { return mageextras.Uninstall("octane") }
+
+// Upload copies packages to CloudFlare R2.
+func Upload() error {
+	cmd := exec.Command("./upload")
+	cmd.Env = os.Environ()
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	return cmd.Run()
+}
+
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
-	mg.Deps(DockerBuildXgo)
-
 	return mageextras.Xgo(
 		artifactsPathDist,
 		"-image",
 		imageXgo,
 		"-targets",
-		"darwin/amd64,darwin/arm64,freebsd/amd64,linux/386,linux/amd64,linux/arm,linux/arm64,linux/mips,linux/mips64,linux/mips64le,linux/mipsle,linux/ppc64le,linux/riscv64,linux/s390x,windows/386,windows/amd64",
+		"darwin/amd64,darwin/arm64,freebsd/amd64,freebsd/arm64,linux/amd64,linux/arm64,windows/amd64,windows/arm64",
 		".",
 	)
 }
-
-// Port builds and compresses artifacts.
-func Port() error {
-	mg.Deps(Xgo)
-
-	return mageextras.Chandler(
-		"-C",
-		artifactsPath,
-		"-czf",
-		fmt.Sprintf("%s.tgz", portBasename),
-		portBasename,
-	)
-}
-
-// Test runs a test suite.
-func Test() error { return mageextras.UnitTest() }
-
-// Install builds and installs Go applications.
-func Install() error { return mageextras.Install() }
-
-// Uninstall deletes installed Go applications.
-func Uninstall() error { return mageextras.Uninstall("octane") }
-
-// Clean deletes artifacts.
-func Clean() error { return os.RemoveAll(artifactsPath) }
