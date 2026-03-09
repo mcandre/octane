@@ -27,6 +27,7 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
     <tr>
       <td>FreeBSD 13</td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.23/freebsd-amd64/octane-0.0.23_1.pkg">Intel</a></td>
+      <td></td>
     </tr>
     <tr>
       <td>macOS 26 Tahoe+</td>
@@ -41,6 +42,7 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
     <tr>
       <td>Windows 11+</td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.23/windows/octane-0.0.23.1-x64.msi">Intel</a></td>
+      <td></td>
     </tr>
   </tbody>
 </table>
