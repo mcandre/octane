@@ -224,7 +224,7 @@ func (me Message) GetAfterTouch(channel, pressure *uint8) (is bool) {
 		return false
 	}
 
-	if len(me) != 2 {
+	if len(me) != 2 && len(me) != 3 { // be tolerant about [3]byte messages
 		return false
 	}
 
@@ -246,7 +246,7 @@ func (me Message) GetProgramChange(channel, program *uint8) (is bool) {
 		return false
 	}
 
-	if len(me) != 2 {
+	if len(me) != 2 && len(me) != 3 { // be tolerant about [3]byte messages
 		return false
 	}
 
@@ -394,7 +394,7 @@ func (me Message) GetSPP(spp *uint16) (is bool) {
 	}
 
 	if spp != nil {
-		_, *spp = utils.ParsePitchWheelVals(me[2], me[1])
+		_, *spp = utils.ParsePitchWheelVals(me[1], me[2])
 	}
 
 	return true

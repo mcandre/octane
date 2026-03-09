@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"fmt"
 	"io"
 )
@@ -142,7 +143,7 @@ func ReadNBytes(n int, rd io.Reader) ([]byte, error) {
 	num, err := rd.Read(b)
 
 	// if num is correct, we are not interested in io.EOF errors
-	if num == n {
+	if errors.Is(err, io.EOF) && num == n {
 		err = nil
 	}
 
@@ -233,8 +234,9 @@ func ParseUint7(b byte) uint8 {
 func ParsePitchWheelVals(b1 byte, b2 byte) (relative int16, absolute uint16) {
 	var val uint16
 
-	val = uint16((b2)&0x7f) << 7
-	val |= uint16(b1) & 0x7f
+	low7 := uint16(b1 & 0x7F)
+	high7 := uint16(b2 & 0x7F)
+	val = (high7 << 7) | low7
 
 	// Turn into a signed value relative to the centre.
 	relative = int16(val) - 0x2000

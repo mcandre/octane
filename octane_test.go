@@ -7,7 +7,7 @@ import (
 )
 
 func TestTransposeKeySymmetric(t *testing.T) {
-	for k := uint8(0); k < 128; k++ {
+	for k := range uint8(128) {
 		kTransposed := octane.TransposeKey(k, 128)
 
 		if kTransposed != k {

@@ -5,10 +5,9 @@ import (
 	"os/exec"
 )
 
-// UnitTest executes the Go unit test suite.
-func UnitTest(args ...string) error {
-	cmd := exec.Command("go")
-	cmd.Args = append(cmd.Args, "test")
+// GoFix runs go fix.
+func GoFix(args ...string) error {
+	cmd := exec.Command("go", "fix")
 	cmd.Args = append(cmd.Args, args...)
 	cmd.Env = os.Environ()
 	cmd.Stderr = os.Stderr

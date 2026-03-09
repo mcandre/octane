@@ -92,6 +92,9 @@ func DockerTest() error {
 // Errcheck runs errcheck.
 func Errcheck() error { return mageextras.Errcheck("-blank") }
 
+// GoFix runs go fix.
+func GoFix() error { return mageextras.GoFix("./...") }
+
 // GoImports runs goimports.
 func GoImports() error { return mageextras.GoImports("-w") }
 
@@ -107,6 +110,7 @@ func Install() error { return mageextras.Install() }
 // Lint runs the lint suite.
 func Lint() error {
 	mg.Deps(Deadcode)
+	mg.Deps(GoFix)
 	mg.Deps(GoImports)
 	mg.Deps(GoVet)
 	mg.Deps(Errcheck)

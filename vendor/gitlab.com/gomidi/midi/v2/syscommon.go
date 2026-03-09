@@ -34,8 +34,8 @@ func Tune() Message {
 // SPP returns a song position pointer message
 func SPP(pointer uint16) Message {
 	var b = make([]byte, 2)
-	b[1] = byte(pointer & 0x7F)
-	b[0] = byte((pointer >> 7) & 0x7F)
+	b[0] = byte(pointer & 0x7F)
+	b[1] = byte((pointer >> 7) & 0x7F)
 	//return NewMessage([]byte{byteSysSongPositionPointer, b[0], b[1]})
 	return []byte{byteSysSongPositionPointer, b[0], b[1]}
 }
