@@ -4,7 +4,7 @@ go 1.26.1
 
 require (
 	github.com/magefile/mage v1.16.0
-	github.com/mcandre/mage-extras v0.0.33
+	github.com/mcandre/mage-extras v0.0.35
 	gitlab.com/gomidi/midi/v2 v2.3.23
 )
 

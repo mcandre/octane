@@ -38,7 +38,7 @@ func Clean() error { mg.Deps(CleanBin); return CleanPackages() }
 func CleanBin() error { return os.RemoveAll(artifactsPath) }
 
 // CleanPackages deletes OS package artifacts.
-func CleanPackages() error { return os.RemoveAll(".rockhopper") }
+func CleanPackages() error { return mageextras.Rockhopper("-c") }
 
 // Audit runs security audits.
 func Audit() error {
