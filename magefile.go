@@ -5,7 +5,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path"
 
 	"github.com/magefile/mage/mg"
@@ -38,7 +37,7 @@ func Clean() error { mg.Deps(CleanBin); return CleanPackages() }
 func CleanBin() error { return os.RemoveAll(artifactsPath) }
 
 // CleanPackages deletes OS package artifacts.
-func CleanPackages() error { return mageextras.Rockhopper("-c") }
+func CleanPackages() error { return mageextras.Run("rockhopper", "-c") }
 
 // Audit runs security audits.
 func Audit() error {
@@ -47,53 +46,31 @@ func Audit() error {
 }
 
 // Deadcode runs deadcode.
-func Deadcode() error { return mageextras.Deadcode("./...") }
+func Deadcode() error { return mageextras.Run("deadcode", "./...") }
 
 // DockerBuild generates Docker images.
-func DockerBuild() error {
-	cmd := exec.Command("docker", "buildx", "bake", "all")
-	cmd.Env = os.Environ()
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
-}
+func DockerBuild() error { return mageextras.Run("docker", "buildx", "bake", "all") }
 
 // DockerPush pushes Docker images.
-func DockerPush() error {
-	cmd := exec.Command("docker", "buildx", "bake", "production", "--push")
-	cmd.Env = os.Environ()
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
-}
+func DockerPush() error { return mageextras.Run("docker", "buildx", "bake", "production", "--push") }
 
 // DockerScout runs docker scout scans.
 func DockerScout() error {
-	if err := mageextras.DockerScout("-e", imageXgo); err != nil {
+	if err := mageextras.Run("docker", "scout", "cves", "-e", imageXgo); err != nil {
 		return err
 	}
 
-	cmd := exec.Command("docker", "scout", "cves", "-e", "fs://.")
-	cmd.Env = os.Environ()
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
+	return mageextras.Run("docker", "scout", "cves", "-e", "fs://.")
 }
 
 // DockerTest tests pushing Docker images.
-func DockerTest() error {
-	cmd := exec.Command("docker", "buildx", "bake", "test", "--push")
-	cmd.Env = os.Environ()
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
-}
+func DockerTest() error { return mageextras.Run("docker", "buildx", "bake", "test", "--push") }
 
 // Errcheck runs errcheck.
-func Errcheck() error { return mageextras.Errcheck("-blank") }
+func Errcheck() error { return mageextras.Run("errcheck", "-blank") }
 
 // GoFix runs go fix.
-func GoFix() error { return mageextras.GoFix("./...") }
+func GoFix() error { return mageextras.Run("go", "fix", "./...") }
 
 // GoImports runs goimports.
 func GoImports() error { return mageextras.GoImports("-w") }
@@ -102,7 +79,7 @@ func GoImports() error { return mageextras.GoImports("-w") }
 func GoVet() error { return mageextras.GoVet() }
 
 // Govulncheck runs govulncheck.
-func Govulncheck() error { return mageextras.Govulncheck("-scan", "package", "./...") }
+func Govulncheck() error { return mageextras.Run("govulncheck", "-scan", "package", "./...") }
 
 // Install builds and installs Go applications.
 func Install() error { return mageextras.Install() }
@@ -124,19 +101,13 @@ func Lint() error {
 func Nakedret() error { return mageextras.Nakedret("-l", "0") }
 
 // Package generates OS packages.
-func Package() error {
-	cmd := exec.Command("rockhopper", "-r", fmt.Sprintf("version=%s", octane.Version))
-	cmd.Env = os.Environ()
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
-}
+func Package() error { return mageextras.Run("rockhopper", "-r", fmt.Sprintf("version=%s", octane.Version)) }
 
 // Shadow runs go vet with shadow checks enabled.
 func Shadow() error { return mageextras.GoVetShadow() }
 
 // Staticcheck runs staticcheck.
-func Staticcheck() error { return mageextras.Staticcheck("./...") }
+func Staticcheck() error { return mageextras.Run("staticcheck", "./...") }
 
 // Test runs a test suite.
 func Test() error { return mageextras.UnitTest() }
@@ -145,13 +116,7 @@ func Test() error { return mageextras.UnitTest() }
 func Uninstall() error { return mageextras.Uninstall("octane") }
 
 // Upload copies packages to CloudFlare R2.
-func Upload() error {
-	cmd := exec.Command("./upload")
-	cmd.Env = os.Environ()
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
-}
+func Upload() error { return mageextras.Run("./upload") }
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
