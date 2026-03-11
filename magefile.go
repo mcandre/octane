@@ -116,7 +116,7 @@ func Test() error { return mageextras.UnitTest() }
 func Uninstall() error { return mageextras.Uninstall("octane") }
 
 // Upload copies packages to CloudFlare R2.
-func Upload() error { return mageextras.Run("./upload") }
+func Upload() error { mg.Deps(Install); return mageextras.Run("./upload") }
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
