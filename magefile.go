@@ -31,10 +31,10 @@ var repoNamespace = "github.com/mcandre/octane"
 var imageXgo = "n4jm4/octane-xgo"
 
 // Clean deletes build artifacts.
-func Clean() error { mg.Deps(CleanBin); return CleanPackages() }
+func Clean() error { mg.Deps(CleanArtifacts); return CleanPackages() }
 
 // CleanBin deletes Go artifacts.
-func CleanBin() error { return os.RemoveAll(artifactsPath) }
+func CleanArtifacts() error { return os.RemoveAll(artifactsPath) }
 
 // CleanPackages deletes OS package artifacts.
 func CleanPackages() error { return mageextras.Run("rockhopper", "-c") }

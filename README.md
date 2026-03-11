@@ -25,7 +25,7 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
   </thead>
   <tbody>
     <tr>
-      <td>FreeBSD 13</td>
+      <td>FreeBSD 14</td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.24/freebsd-amd64/octane-0.0.24_1.pkg">Intel</a></td>
       <td></td>
     </tr>

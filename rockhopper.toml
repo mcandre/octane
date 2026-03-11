@@ -18,7 +18,7 @@ image = "n4jm4/rockhopper:0.0.23-freebsd"
 rocklet.origin = "local/octane"
 rocklet.oci_arch = "linux/amd64"
 rocklet.os_arch = "freebsd:*:amd64"
-dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-freebsd13-amd64"
+dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-freebsd14-amd64"
 
 [[pkg]]
 image = "n4jm4/rockhopper:0.0.23-macos"
