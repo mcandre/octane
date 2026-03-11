@@ -1,6 +1,6 @@
 # octane: a MIDI connector
 
-[![CloudFlare R2 install media downloads](https://img.shields.io/badge/Cloudflare-F28220?style=for-the-badge&logo=Cloudflare&logoColor=white&style=flat)](#download) [![GitHub Downloads](https://img.shields.io/github/downloads/mcandre/octane/total?logo=github)](https://github.com/mcandre/octane/releases) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![Test](https://github.com/mcandre/octane/actions/workflows/test.yml/badge.svg)](https://github.com/mcandre/octane/actions/workflows/test.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
+[![CloudFlare R2 install media downloads](https://img.shields.io/badge/Packages-F38020?logo=Cloudflare&logoColor=white)](#download) [![GitHub Downloads](https://img.shields.io/github/downloads/mcandre/octane/total?logo=github)](https://github.com/mcandre/octane/releases) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![Test](https://github.com/mcandre/octane/actions/workflows/test.yml/badge.svg)](https://github.com/mcandre/octane/actions/workflows/test.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
 
 ![jam session](demo.gif)
 
