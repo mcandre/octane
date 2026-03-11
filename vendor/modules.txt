@@ -18,7 +18,7 @@ github.com/magefile/mage/mage
 github.com/magefile/mage/mg
 github.com/magefile/mage/parse
 github.com/magefile/mage/sh
-# github.com/mcandre/mage-extras v0.0.36
+# github.com/mcandre/mage-extras v0.0.37
 ## explicit; go 1.26.1
 github.com/mcandre/mage-extras
 # gitlab.com/gomidi/midi/v2 v2.3.23
