@@ -59,9 +59,9 @@ github.com/magefile/mage/mage
 github.com/magefile/mage/mg
 github.com/magefile/mage/parse
 github.com/magefile/mage/sh
-# github.com/mcandre/mage-extras v0.0.42
+# github.com/mcandre/mx v0.0.43
 ## explicit; go 1.26.1
-github.com/mcandre/mage-extras
+github.com/mcandre/mx
 # github.com/moby/docker-image-spec v1.3.1
 ## explicit; go 1.18
 github.com/moby/docker-image-spec/specs-go/v1

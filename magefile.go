@@ -9,7 +9,7 @@ import (
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
-	mageextras "github.com/mcandre/mage-extras"
+	"github.com/mcandre/mx"
 	"github.com/mcandre/octane"
 )
 
@@ -74,16 +74,16 @@ func Errcheck() error { return sh.RunV("errcheck", "-blank") }
 func GoFix() error { return sh.RunV("go", "fix", "./...") }
 
 // GoImports runs goimports.
-func GoImports() error { return mageextras.GoImports("-w") }
+func GoImports() error { return mx.GoImports("-w") }
 
 // GoVet runs default go vet analyzers.
-func GoVet() error { return mageextras.GoVet() }
+func GoVet() error { return mx.GoVet() }
 
 // Govulncheck runs govulncheck.
 func Govulncheck() error { return sh.RunV("govulncheck", "-scan", "package", "./...") }
 
 // Install builds and installs Go applications.
-func Install() error { return mageextras.Install() }
+func Install() error { return mx.Install() }
 
 // Lint runs the lint suite.
 func Lint() error {
@@ -99,22 +99,22 @@ func Lint() error {
 }
 
 // Nakedret runs nakedret.
-func Nakedret() error { return mageextras.Nakedret("-l", "0") }
+func Nakedret() error { return mx.Nakedret("-l", "0") }
 
 // Package generates OS packages.
 func Package() error { return sh.RunV("rockhopper", "-r", fmt.Sprintf("version=%s", octane.Version)) }
 
 // Shadow runs go vet with shadow checks enabled.
-func Shadow() error { return mageextras.GoVetShadow() }
+func Shadow() error { return mx.GoVetShadow() }
 
 // Staticcheck runs staticcheck.
 func Staticcheck() error { return sh.RunV("staticcheck", "./...") }
 
 // Test runs a test suite.
-func Test() error { return mageextras.UnitTest() }
+func Test() error { return mx.UnitTest() }
 
 // Uninstall deletes installed Go applications.
-func Uninstall() error { return mageextras.Uninstall("octane") }
+func Uninstall() error { return mx.Uninstall("octane") }
 
 // Upload copies packages to CloudFlare R2.
 func Upload() error { mg.Deps(Install); return sh.RunV("./upload") }

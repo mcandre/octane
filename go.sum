@@ -37,8 +37,8 @@ github.com/kisielk/errcheck v1.9.0 h1:9xt1zI9EBfcYBvdU1nVrzMzzUPUtPKs9bVSIM3TAb3
 github.com/kisielk/errcheck v1.9.0/go.mod h1:kQxWMMVZgIkDq7U8xtG/n2juOjbLgZtedi0D+/VL/i8=
 github.com/magefile/mage v1.16.1 h1:j5UwkdA48xTlGs0Hcm1Q3sSAcxBorntQjiewDNMsqlo=
 github.com/magefile/mage v1.16.1/go.mod h1:z5UZb/iS3GoOSn0JgWuiw7dxlurVYTu+/jHXqQg881A=
-github.com/mcandre/mage-extras v0.0.42 h1:o2NIkAQ3u8kyYdDhOMQR+tG4AeMyZnLBm5emoAqvWfA=
-github.com/mcandre/mage-extras v0.0.42/go.mod h1:EDQRT5xm9TByyZx4HRpxW/lvmdEhoy8ePdiJ6Vht/f4=
+github.com/mcandre/mx v0.0.43 h1:5GUXnoCUTiPW7g5MowTCdVp7ybQRT4hONf83IsWkKLc=
+github.com/mcandre/mx v0.0.43/go.mod h1:qTOKXI+OisaQRk7dB7Bg7a4gMriApct5poQGP9euoYc=
 github.com/moby/docker-image-spec v1.3.1 h1:jMKff3w6PgbfSa69GfNg+zN/XLhfXJGnEx3Nl2EsFP0=
 github.com/moby/docker-image-spec v1.3.1/go.mod h1:eKmb5VW8vQEh/BAr2yvVNvuiJuY6UIocYsFu/DxxRpo=
 github.com/moby/moby/api v1.53.0 h1:PihqG1ncw4W+8mZs69jlwGXdaYBeb5brF6BL7mPIS/w=

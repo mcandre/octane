@@ -7,7 +7,7 @@ import (
 
 	"github.com/magefile/mage/mg"
 	"github.com/magefile/mage/sh"
-	mx "github.com/mcandre/mage-extras"
+	"github.com/mcandre/mx"
 )
 
 // Default references the default build task.
