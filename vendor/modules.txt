@@ -59,7 +59,7 @@ github.com/magefile/mage/mage
 github.com/magefile/mage/mg
 github.com/magefile/mage/parse
 github.com/magefile/mage/sh
-# github.com/mcandre/mx v0.0.44
+# github.com/mcandre/mx v0.0.45
 ## explicit; go 1.26.1
 github.com/mcandre/mx
 # github.com/moby/docker-image-spec v1.3.1
