@@ -52,20 +52,15 @@ func Govulncheck() error { return mageextras.Run("govulncheck", "-scan", "packag
 // GoImports runs goimports.
 func GoImports() error { return mageextras.GoImports("-w") }
 
-// GoLint runs golint.
-func GoLint() error { return mageextras.GoLint() }
-
 // GoVet runs default go vet analyzers.
 func GoVet() error { return mageextras.GoVet() }
 
 // Lint runs the lint suite.
 func Lint() error {
 	mg.Deps(GoImports)
-	mg.Deps(GoLint)
 	mg.Deps(GoVet)
 	mg.Deps(Errcheck)
 	mg.Deps(Nakedret)
-	mg.Deps(Revive)
 	mg.Deps(Shadow)
 	mg.Deps(Staticcheck)
 	return nil
@@ -84,9 +79,6 @@ func NoVendor() error {
 
 	return nil
 }
-
-// Revive runs revive.
-func Revive() error { return mageextras.Revive() }
 
 // Shadow runs go vet with shadow checks enabled.
 func Shadow() error { return mageextras.GoVetShadow() }

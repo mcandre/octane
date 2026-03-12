@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/magefile/mage/mg"
 	mageextras "github.com/mcandre/mage-extras"
@@ -120,12 +121,26 @@ func Upload() error { mg.Deps(Install); return mageextras.Run("./upload") }
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
-	return mageextras.Xgo(
+	// Skip 32-bit ports
+	// Skip broken ports
+	ports := []string{
+		"darwin/amd64",
+		"darwin/arm64",
+		"freebsd/amd64",
+		"linux/amd64",
+		"linux/arm64",
+		"windows/amd64",
+		"windows/arm64",
+	}
+
+	return mageextras.Run(
+		"xgo",
+		"-dest",
 		artifactsPathDist,
 		"-image",
 		imageXgo,
 		"-targets",
-		"darwin/amd64,darwin/arm64,freebsd/amd64,linux/amd64,linux/arm64,windows/amd64,windows/arm64",
+		strings.Join(ports, ","),
 		".",
 	)
 }

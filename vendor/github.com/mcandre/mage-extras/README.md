@@ -15,13 +15,10 @@ mage-extras provides utility functions for common Go development operations.
 * `Install` - Compile and install Go executables
 * Lint Go projects recursively:
   * `GoImports`
-  * `GoLint`
   * `GoVet`
   * `GoVetShadow`
   * `Nakedret`
-  * `Revive`
 * `UnitTest` - trigger unit test suite
-* `Xgo` crosscompile cGo applications
 * `Run` for everything else
 
 # SYSTEM REQUIREMENTS
