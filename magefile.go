@@ -4,11 +4,11 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"path"
 	"strings"
 
 	"github.com/magefile/mage/mg"
+	"github.com/magefile/mage/sh"
 	mageextras "github.com/mcandre/mage-extras"
 	"github.com/mcandre/octane"
 )
@@ -35,10 +35,10 @@ var imageXgo = "n4jm4/octane-xgo"
 func Clean() error { mg.Deps(CleanArtifacts); return CleanPackages() }
 
 // CleanBin deletes Go artifacts.
-func CleanArtifacts() error { return os.RemoveAll(artifactsPath) }
+func CleanArtifacts() error { return sh.Rm(artifactsPath) }
 
 // CleanPackages deletes OS package artifacts.
-func CleanPackages() error { return mageextras.Run("rockhopper", "-c") }
+func CleanPackages() error { return sh.RunV("rockhopper", "-c") }
 
 // Audit runs security audits.
 func Audit() error {
@@ -47,31 +47,31 @@ func Audit() error {
 }
 
 // Deadcode runs deadcode.
-func Deadcode() error { return mageextras.Run("deadcode", "./...") }
+func Deadcode() error { return sh.RunV("deadcode", "./...") }
 
 // DockerBuild generates Docker images.
-func DockerBuild() error { return mageextras.Run("docker", "buildx", "bake", "all") }
+func DockerBuild() error { return sh.RunV("docker", "buildx", "bake", "all") }
 
 // DockerPush pushes Docker images.
-func DockerPush() error { return mageextras.Run("docker", "buildx", "bake", "production", "--push") }
+func DockerPush() error { return sh.RunV("docker", "buildx", "bake", "production", "--push") }
 
 // DockerScout runs docker scout scans.
 func DockerScout() error {
-	if err := mageextras.Run("docker", "scout", "cves", "-e", imageXgo); err != nil {
+	if err := sh.RunV("docker", "scout", "cves", "-e", imageXgo); err != nil {
 		return err
 	}
 
-	return mageextras.Run("docker", "scout", "cves", "-e", "fs://.")
+	return sh.RunV("docker", "scout", "cves", "-e", "fs://.")
 }
 
 // DockerTest tests pushing Docker images.
-func DockerTest() error { return mageextras.Run("docker", "buildx", "bake", "test", "--push") }
+func DockerTest() error { return sh.RunV("docker", "buildx", "bake", "test", "--push") }
 
 // Errcheck runs errcheck.
-func Errcheck() error { return mageextras.Run("errcheck", "-blank") }
+func Errcheck() error { return sh.RunV("errcheck", "-blank") }
 
 // GoFix runs go fix.
-func GoFix() error { return mageextras.Run("go", "fix", "./...") }
+func GoFix() error { return sh.RunV("go", "fix", "./...") }
 
 // GoImports runs goimports.
 func GoImports() error { return mageextras.GoImports("-w") }
@@ -80,7 +80,7 @@ func GoImports() error { return mageextras.GoImports("-w") }
 func GoVet() error { return mageextras.GoVet() }
 
 // Govulncheck runs govulncheck.
-func Govulncheck() error { return mageextras.Run("govulncheck", "-scan", "package", "./...") }
+func Govulncheck() error { return sh.RunV("govulncheck", "-scan", "package", "./...") }
 
 // Install builds and installs Go applications.
 func Install() error { return mageextras.Install() }
@@ -102,13 +102,13 @@ func Lint() error {
 func Nakedret() error { return mageextras.Nakedret("-l", "0") }
 
 // Package generates OS packages.
-func Package() error { return mageextras.Run("rockhopper", "-r", fmt.Sprintf("version=%s", octane.Version)) }
+func Package() error { return sh.RunV("rockhopper", "-r", fmt.Sprintf("version=%s", octane.Version)) }
 
 // Shadow runs go vet with shadow checks enabled.
 func Shadow() error { return mageextras.GoVetShadow() }
 
 // Staticcheck runs staticcheck.
-func Staticcheck() error { return mageextras.Run("staticcheck", "./...") }
+func Staticcheck() error { return sh.RunV("staticcheck", "./...") }
 
 // Test runs a test suite.
 func Test() error { return mageextras.UnitTest() }
@@ -117,7 +117,7 @@ func Test() error { return mageextras.UnitTest() }
 func Uninstall() error { return mageextras.Uninstall("octane") }
 
 // Upload copies packages to CloudFlare R2.
-func Upload() error { mg.Deps(Install); return mageextras.Run("./upload") }
+func Upload() error { mg.Deps(Install); return sh.RunV("./upload") }
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
@@ -133,7 +133,7 @@ func Xgo() error {
 		"windows/arm64",
 	}
 
-	return mageextras.Run(
+	return sh.RunV(
 		"xgo",
 		"-dest",
 		artifactsPathDist,

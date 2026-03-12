@@ -2,15 +2,15 @@
 package main
 
 import (
-	"github.com/mcandre/octane"
-	"gitlab.com/gomidi/midi/v2"
-	"gitlab.com/gomidi/midi/v2/drivers"
-	_ "gitlab.com/gomidi/midi/v2/drivers/rtmididrv"
-
 	"flag"
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/mcandre/octane"
+	"gitlab.com/gomidi/midi/v2"
+	"gitlab.com/gomidi/midi/v2/drivers"
+	_ "gitlab.com/gomidi/midi/v2/drivers/rtmididrv"
 )
 
 var flagList = flag.Bool("list", false, "List MIDI devices")

@@ -2,6 +2,7 @@ package mageextras
 
 import (
 	"github.com/magefile/mage/mg"
+	"github.com/magefile/mage/sh"
 )
 
 // GoImports runs goimports.
@@ -13,7 +14,7 @@ func GoImports(args ...string) error {
 		as = append(as, args...)
 		as = append(as, pth)
 
-		if err := Run("goimports", as...); err != nil {
+		if err := sh.RunV("goimports", as...); err != nil {
 			return err
 		}
 	}

@@ -1,9 +1,13 @@
 package mageextras
 
+import (
+	"github.com/magefile/mage/sh"
+)
+
 // Nakedret runs nakedret.
 func Nakedret(args ...string) error {
 	var as []string
 	as = append(as, args...)
-	as = append(as, AllPackagesPath)
-	return Run("nakedret", as...)
+	as = append(as, "./...")
+	return sh.RunV("nakedret", as...)
 }

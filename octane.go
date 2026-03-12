@@ -2,11 +2,11 @@
 package octane
 
 import (
-	"gitlab.com/gomidi/midi/v2"
-	"gitlab.com/gomidi/midi/v2/drivers"
-
 	"fmt"
 	"os"
+
+	"gitlab.com/gomidi/midi/v2"
+	"gitlab.com/gomidi/midi/v2/drivers"
 )
 
 // TransposeKey applies a MIDI offset to a key.

@@ -1,9 +1,9 @@
 package octane_test
 
 import (
-	"github.com/mcandre/octane"
-
 	"testing"
+
+	"github.com/mcandre/octane"
 )
 
 func TestTransposeKeySymmetric(t *testing.T) {
