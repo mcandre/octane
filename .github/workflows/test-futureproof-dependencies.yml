@@ -25,6 +25,7 @@ jobs:
         sudo apt install -y libasound2-dev
     - run: |
         go get -u ./...
-        sh -c "go mod download && go mod vendor && go mod tidy" || echo 'go mod is silly'
-        sh -c "go mod download && go mod vendor && go mod tidy"
+        go mod download
+        go mod tidy
+        go mod vendor
         go test
