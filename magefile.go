@@ -14,22 +14,22 @@ import (
 )
 
 // artifactsPath describes where artifacts are produced.
-var artifactsPath = "bin"
-
-// Default references the default build task.
-var Default = Test
+const artifactsPath = "bin"
 
 // portBasename labels the artifact basename.
-var portBasename = "octane"
+const portBasename = "octane"
+
+// repoNamespace identifies the Go namespace for this project.
+const repoNamespace = "github.com/mcandre/octane"
+
+// imageXgo denotes a Docker image for building this project.
+const imageXgo = "n4jm4/octane-xgo"
 
 // artifactsPathDist is the parent directory of xgo artifacts.
 var artifactsPathDist = path.Join(artifactsPath, portBasename)
 
-// repoNamespace identifies the Go namespace for this project.
-var repoNamespace = "github.com/mcandre/octane"
-
-// imageXgo denotes a Docker image for building this project.
-var imageXgo = "n4jm4/octane-xgo"
+// Default references the default build task.
+var Default = Test
 
 // Clean deletes build artifacts.
 func Clean() error { mg.Deps(CleanArtifacts); return CleanPackages() }

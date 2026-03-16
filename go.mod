@@ -4,8 +4,16 @@ go 1.26.1
 
 require (
 	github.com/magefile/mage v1.16.1
-	github.com/mcandre/mx v0.0.45
+	github.com/mcandre/mx v0.0.47
 	gitlab.com/gomidi/midi/v2 v2.3.23
+)
+
+tool (
+	github.com/alexkohler/nakedret/v2/cmd/nakedret
+	github.com/kisielk/errcheck
+	github.com/magefile/mage
+	honnef.co/go/tools/cmd/staticcheck
+	src.techknowlogick.com/xgo
 )
 
 require (
@@ -42,12 +50,4 @@ require (
 	golang.org/x/tools v0.42.0 // indirect
 	honnef.co/go/tools v0.6.1 // indirect
 	src.techknowlogick.com/xgo v1.9.0 // indirect
-)
-
-tool (
-	github.com/alexkohler/nakedret/v2/cmd/nakedret
-	github.com/kisielk/errcheck
-	github.com/magefile/mage
-	honnef.co/go/tools/cmd/staticcheck
-	src.techknowlogick.com/xgo
 )
