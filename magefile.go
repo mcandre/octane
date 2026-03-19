@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"path"
 	"strings"
 
@@ -13,38 +14,53 @@ import (
 	"github.com/mcandre/octane"
 )
 
-// artifactsPath describes where artifacts are produced.
-const artifactsPath = "bin"
+// ArtifactsPath describes where artifacts are produced.
+const ArtifactsPath = "bin"
 
-// portBasename labels the artifact basename.
-const portBasename = "octane"
+// PortBasename labels the artifact basename.
+const PortBasename = "octane"
 
-// repoNamespace identifies the Go namespace for this project.
-const repoNamespace = "github.com/mcandre/octane"
+// RepoNamespace identifies the Go namespace for this project.
+const RepoNamespace = "github.com/mcandre/octane"
 
-// imageXgo denotes a Docker image for building this project.
-const imageXgo = "n4jm4/octane-xgo"
+// ImageXgo denotes a Docker image for building this project.
+const ImageXgo = "n4jm4/octane-xgo"
 
-// artifactsPathDist is the parent directory of xgo artifacts.
-var artifactsPathDist = path.Join(artifactsPath, portBasename)
+// ArtifactsPathDist is the parent directory of xgo artifacts.
+var ArtifactsPathDist = path.Join(ArtifactsPath, PortBasename)
 
 // Default references the default build task.
-var Default = Test
+var Default = Build
+
+// Audit runs security checks.
+func Audit() error { return Govulncheck() }
+
+// Build compiles Go projects.
+func Build() error {
+	dest := ArtifactsPath
+
+	if d, ok := os.LookupEnv("DEST"); ok && d != "" {
+		dest = d
+	}
+
+	if err := os.MkdirAll(dest, 0755); err != nil {
+		return err
+	}
+
+	return sh.RunV("go", "build", "-o", dest, "./...")
+}
 
 // Clean deletes build artifacts.
-func Clean() error { mg.Deps(CleanArtifacts); return CleanPackages() }
+func Clean() error { mg.Deps(CleanArtifacts); mg.Deps(CleanBuild); return CleanPackages() }
 
 // CleanBin deletes Go artifacts.
-func CleanArtifacts() error { return sh.Rm(artifactsPath) }
+func CleanArtifacts() error { return sh.Rm(ArtifactsPath) }
+
+// CleanBuild removes build artifacts.
+func CleanBuild() error { return os.RemoveAll(ArtifactsPath) }
 
 // CleanPackages deletes OS package artifacts.
 func CleanPackages() error { return sh.RunV("rockhopper", "-c") }
-
-// Audit runs security audits.
-func Audit() error {
-	mg.Deps(Govulncheck)
-	return DockerScout()
-}
 
 // Deadcode runs deadcode.
 func Deadcode() error { return sh.RunV("deadcode", "./...") }
@@ -57,7 +73,7 @@ func DockerPush() error { return sh.RunV("docker", "buildx", "bake", "production
 
 // DockerScout runs docker scout scans.
 func DockerScout() error {
-	if err := sh.RunV("docker", "scout", "cves", "-e", imageXgo); err != nil {
+	if err := sh.RunV("docker", "scout", "cves", "-e", ImageXgo); err != nil {
 		return err
 	}
 
@@ -116,29 +132,51 @@ func Test() error { return mx.UnitTest() }
 // Uninstall deletes installed Go applications.
 func Uninstall() error { return mx.Uninstall("octane") }
 
-// Upload copies packages to CloudFlare R2.
-func Upload() error { mg.Deps(Install); return sh.RunV("./upload") }
+// Bucket stores OS packages
+const S3Bucket = "s3://octane"
+
+// Artifacts contains precompiled binaries
+var Artifacts = path.Join(".rockhopper", "artifacts")
+
+// Banner identifies the application version.
+var Banner = fmt.Sprintf("octane-%s", octane.Version)
+
+// S3Dest stores OS packages for this application version.
+var S3Dest = fmt.Sprintf("%s/%s/", S3Bucket, Banner)
+
+// Upload sends packages to CloudFlare R2.
+func Upload() error {
+	return mx.RunVSilent("aws",
+		"--cli-connect-timeout", "1",
+		"s3",
+		"cp",
+		"--recursive",
+		Artifacts,
+		S3Dest,
+	)
+}
 
 // Xgo cross-compiles (c)Go binaries with additional targets enabled.
 func Xgo() error {
 	// Skip 32-bit ports
 	// Skip broken ports
+	// Skip fringe platforms
 	ports := []string{
 		"darwin/amd64",
 		"darwin/arm64",
-		"freebsd/amd64",
+		// "freebsd/amd64",
 		"linux/amd64",
 		"linux/arm64",
-		"windows/amd64",
-		"windows/arm64",
+		// "windows/amd64",
+		// "windows/arm64",
 	}
 
 	return sh.RunV(
 		"xgo",
 		"-dest",
-		artifactsPathDist,
+		ArtifactsPathDist,
 		"-image",
-		imageXgo,
+		ImageXgo,
 		"-targets",
 		strings.Join(ports, ","),
 		".",

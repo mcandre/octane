@@ -1,8 +1,8 @@
 # INSTALL
 
-In addition to OS packages, octane also supports alternative installation methods.
+We support alternative installation methods.
 
-# INSTALL (GO REMOTE)
+# INSTALL (GO)
 
 octane is packaged as a Go module.
 
@@ -17,22 +17,6 @@ go install github.com/mcandre/octane/cmd/octane@latest
 * FreeBSD users require enabling the `snd_uaudio` driver
 * Linux distros require an [ALSA](https://www.alsa-project.org/wiki/Main_Page) driver
 
-# INSTALL (GO LOCAL)
+## Postinstall
 
-kirill may be compiled from source.
-
-```sh
-git clone https://github.com/mcandre/octane.git
-cd octane
-go install ./...
-```
-
-## Prerequisites
-
-* a [C++](https://isocpp.org/) compiler
-* [git](https://git-scm.com/)
-* [Go](https://go.dev/)
-* FreeBSD users require enabling the `snd_uaudio` driver
-* Linux distros require an [ALSA](https://www.alsa-project.org/wiki/Main_Page) driver
-
-For more details on developing octane, see our [development guide](DEVELOPMENT.md).
+Register output of `go env GOBIN` to `PATH` environment variable.

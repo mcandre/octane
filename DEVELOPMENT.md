@@ -1,17 +1,19 @@
 # DEVELOPMENT GUIDE
 
-octane follows standard, Go based operations for compiling and unit testing Go code.
+We follow standard, `go` based operations for compiling and unit testing Go code.
 
 For advanced operations, such as linting, we further supplement with some software industry tools.
 
-# BUILDTIME REQUIREMENTS
+# DEV ENVIRONMENT
+
+## Prerequisites
 
 * a UNIX-like environment (e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/))
 * [awscli](https://aws.amazon.com/cli/)
 * a [C++](https://isocpp.org/) compiler
 * [Docker](https://www.docker.com/)
 * [Go](https://go.dev/)
-* POSIX compliant [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
+* [make](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/make.html)
 * [Rust](https://rust-lang.org/)
 * FreeBSD users require enabling the `snd_uaudio` driver
 * Linux distros require an [ALSA](https://www.alsa-project.org/wiki/Main_Page) driver
@@ -19,38 +21,50 @@ For advanced operations, such as linting, we further supplement with some softwa
 
 ## Recommended
 
-* [ASDF](https://asdf-vm.com/) 0.18 (run `asdf reshim` after provisioning)
+* [asdf](https://asdf-vm.com/) 0.18
 
-# AUDIT
+## Postinstall
+
+Register output of `go env GOBIN` to `PATH` environment variable.
+
+# TASKS
+
+We automate engineering tasks.
+
+## Build
 
 ```sh
-mage audit
+mage
 ```
 
-# INSTALL
+## Install
 
 ```sh
 mage install
 ```
 
-# UNINSTALL
+## Uninstall
 
 ```sh
 mage uninstall
 ```
 
-# LINT
+## Security Audit
 
-Keep the code tidy:
+```sh
+mage audit
+```
+
+## Lint
 
 ```sh
 mage lint
 ```
 
-# TEST
+## Test
 
 ```sh
-mage [test]
+mage test
 ```
 
 # BUILD DOCKER IMAGES

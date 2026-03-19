@@ -1,18 +1,14 @@
-# octane: a MIDI connector
+# octane: MIDI transformer
 
 [![CloudFlare R2 install media downloads](https://img.shields.io/badge/Packages-F38020?logo=Cloudflare&logoColor=white)](#download) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![Test](https://github.com/mcandre/octane/actions/workflows/test.yml/badge.svg)](https://github.com/mcandre/octane/actions/workflows/test.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
 
 ![jam session](demo.gif)
 
-# ABOUT
+# SUMMARY
 
-octane harmonizes MIDI devices. Primarily by extending pitch range!
+octane assists MIDI device connectivity, by transforming MIDI streams.
 
-For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with mutually exclusive CC signals. That's where octane comes in! octane offers a simple pitch offset parameter. Suddenly we unlock more interesting interactions for your synths. Make sweet, sweet beats with octane.
-
-# TECH TALK SLIDES
-
-[MIDI for Morons](https://drive.google.com/file/d/1eqeV3nXvpsRyp51eOuZNf_mRmqZ83Mts/view?usp=sharing)
+For feature details, see our [usage guide](USAGE.md).
 
 # DOWNLOAD
 
@@ -25,139 +21,21 @@ For example, a Bastl microGranny sampler and a KORG SQ-1 sequencer operate with 
   </thead>
   <tbody>
     <tr>
-      <td>FreeBSD 14</td>
-      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/freebsd-amd64/octane-0.0.26_1.pkg">Intel</a></td>
-      <td></td>
-    </tr>
-    <tr>
       <td>macOS 26 Tahoe+</td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/macos/octane-x86_64-0.0.26-1.pkg">Intel</a></td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/macos/octane-arm64-0.0.26-1.pkg">ARM</a></td>
     </tr>
     <tr>
-      <td>Ubuntu 24.04 Noble</td>
+      <td>Ubuntu 24.04 Noble / WSL 2+</td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/ubuntu/octane_0.0.26-1_amd64.deb">Intel</a></td>
       <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/ubuntu/octane_0.0.26-1_arm64.deb">ARM</a></td>
-    </tr>
-    <tr>
-      <td>Windows 11+</td>
-      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/windows/octane-0.0.26.1-x64.msi">Intel</a></td>
-      <td></td>
     </tr>
   </tbody>
 </table>
 
-# SYSTEM REQUIREMENTS
+For more platforms and installation methods, see our [install guide](INSTALL.md).
 
-## Bitness
-
-64
-
-FreeBSD users require enabling the `snd_uaudio` driver.
-
-For more host platforms and installation methods, see our [install guide](INSTALL.md).
-
-# TIPS
-
-* Polling may complete faster when MIDI software such as Arturia Analog Lab is running. Though be careful about such software interfering with your jam sessions.
-* Polling may complete faster on Linux.
-* Any USB MIDI adapter hubs may obfuscate or alter device names.
-* MIDI device names may differ between operating systems.
-* In a pinch, many MIDI devices can serve as adapters to reach further MIDI devices, using "thru" options.
-* By default, octane copies data from all available IN devices to all available OUT devices. Optional `-in`, `-out` flags can narrow the mapping.
-
-# WE JAMMIN'
-
-A quick hardware example triggers funky beats.
-
-Equipment:
-
-* Speaker (e.g., [Anker Sondcore Motion+](https://us.soundcore.com/products/a3116011))
-* Sampler (e.g., [Bastl microGranny v2](https://bastl-instruments.com/instruments/microgranny) + [2GB microSD card](https://www.amazon.com/dp/B081NR485T/) + [microSD card reader](https://www.amazon.com/dp/B07H4VQ4BZ/))
-* Sequencer (e.g., [KORG SQ-1](https://www.korg.com/us/products/dj/sq_1/) + [KORG MIDI TRS DIN adapter](https://www.amazon.com/dp/B0797SG8RS))
-* MIDI controller (e.g., [Arturia KeyStep](https://www.arturia.com/keystep/overview))
-* USB to MIDI DIN adapter (e.g., [iConnectivity mio 1 in 1 out](https://www.iconnectivity.com/products/midi/mio))
-* PC (e.g., [Apple MacBook Pro](https://www.apple.com/macbook-pro/))
-* audio cable (e.g. [3.5mm TRS male to male](https://www.amazon.com/dp/B00NO73Q84/))
-* DIN cable (e.g., [5-pin male to male](https://www.amazon.com/dp/B093SW8ZNX/))
-* assorted USB A/B/C/micro adapter cables
-* assorted power supplies, batteries
-
-Hardware Configuration:
-
-1. Ensure speaker is powered on.
-2. Connect sampler to speaker with an audio cable.
-3. Ensure sampler is powered on.
-4. Connect MIDI controller to sampler with a DIN cable.
-5. Connect MIDI controller to PC with a USB cable.
-6. Ensure MIDI controller is powered on.
-7. Set the MIDI controller clock to internal.
-8. Enable Hold function on MIDI controller, if you have one.
-9. Connect sequencer MIDI _OUT_ port to DIN adapter.
-10. Connect sequencer DIN adapter to MIDI _IN_ port of USB adapter.
-11. Connect MIDI USB adapter to PC.
-12. Ensure sequencer is powered on.
-13. Set sequencer pattern to linear, left to right through 8 + 8 = 16 rows.
-14. Randomize sequencer pitch knobs.
-15. Set sequencer mode to Step Jump if you have one.
-16. Ensure PC is powered on.
-
-Software configuration:
-
-1. Enumerate PC MIDI devices:
-
-```console
-$ octane -list
-Polling for MIDI devices...
-MIDI IN devices:
-
-* SQ-1 SEQ IN
-* mio
-* Arturia KeyStep 32
-
-MIDI OUT devices:
-
-* SQ-1 MIDI OUT
-* SQ-1 CTRL
-* mio
-* Arturia KeyStep 32
-```
-
-Normally, the KORG SQ-1 sequencer emits notes too high for Bastl microGranny to understand. We will transpose the notes down four octaves, so that the sequencer can correctly trigger instructions to select different sample sounds.
-
-2. Set `-transposeNote` to subtract 48 from each sequencer note. Test octane with different inputs and outputs for your particular setup.
-
-```console
-$ octane \
-    -transposeNote -48 \
-    -in "SQ-1 SEQ IN" \
-    -out "Arturia KeyStep 32"
-
-Polling for MIDI devices...
-Connected to MIDI IN device: SQ-1 SEQ IN
-Connected to MIDI OUT device: Arturia KeyStep 32
-
-(Play a sequence)
-
-#0 [4 d:4] channel.NoteOn channel 0 key 48 velocity 64
-#0 [1187 d:1187] channel.NoteOff channel 0 key 48
-...
-```
-
-Depending on the host, your MIDI devices may enumerate differently. For example, Linux typically may provide fewer. more generic MIDI instruments.
-
-```console
-$ octane \
-    -transposeNote -48 \
-    -in "mio:mio MIDI 1 24:0" \
-    -out "mio:mio MIDI 1 24:0"
-```
-
-3. Set a sample going with the MIDI controller piano keys.
-4. Start the sequencer playing.
-5. Jam.
-
-For details on more CLI options, see `octane -help`.
+For details on building from source, see our [development guide](DEVELOPMENT.md).
 
 # RESOURCES
 
@@ -165,3 +43,5 @@ Prior art, personal plugs, and tools for developing applications (including non-
 
 * [gomidi](https://gitlab.com/gomidi) - Go MIDI framework
 * [mcandre/linters](https://github.com/mcandre/linters) - curated linter collection
+
+🏎️
