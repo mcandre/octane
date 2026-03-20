@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"path"
 	"strings"
 
@@ -14,9 +13,6 @@ import (
 	"github.com/mcandre/octane"
 )
 
-// ArtifactsPath describes where artifacts are produced.
-const ArtifactsPath = "bin"
-
 // PortBasename labels the artifact basename.
 const PortBasename = "octane"
 
@@ -25,6 +21,9 @@ const RepoNamespace = "github.com/mcandre/octane"
 
 // ImageXgo denotes a Docker image for building this project.
 const ImageXgo = "n4jm4/octane-xgo"
+
+// ArtifactsPath describes where artifacts are produced.
+const ArtifactsPath = "bin"
 
 // ArtifactsPathDist is the parent directory of xgo artifacts.
 var ArtifactsPathDist = path.Join(ArtifactsPath, PortBasename)
@@ -36,28 +35,13 @@ var Default = Build
 func Audit() error { return Govulncheck() }
 
 // Build compiles Go projects.
-func Build() error {
-	dest := ArtifactsPath
-
-	if d, ok := os.LookupEnv("DEST"); ok && d != "" {
-		dest = d
-	}
-
-	if err := os.MkdirAll(dest, 0755); err != nil {
-		return err
-	}
-
-	return sh.RunV("go", "build", "-o", dest, "./...")
-}
+func Build() error { return sh.RunV("go", "build", "./...") }
 
 // Clean deletes build artifacts.
-func Clean() error { mg.Deps(CleanArtifacts); mg.Deps(CleanBuild); return CleanPackages() }
+func Clean() error { mg.Deps(CleanArtifacts); return CleanPackages() }
 
 // CleanBin deletes Go artifacts.
 func CleanArtifacts() error { return sh.Rm(ArtifactsPath) }
-
-// CleanBuild removes build artifacts.
-func CleanBuild() error { return os.RemoveAll(ArtifactsPath) }
 
 // CleanPackages deletes OS package artifacts.
 func CleanPackages() error { return sh.RunV("rockhopper", "-c") }
