@@ -1,10 +1,10 @@
-# USAGE GUIDE
+# CONFIGURATION
 
-We provide a rich set of features.
+octane uses CLI flags for configuration.
 
-# LIST AVAILABLE MIDI DEVICES
+# -list
 
-`-list`
+List available MIDI devices.
 
 Example:
 
@@ -12,9 +12,9 @@ Example:
 octane -list
 ```
 
-# SELECT MIDI DEVICE INPUTS
+# `-in <devices>`
 
-`-in <devices>`
+Select MIDI device inputs.
 
 Comma separated.
 
@@ -26,9 +26,9 @@ Example:
 octane -in "mio:mio MIDI 1 24:0"
 ```
 
-# SELECT MIDI DEVICE OUTPUTS
+# `-out <devices>`
 
-`-out <devices>`
+Select MIDI device outputs.
 
 Comma separated.
 
@@ -40,9 +40,7 @@ Example:
 octane -out "mio:mio MIDI 1 24:0"
 ```
 
-# TRANSPOTES NOTES
-
-`-transposeNote <offset>`
+# `-transposeNote <offset>`
 
 Sums incoming pitches with the given offset.
 

@@ -1,4 +1,4 @@
-# DEVELOPMENT GUIDE
+# DEVELOPMENT
 
 We follow standard, `go` based operations for compiling and unit testing Go code.
 
@@ -21,7 +21,7 @@ For advanced operations, such as linting, we further supplement with some softwa
 
 ## Recommended
 
-* [asdf](https://asdf-vm.com/) 0.18
+* [asdf](https://asdf-vm.com/)
 
 ## Postinstall
 
@@ -67,38 +67,44 @@ mage lint
 mage test
 ```
 
-# BUILD DOCKER IMAGES
+## Build Images
 
 ```sh
 mage dockerBuild
 ```
 
-# TEST PUSH DOCKER IMAGES
+## Test Push Images
 
 ```sh
 mage dockerTest
 ```
 
-# PUSH DOCKER IMAGES
+## Push Images
 
 ```sh
 mage dockerPush
 ```
 
-# CROSSCOMPILE BINARIES
+## Crosscompile Binaries
 
 ```sh
 mage xgo
 ```
 
-# PACKAGE BINARIES
+## Package Binaries
 
 ```sh
 mage package
 ```
 
-# UPLOAD BINARIES
+## Upload Packages
 
 ```sh
 mage upload
+```
+
+## Clean Workspace
+
+```sh
+mage clean
 ```

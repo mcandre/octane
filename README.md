@@ -8,7 +8,7 @@
 
 octane assists MIDI device connectivity, by transforming MIDI streams.
 
-For feature details, see our [usage guide](USAGE.md).
+For details on tuning octane, see [CONFIGURATION](CONFIGURATION.md).
 
 # DOWNLOAD
 
@@ -33,9 +33,9 @@ For feature details, see our [usage guide](USAGE.md).
   </tbody>
 </table>
 
-For more platforms and installation methods, see our [install guide](INSTALL.md).
+For more platforms and installation methods, see [INSTALL](INSTALL.md).
 
-For details on building from source, see our [development guide](DEVELOPMENT.md).
+For details on building from source, see [DEVELOPMENT](DEVELOPMENT.md).
 
 # RESOURCES
 
