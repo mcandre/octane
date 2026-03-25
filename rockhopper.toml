@@ -14,25 +14,25 @@ license = "0BSD"
 url = "https://github.com/mcandre/octane"
 
 [[pkg]]
-image = "n4jm4/rockhopper:0.0.23-macos"
+image = "n4jm4/rockhopper:0.0.25-macos"
 rocklet.oci_arch = "linux/amd64"
 rocklet.os_arch = "x86_64"
 dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-darwin-10.12-amd64"
 
 [[pkg]]
-image = "n4jm4/rockhopper:0.0.23-macos"
+image = "n4jm4/rockhopper:0.0.25-macos"
 rocklet.oci_arch = "linux/arm64"
 rocklet.os_arch = "arm64"
 dest."usr/local/bin/octane" = "bin/octane/github.com/mcandre/octane-darwin-10.12-arm64"
 
 [[pkg]]
-image = "n4jm4/rockhopper:0.0.23-ubuntu-24.04"
+image = "n4jm4/rockhopper:0.0.25-ubuntu-24.04"
 rocklet.oci_arch = "linux/amd64"
 rocklet.dependencies = "libasound2"
 dest."usr/bin/octane" = "bin/octane/github.com/mcandre/octane-linux-amd64"
 
 [[pkg]]
-image = "n4jm4/rockhopper:0.0.23-ubuntu-24.04"
+image = "n4jm4/rockhopper:0.0.25-ubuntu-24.04"
 rocklet.oci_arch = "linux/arm64"
 rocklet.dependencies = "libasound2"
 dest."usr/bin/octane" = "bin/octane/github.com/mcandre/octane-linux-arm64"
