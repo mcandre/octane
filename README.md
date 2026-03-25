@@ -22,13 +22,13 @@ For details on tuning octane, see [CONFIGURATION](CONFIGURATION.md).
   <tbody>
     <tr>
       <td>macOS 26 Tahoe+</td>
-      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/macos/octane-x86_64-0.0.26-1.pkg">Intel</a></td>
-      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/macos/octane-arm64-0.0.26-1.pkg">ARM</a></td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.27/macos/octane-x86_64-0.0.27-1.pkg">Intel</a></td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.27/macos/octane-arm64-0.0.27-1.pkg">ARM</a></td>
     </tr>
     <tr>
       <td>Ubuntu 24.04 Noble / WSL 2+</td>
-      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/ubuntu/octane_0.0.26-1_amd64.deb">Intel</a></td>
-      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.26/ubuntu/octane_0.0.26-1_arm64.deb">ARM</a></td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.27/ubuntu/octane_0.0.27-1_amd64.deb">Intel</a></td>
+      <td><a href="https://pub-0fd14cad082045a78b2bd5e202516c8a.r2.dev/octane-0.0.27/ubuntu/octane_0.0.27-1_arm64.deb">ARM</a></td>
     </tr>
   </tbody>
 </table>
