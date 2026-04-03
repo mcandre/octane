@@ -27,6 +27,8 @@ For advanced operations, such as linting, we further supplement with some softwa
 
 Register output of `go env GOBIN` to `PATH` environment variable.
 
+Register `~/.cargo/bin` to `PATH` environment variable.
+
 # TASKS
 
 We automate engineering tasks.
