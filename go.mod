@@ -1,9 +1,9 @@
 module github.com/mcandre/octane
 
-go 1.26.1
+go 1.26.2
 
 require (
-	github.com/magefile/mage v1.16.1
+	github.com/magefile/mage v1.17.2
 	github.com/mcandre/mx v0.0.47
 	gitlab.com/gomidi/midi/v2 v2.3.23
 )
