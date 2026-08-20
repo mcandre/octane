@@ -1,11 +1,11 @@
 module github.com/mcandre/octane
 
-go 1.26.2
+go 1.27.0
 
 require (
 	github.com/magefile/mage v1.17.2
 	github.com/mcandre/mx v0.0.47
-	gitlab.com/gomidi/midi/v2 v2.3.23
+	gitlab.com/gomidi/midi/v2 v2.3.24
 )
 
 tool (
@@ -30,7 +30,7 @@ require (
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
-	github.com/kisielk/errcheck v1.9.0 // indirect
+	github.com/kisielk/errcheck v1.20.0 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/moby/api v1.53.0 // indirect
 	github.com/moby/moby/client v0.2.2 // indirect
@@ -43,11 +43,11 @@ require (
 	go.opentelemetry.io/otel/metric v1.40.0 // indirect
 	go.opentelemetry.io/otel/trace v1.40.0 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20250408133849-7e4ce0ab07d0 // indirect
-	golang.org/x/mod v0.33.0 // indirect
-	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/mod v0.35.0 // indirect
+	golang.org/x/sync v0.20.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/term v0.40.0 // indirect
-	golang.org/x/tools v0.42.0 // indirect
-	honnef.co/go/tools v0.6.1 // indirect
+	golang.org/x/tools v0.44.1-0.20260420230617-19499e7caabc // indirect
+	honnef.co/go/tools v0.8.0-rc.1 // indirect
 	src.techknowlogick.com/xgo v1.9.0 // indirect
 )
