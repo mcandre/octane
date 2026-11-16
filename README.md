@@ -1,6 +1,6 @@
 # octane: MIDI transformer
 
-[![CloudFlare R2 install media downloads](https://img.shields.io/badge/Packages-F38020?logo=Cloudflare&logoColor=white)](#download) [![go.dev reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white)](https://pkg.go.dev/github.com/mcandre/octane) [![Test](https://github.com/mcandre/octane/actions/workflows/test.yml/badge.svg)](https://github.com/mcandre/octane/actions/workflows/test.yml) [![license](https://img.shields.io/badge/license-BSD-0)](LICENSE.md)
+[![CloudFlare R2 Downloads](https://badgen.net/static/download/Packages/f38020)](#download) [![API Docs](https://badgen.net/static/docs/API/007d9c?icon=go)](https://pkg.go.dev/github.com/mcandre/octane) [![CI/CD](https://badgen.net/github/checks/mcandre/octane?icon=github)](https://github.com/mcandre/octane/actions) [![License](https://badgen.net/static/license/BSD/ab2b29)](LICENSE.md)
 
 ![jam session](demo.gif)
 
