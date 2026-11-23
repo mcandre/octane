@@ -1,6 +1,6 @@
 # octane: MIDI transformer
 
-[![CloudFlare R2 Downloads](https://badgen.net/static/download/Packages/f38020?icon=cloudflare)](#download) [![API Docs](https://badgen.net/static/docs/API/007d9c?icon=go)](https://pkg.go.dev/github.com/mcandre/octane) [![CI/CD](https://badgen.net/github/checks/mcandre/octane?icon=github)](https://github.com/mcandre/octane/actions) [![License](https://badgen.net/static/license/BSD/ab2b29?icon=freebsd)](LICENSE.md)
+[![CloudFlare R2 Downloads](https://badgen.net/static/download/Packages/f38020?icon=cloudflare)](#download) [![API Docs](https://badgen.net/static/docs/API/007d9c?icon=go)](https://pkg.go.dev/github.com/mcandre/octane) [![CI/CD](https://badgen.net/github/checks/mcandre/octane?icon=github)](https://github.com/mcandre/octane/actions) [![License](https://badgen.net/static/license/BSD/ab2b29?icon=freebsd)](LICENSE.md) [![AI](https://badgen.net/static/人/NO%20AI?color=aa4a44)](AI-DECLARATION.md)
 
 ![jam session](demo.gif)
 
